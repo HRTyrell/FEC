@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 
+
+const Title = styled.h1`
+color: blue;
+`;
+
 const ProductInformation = () => {
+
+
+
   return (
     <div>
-      <h1>ProductInformation</h1>
+      <Title>ProductInformation</Title>
     </div>
   )
 }

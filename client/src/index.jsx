@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import ProductDetail from './components/ProductDetail/ProductDetail.jsx'
+import styled from "styled-components";
+import ProductDetail from './components/ProductDetail/ProductDetail.jsx';
+import NavigationBar from "./components/ProductDetail/NavigationBar.jsx";
+
 
 
 const App = () => {
+
+
   return (
     <div>
-      <h1>FEC</h1>
+      <NavigationBar />
       <ProductDetail />
     </div>
   )

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 
-const StyleSelector = () => {
+const StyleCart = () => {
   return (
     <div>
-      <h1>StyleSelector</h1>
+      <h1>StyleCart</h1>
     </div>
   )
 }
 
-export default StyleSelector;
+export default StyleCart;
