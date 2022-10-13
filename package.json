@@ -12,11 +12,22 @@
     "build": "npx webpack",
     "start": ""
   },
+  "jest": {
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": ["node_modules", "src"],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js"
+    },
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ]
+  },
   "dependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
     "axios": "^0.21.1",
+    "babel-jest": "^29.1.2",
     "babel-loader": "^8.2.2",
     "dotenv": "^10.0.0",
     "react": "^17.0.2",
