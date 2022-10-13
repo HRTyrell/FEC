@@ -7,7 +7,7 @@ import NavigationBar from "./components/ProductDetail/NavigationBar.jsx";
 import QAList from "./components/Q&A/QAList.jsx";
 
 import RelatedItems from './components/RelatedItems/RelatedItems.jsx';
-
+import Breakdown from './components/ratings-reviews/breakdown.jsx';
 
 const App = () => {
 
@@ -20,6 +20,7 @@ const App = () => {
       <ProductDetail />
       <QAList />
       <RelatedItems />
+      <Breakdown />
     </div>
   )
 }
