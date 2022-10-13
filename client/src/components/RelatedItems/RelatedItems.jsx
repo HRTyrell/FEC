@@ -1,1 +1,8 @@
-import react, {useState, useEffect}
+import react, {useState, useEffect} from 'react';
+
+const RelatedItems = () => {
+
+}
+
+
+export default RelatedItems;
