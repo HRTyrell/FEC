@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ProductDetail from './components/ProductDetail/ProductDetail.jsx';
 import NavigationBar from "./components/ProductDetail/NavigationBar.jsx";
 import RelatedItems from './components/RelatedItems/RelatedItems.jsx';
-
+import Breakdown from './components/ratings-reviews/breakdown.jsx';
 
 const App = () => {
 
@@ -17,6 +17,7 @@ const App = () => {
       <NavigationBar />
       <ProductDetail />
       <RelatedItems />
+      <Breakdown />
     </div>
   )
 }
