@@ -1,16 +1,18 @@
 import {useState, useEffect} from 'react';
 import getProducts from './parseHelpers.js';
-
+import RelatedProducts from './RelatedProducts.jsx';
+import YourOutfit from './YourOutfit.jsx';
 
 
 const RelatedItems = () => {
 
-  return(
+  return (
+
     <div>
-      <p>Hello</p>
+      <RelatedProducts />
+      <YourOutfit />
     </div>
   )
 }
-
 
 export default RelatedItems;
