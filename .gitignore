@@ -4,3 +4,5 @@ client/dist/bundle.js.map
 .env
 package-lock.json
 bundle.js.map
+bundle.js
+config.js
