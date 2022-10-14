@@ -27,6 +27,15 @@
 1. git push -u origin BRANCH_NAME (pushes completed feature to origin/main)
 1. Now the information must be pulled again when you start to keep up with others who have created features
 
+## Opening Day Work with Git
+1. Start with git fetch (to see whether there is any new commits to pull)
+1. Then git checkout main (to get the main branch locally up to date)
+1. git pull (will pull all the commited information back to the local main branch)
+1. git checkout BRANCH_NAME (takes us back to the fetature branch)
+1. git merge origin (merge the information from main to the branch)
+1. fix merge conflicts in VSC by keeping the stuff you want from the previous commit and getting rid of everything else
+1. Once Complete and features ready to commit git checkout -b BRANCH_NAME (to send it back to main) 
+
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
