@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {TOKEN} from '/config.js';
-import Breakdown from './breakdown.jsx';
+import {Breakdown} from './breakdown.jsx';
 
 const RatingsReviews = () => {
 
