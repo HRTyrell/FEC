@@ -1,8 +1,18 @@
-import react, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
+import getProducts from './parseHelpers.js';
+import RelatedProducts from './RelatedProducts.jsx';
+import YourOutfit from './YourOutfit.jsx';
+
 
 const RelatedItems = () => {
 
-}
+  return (
 
+    <div>
+      <RelatedProducts />
+      <YourOutfit />
+    </div>
+  )
+}
 
 export default RelatedItems;
