@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {TOKEN} from '/config.js';
 
-export const Breakdown = () => {
+const Breakdown = () => {
 
   let exampleProductID = 66643;
   const [starBarFilters, setstarBarFilters]  = useState([true, true, true, true, true]);
@@ -33,3 +33,5 @@ export const Breakdown = () => {
     </div>
   )
 }
+
+export default Breakdown;
