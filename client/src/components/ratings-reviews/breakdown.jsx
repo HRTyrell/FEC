@@ -1,37 +1,27 @@
 import {useState, useEffect} from 'react';
-import axios from 'axios';
-import {TOKEN} from '/config.js';
+import Star from '../../assets/star.png';
+import quarterStar from '../../assets/quarterStar.png';
+import halfStar from '../../assets/halfStar.png';
+import threefourthsStar from '../../assets/3fourthsStar.png';
+import fullstar from '../../assets/fullstar.png';
 
-const Breakdown = () => {
+export const getAvg = function(ratings) {
+  let averageRating = [];
+  for (var key in ratings) {
+    averageRating = averageRating.concat(new Array(Number(ratings[key])).fill(Number(key)));
+  }
+  averageRating = averageRating.reduce((accumulator, val)=>{return accumulator + val}, 0) / averageRating.length;
+  return Number(averageRating.toFixed(1));
+}
 
-  let exampleProductID = 66643;
-  const [starBarFilters, setstarBarFilters]  = useState([true, true, true, true, true]);
-  const [metaData, setmetaData]  = useState(null);
-  const [sort, setSort]  = useState('relevant');
-  const [searchBarTerm, setsearchBarTerm] = useState('');
+export const Breakdown = function ({metaData, setstarBarFilters}) {
 
-  useEffect(()=> {
-    axios({
-      url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/meta/?product_id=${exampleProductID}`,
-      method: 'get',
-      headers: {authorization: TOKEN}
-      })
-      .then((val)=> {
-        //console.log(val.data)
-        setmetaData(val.data)
-      })
-      .catch((err)=> {
-        alert(err);
-      })
-  }, []);
+  let avg = getAvg(metaData.ratings);
+  console.log(metaData);
 
   return (
-    <div>
-      <input></input>
-
-
+    <div>RATINGS & REVIEWS
+      <img src={Star}></img>
     </div>
   )
 }
-
-export default Breakdown;
