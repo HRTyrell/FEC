@@ -13,6 +13,20 @@ const StyledDiv = styled.div`
   display: flex;
 `;
 
+const StyledOuterDiv = styled.div`
+  width: 33%;
+`;
+
+const StyledCharacteristicBar = styled.div`
+  border-style: solid;
+  background-color: LightGray;
+`;
+
+const StyledIcon = styled.i`
+  position: relative;
+  left: ${props=> props.position};
+`;
+
 export const getAvg = function(ratings) {
   let averageRating = [];
   for (var key in ratings) {
@@ -25,7 +39,7 @@ export const getAvg = function(ratings) {
 export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}) {
   let avg = getAvg(metaData.ratings);
   let totalRatings = Number(metaData.recommended.false) + Number(metaData.recommended.true);
-  console.log(metaData);
+  //console.log(metaData);
 
   const onClickBar = (star)=> {
     let newStarBarFilters={};
@@ -78,7 +92,7 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
   }
 
   return (
-    <div>RATINGS & REVIEWS
+    <StyledOuterDiv>RATINGS & REVIEWS
       <StyledDiv className='flex-container'>
         <label>{avg}</label>
         <Starbar rating={avg}></Starbar>
@@ -92,7 +106,6 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
         </div> :
         <label></label>
       }
-
         {Object.keys(metaData.ratings).reverse().map((item, index) => {
           return (
             <div className='Red_hoverable' key={index} onClick={()=> {onClickBar(item)}}>
@@ -100,8 +113,13 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
             </div>
             )
         })}
+      <label>{`${(Number(metaData.recommended.true) / (Number(metaData.recommended.true) + Number(metaData.recommended.false))).toFixed(2) * 100}% of reviews recommend this product`}</label>
 
-    </div>
+      {Object.keys(metaData.characteristics).map((characteristic, index)=> {
+        return <ProductBreakdownFactor key={index} characteristic={characteristic} data={metaData.characteristics[characteristic]}></ProductBreakdownFactor>
+      })}
+
+    </StyledOuterDiv>
   )
 }
 
@@ -128,5 +146,18 @@ export const Starbar = function ({rating}) {
         return <img key={index} src={item}></img>
       })}
     </div>
+  )
+}
+
+export const ProductBreakdownFactor = ({characteristic, data})=> {
+
+  let iconPosition = ((Number(data.value) / 5) * 100).toFixed(2);
+  iconPosition = iconPosition > 93? '93%': `${iconPosition}%`;
+
+  return (
+  <div>
+    <header>{characteristic}</header>
+    <StyledCharacteristicBar><StyledIcon position={iconPosition}>▼</StyledIcon></StyledCharacteristicBar>
+  </div>
   )
 }
