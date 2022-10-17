@@ -50,6 +50,33 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
     setstarBarFilters(newStarBarFilters);
   }
 
+  const onClickRemoveAllFilters = () => {
+    let newStarBarFilters={};
+    for (let i = 1; i <= 5; i ++) {
+      newStarBarFilters[i] = true;
+    }
+    newStarBarFilters.filtered = false;
+    setstarBarFilters(newStarBarFilters);
+  }
+
+  let getfilterMessage = ()=> {
+    let filterMessage = [];
+    if (starBarFilters.filtered) {
+      for (let i = 1; i <= 5; i ++) {
+        if (starBarFilters[i]) {
+          filterMessage.push(i);
+        }
+      }
+      if (filterMessage.length > 1) {
+        filterMessage = filterMessage.slice(0, filterMessage.length - 1).join(', ') + ' and ' + filterMessage.slice(filterMessage.length - 1);
+      } else {
+        filterMessage = filterMessage[0]
+      }
+      filterMessage = `Filtered for ${filterMessage} star reviews`
+    }
+    return filterMessage.length>0? filterMessage : '';
+  }
+
   return (
     <div>RATINGS & REVIEWS
       <StyledDiv className='flex-container'>
@@ -57,7 +84,15 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
         <Starbar rating={avg}></Starbar>
       </StyledDiv>
       <label>{totalRatings} total reviews</label>
-      <section> Rating Breakdown
+      <header> Rating Breakdown</header>
+      {starBarFilters.filtered?
+        <div>
+          <header>{getfilterMessage()}</header>
+          <button onClick={onClickRemoveAllFilters}>Remove All Filters</button>
+        </div> :
+        <label></label>
+      }
+
         {Object.keys(metaData.ratings).reverse().map((item, index) => {
           return (
             <div className='Red_hoverable' key={index} onClick={()=> {onClickBar(item)}}>
@@ -65,7 +100,7 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
             </div>
             )
         })}
-      </section>
+
     </div>
   )
 }
