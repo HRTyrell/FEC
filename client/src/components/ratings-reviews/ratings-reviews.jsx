@@ -31,7 +31,7 @@ const RatingsReviews = () => {
 
   return (
     <div>
-      <Breakdown metaData={metaData} setstarBarFilters={setstarBarFilters}></Breakdown>
+      <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}></Breakdown>
       <input></input>
 
 

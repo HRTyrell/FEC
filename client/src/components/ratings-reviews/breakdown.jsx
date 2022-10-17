@@ -22,14 +22,14 @@ export const getAvg = function(ratings) {
   return Number(averageRating.toFixed(1));
 }
 
-export const Breakdown = function ({metaData, setstarBarFilters}) {
+export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}) {
 
   let avg = getAvg(metaData.ratings);
   let totalRatings = Number(metaData.recommended.false) + Number(metaData.recommended.true);
   console.log(metaData);
 
   return (
-    <header>RATINGS & REVIEWS
+    <div>RATINGS & REVIEWS
       <StyledDiv className='flex-container'>
         <label>{avg}</label>
         <Starbar rating={avg}></Starbar>
@@ -37,12 +37,14 @@ export const Breakdown = function ({metaData, setstarBarFilters}) {
       <label>{totalRatings} total reviews</label>
       <section> Rating Breakdown
         {Object.keys(metaData.ratings).reverse().map((item, index) => {
-          return <div key={index}>
-            <label>{item + ' Stars'}</label><StyledProgressBar max={totalRatings} value={metaData.ratings[item]}></StyledProgressBar><label>{metaData.ratings[item]}</label>
+          return (
+            <div className='Red_hoverable' key={index}>
+              <label>{item + ' Stars'}</label><StyledProgressBar max={totalRatings} value={metaData.ratings[item]}></StyledProgressBar><label>{metaData.ratings[item]}</label>
             </div>
+            )
         })}
       </section>
-    </header>
+    </div>
   )
 }
 
