@@ -6,7 +6,7 @@ import {Breakdown} from './breakdown.jsx';
 const RatingsReviews = () => {
 
   let product_id = 66643;
-  const [starBarFilters, setstarBarFilters]  = useState([true, true, true, true, true]);
+  const [starBarFilters, setstarBarFilters]  = useState({1:true, 2:true, 3:true, 4:true, 5:true, filtered=false});
   const [metaData, setmetaData]  = useState(null);
   const [sort, setSort]  = useState('relevant');
   const [searchBarTerm, setsearchBarTerm] = useState('');

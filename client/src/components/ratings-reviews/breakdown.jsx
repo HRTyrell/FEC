@@ -23,10 +23,32 @@ export const getAvg = function(ratings) {
 }
 
 export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}) {
-
   let avg = getAvg(metaData.ratings);
   let totalRatings = Number(metaData.recommended.false) + Number(metaData.recommended.true);
   console.log(metaData);
+
+  const onClickBar = (star)=> {
+    let newStarBarFilters={};
+    if (!starBarFilters.filtered) {
+      for (var key in starBarFilters) {
+        newStarBarFilters[key] = false;
+      }
+      newStarBarFilters.filtered = true;
+      newStarBarFilters[star] = true;
+    } else {
+      for (var key in starBarFilters) {
+        newStarBarFilters[key] = starBarFilters[key];
+      }
+      newStarBarFilters[star] = newStarBarFilters[star]? false : true;
+      if (newStarBarFilters[1]===false && newStarBarFilters[2]===false && newStarBarFilters[3]===false && newStarBarFilters[4]===false && newStarBarFilters[5]===false) {
+        for (var key in starBarFilters) {
+          newStarBarFilters[key] = true;
+        }
+        newStarBarFilters.filtered = false;
+      }
+    }
+    setstarBarFilters(newStarBarFilters);
+  }
 
   return (
     <div>RATINGS & REVIEWS
@@ -38,7 +60,7 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
       <section> Rating Breakdown
         {Object.keys(metaData.ratings).reverse().map((item, index) => {
           return (
-            <div className='Red_hoverable' key={index}>
+            <div className='Red_hoverable' key={index} onClick={()=> {onClickBar(item)}}>
               <label>{item + ' Stars'}</label><StyledProgressBar max={totalRatings} value={metaData.ratings[item]}></StyledProgressBar><label>{metaData.ratings[item]}</label>
             </div>
             )
