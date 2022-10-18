@@ -9,6 +9,7 @@ const RelatedItems = () => {
   return (
 
     <div>
+      <h1>RelatedItems</h1>
       <RelatedProducts />
       <YourOutfit />
     </div>
