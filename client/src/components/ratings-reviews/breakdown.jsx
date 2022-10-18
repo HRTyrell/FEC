@@ -1,5 +1,8 @@
 import {useState, useEffect} from 'react';
+<<<<<<< HEAD
 import styled from "styled-components";
+=======
+>>>>>>> main
 import Star from '../../assets/Star.png';
 import quarterStar from '../../assets/quarterStar.png';
 import halfStar from '../../assets/halfStar.png';

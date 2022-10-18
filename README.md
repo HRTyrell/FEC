@@ -34,7 +34,18 @@
 1. ***git checkout BRANCH_NAME*** (takes us back to the fetature branch)
 1. ***git merge origin*** (merge the information from main to the branch)
 1. fix merge conflicts in VSC by keeping the stuff you want from the previous commit and getting rid of everything else
-1. Once Complete and features ready to commit ***git checkout -b BRANCH_NAME*** (to send it back to main) 
+1. Once Complete and features ready to commit ***git checkout -b BRANCH_NAME*** (to send it back to main)
+
+## Testing Branch
+
+1. Start with ***git checkout test*** (Takes you to the testing branch)
+1. Create a new subTesting branch for your component ***git checkout -b BRANCH_NAME***
+1. For each Feature either work on it within this subbranch or create another subbranch from there
+1. ***git fetch*** then ***git merge origin*** to get main branch info to Test Branch
+1. Do the same to the subBranch before sending a push request to the Github
+1. ***git push -u origin BRANCH_NAME*** (Sending info to Git Repo)
+1. ***ONLY SEND PULL REQUEST TO TEST BRANCH***
+1. Test branch has all the tests while main branch is clear of tests
 
 ## Requirements
 

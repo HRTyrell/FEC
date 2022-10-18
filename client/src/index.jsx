@@ -2,25 +2,32 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import styled from "styled-components";
-import ProductDetail from './components/ProductDetail/ProductDetail.jsx';
-import NavigationBar from "./components/ProductDetail/NavigationBar.jsx";
+import Overview from './components/ProductDetail/Overview.jsx';
+import NavigationBar from "./components/NavBar/NavigationBar.jsx";
 import QAList from "./components/Q&A/QAList.jsx";
 
 import RelatedItems from './components/RelatedItems/RelatedItems.jsx';
 import RatingsReviews from './components/ratings-reviews/ratings-reviews.jsx';
 
-const App = () => {
+const Sdiv = styled.div`
+display: flex;
+flex-direction: column;
+max-width: 100%;
+justify-content: center;
+align-items: center;
+`
 
+const App = () => {
 
   return (
     <div>
-      <h1>FEC</h1>
-
       <NavigationBar />
-      <ProductDetail />
-      <QAList />
-      <RelatedItems />
-      <RatingsReviews />
+      <Sdiv>
+        <Overview />
+        <QAList />
+        <RelatedItems />
+        <RatingsReviews />
+      </Sdiv>
     </div>
   )
 }
