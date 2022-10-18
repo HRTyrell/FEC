@@ -9,13 +9,6 @@ import fullstar from '../../assets/fullstar.png';
 const StyledProgressBar = styled.progress`
   accent-color: green;
 `;
-const StyledDiv = styled.div`
-  display: ;
-`;
-
-const StyledOuterDiv = styled.div`
-  width: 33%;
-`;
 
 const StyledCharacteristicBar = styled.div`
   border-style: solid;
@@ -28,10 +21,28 @@ const StyledIcon = styled.i`
 `;
 
 const StyledHoverable = styled.div`
+  display: flex;
+  flex-direction: row;
   :hover {
     background: aliceblue;
-  }
+  };
 `;
+
+const BreakdownDiv = styled.div`
+  margin: 10px 0;
+  padding: 10px;
+  border: solid;
+  border-radius: 10px;
+  width: 30%;
+`
+const NoShrinkLabel = styled.label`
+  flex-shrink: 0;
+`
+const FixedWidthLabel = styled.div`
+  display: block;
+  float: left;
+  width: 16px;
+`
 
 export const getAvg = function(ratings) {
   let averageRating = [];
@@ -98,11 +109,11 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
   }
 
   return (
-    <StyledOuterDiv>RATINGS & REVIEWS
-      <StyledDiv className='flex-container'>
+    <BreakdownDiv>RATINGS & REVIEWS
+      <div>
         <label>{avg}</label>
         <Starbar rating={avg}></Starbar>
-      </StyledDiv>
+      </div>
       <label>{totalRatings} total reviews</label>
       <header> Rating Breakdown</header>
       {starBarFilters.filtered?
@@ -115,17 +126,17 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
         {Object.keys(metaData.ratings).reverse().map((item, index) => {
           return (
             <StyledHoverable key={index} onClick={()=> {onClickBar(item)}}>
-              <label>{item + ' Stars'}</label><StyledProgressBar max={totalRatings} value={metaData.ratings[item]}></StyledProgressBar><label>{metaData.ratings[item]}</label>
+              <NoShrinkLabel>{item + ' Stars'}</NoShrinkLabel><StyledProgressBar max={totalRatings} value={metaData.ratings[item]}></StyledProgressBar><FixedWidthLabel>{metaData.ratings[item]}</FixedWidthLabel>
             </StyledHoverable>
             )
         })}
       <label>{`${(Number(metaData.recommended.true) / (Number(metaData.recommended.true) + Number(metaData.recommended.false))).toFixed(2) * 100}% of reviews recommend this product`}</label>
 
       {Object.keys(metaData.characteristics).map((characteristic, index)=> {
-        return <ProductBreakdownFactor key={index} characteristic={characteristic} data={metaData.characteristics[characteristic]}></ProductBreakdownFactor>
+        return <ProductBreakdownFactor key={index} characteristic={characteristic} data={metaData.characteristics[characteristic]}/>
       })}
 
-    </StyledOuterDiv>
+    </BreakdownDiv>
   )
 }
 
