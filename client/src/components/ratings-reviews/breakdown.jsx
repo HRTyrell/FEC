@@ -1,8 +1,5 @@
 import {useState, useEffect} from 'react';
-<<<<<<< HEAD
 import styled from "styled-components";
-=======
->>>>>>> main
 import Star from '../../assets/Star.png';
 import quarterStar from '../../assets/quarterStar.png';
 import halfStar from '../../assets/halfStar.png';
@@ -13,7 +10,7 @@ const StyledProgressBar = styled.progress`
   accent-color: green;
 `;
 const StyledDiv = styled.div`
-  display: flex;
+  display: ;
 `;
 
 const StyledOuterDiv = styled.div`

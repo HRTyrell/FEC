@@ -2,6 +2,11 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {TOKEN} from '/MyConfig.js';
 import {Breakdown} from './breakdown.jsx';
+import styled from "styled-components";
+
+const StyledContainer = styled.div`
+  align-items: left;
+`;
 
 const RatingsReviews = () => {
 
@@ -30,12 +35,12 @@ const RatingsReviews = () => {
   }
 
   return (
-    <div>
+    <StyledContainer>
       <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}></Breakdown>
       <input></input>
 
 
-    </div>
+    </StyledContainer>
   )
 }
 
