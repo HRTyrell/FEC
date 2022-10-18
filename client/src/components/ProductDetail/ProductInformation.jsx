@@ -14,7 +14,7 @@ border-radius: 10px;
 text-align: center;
 `
 
-const ProductInformation = () => {
+const ProductInformation = () => { //Product
 
 
 

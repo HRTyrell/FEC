@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import {TOKEN} from '/config.js';
+import {URL, TOKEN} from '/MyConfig.js';
 import {Breakdown} from './breakdown.jsx';
 
 const RatingsReviews = () => {
@@ -13,7 +13,7 @@ const RatingsReviews = () => {
 
   useEffect(()=> {
     axios({
-      url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/meta/?product_id=${product_id}`,
+      url: `${URL}/reviews/meta/?product_id=${product_id}`,
       method: 'get',
       headers: {authorization: TOKEN}
       })
