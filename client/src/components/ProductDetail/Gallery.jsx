@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 
-const StyleDiv = styled.div`
+const GalleryDiv = styled.div`
 margin: 10px 0;
 height: 400px;
-width: 30%;
+width: 70%;
 border: solid;
 border-radius: 10px;
 `
 
-const StyleCart = () => {
+const Gallery = () => {
   return (
-    <StyleDiv>
-      <h1>StyleCart</h1>
-    </StyleDiv>
+    <GalleryDiv>
+      <h1>Gallery</h1>
+    </GalleryDiv>
   )
 }
 
-export default StyleCart;
+export default Gallery;

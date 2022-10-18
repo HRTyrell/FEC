@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import Star from '../../assets/star.png';
+import Star from '../../assets/Star.png';
 import quarterStar from '../../assets/quarterStar.png';
 import halfStar from '../../assets/halfStar.png';
 import threefourthsStar from '../../assets/3fourthsStar.png';

@@ -6,3 +6,4 @@ package-lock.json
 bundle.js.map
 bundle.js
 config.js
+client/dist/*.png
