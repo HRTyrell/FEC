@@ -1,12 +1,18 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+
 import {URL, TOKEN} from '/MyConfig.js';
 import {Breakdown} from './breakdown.jsx';
+import styled from "styled-components";
+
+const StyledContainer = styled.div`
+  align-items: left;
+`;
 
 const RatingsReviews = () => {
 
-  let product_id = 66643;
-  const [starBarFilters, setstarBarFilters]  = useState([true, true, true, true, true]);
+  let product_id = 66642;
+  const [starBarFilters, setstarBarFilters]  = useState({1:true, 2:true, 3:true, 4:true, 5:true, filtered:false});
   const [metaData, setmetaData]  = useState(null);
   const [sort, setSort]  = useState('relevant');
   const [searchBarTerm, setsearchBarTerm] = useState('');
@@ -30,12 +36,12 @@ const RatingsReviews = () => {
   }
 
   return (
-    <div>
-      <Breakdown metaData={metaData} setstarBarFilters={setstarBarFilters}></Breakdown>
+    <StyledContainer>
+      <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}></Breakdown>
       <input></input>
 
 
-    </div>
+    </StyledContainer>
   )
 }
 
