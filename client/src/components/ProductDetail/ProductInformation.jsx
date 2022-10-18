@@ -6,14 +6,22 @@ const Title = styled.h1`
 color: blue;
 `;
 
+const InfoDiv = styled.div`
+/* height: 400px; */
+width: 70%;
+border: solid;
+border-radius: 10px;
+text-align: center;
+`
+
 const ProductInformation = () => {
 
 
 
   return (
-    <div>
+    <InfoDiv>
       <Title>ProductInformation</Title>
-    </div>
+    </InfoDiv>
   )
 }
 

@@ -9,10 +9,11 @@ text-align: center;
 `;
 
 const Wrap = styled.div`
-padding: 3em;
-// width: 100%;
+padding: 3em 0;
+width: 100%;
 background: white;
 border-bottom: solid;
+text-align: center;
 `;
 
 const H5 = styled.h5`

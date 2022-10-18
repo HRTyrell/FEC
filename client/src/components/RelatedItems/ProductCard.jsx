@@ -10,6 +10,7 @@ height: 200px;
 padding: 0;
 `;
 
+
 // const ProductImageOuterDiv = styled.div`
 // width: 100px;
 // height: 66.6666px;

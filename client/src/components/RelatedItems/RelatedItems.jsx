@@ -27,6 +27,7 @@ const RelatedItems = () => {
       <Carousel data={testData} title="Related Products"><RelatedProducts/></Carousel>
       <Carousel data={testData} title="Your Outfit"><YourOutfit/></Carousel>
     </MasterDiv>
+
   )
 }
 
