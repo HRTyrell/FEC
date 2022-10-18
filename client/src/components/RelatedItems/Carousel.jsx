@@ -46,12 +46,28 @@ pointer-events: none;
 
 const Carousel = (props) => {
   const [overlay, setOverlay] = useState(true);
+  const [showPrevious, setShowPrevious] = useState(false)
+  const [showNext, setShowNext] = useState(true);
+
+
   const slide = (e, shift) => {
     e.target.parentNode.scrollLeft -= shift;
-    if (e.target.parentNode.scrollHeight - e.target.parentNode.scrollLeft <= 100) {
+    let distanceToEndOfScroll = e.target.parentNode.scrollHeight - e.target.parentNode.scrollLeft
+    if (distanceToEndOfScroll <= 100) {
       setOverlay(false);
     } else {
       setOverlay(true);
+      setShowNext(true);
+    }
+    if (e.target.parentNode.scrollLeft > 0) {
+      setShowPrevious(true);
+    } else {
+      setShowPrevious(false);
+    }
+    if (distanceToEndOfScroll <= 20) {
+      setShowNext(false);
+    } else {
+      setShowNext(true);
     }
   }
 
@@ -60,8 +76,8 @@ const Carousel = (props) => {
                   position: "relative"}}>
     {overlay ? <FadedOverlay /> : null }
     <CarouselStyled aria-label="Product Carousel">
-      <CarouselControlPrev onClick={(e)=> slide(e, 120)}>&#8678;</CarouselControlPrev>
-      <CarouselControlNext onClick={(e)=> slide(e, -120)}>&#8680;</CarouselControlNext>
+      {showPrevious ? <CarouselControlPrev onClick={(e)=> slide(e, 120)}>&#60;</CarouselControlPrev> : null }
+      {showNext ? <CarouselControlNext onClick={(e)=> slide(e, -120)}>&#62;</CarouselControlNext> : null }
       {React.cloneElement(props.children, {data: props.data}, null)}
     </CarouselStyled>
     </div>
