@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import {TOKEN} from '/config.js';
+import {TOKEN} from '/MyConfig.js';
 
 const Breakdown = () => {
 

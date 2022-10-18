@@ -1,8 +1,9 @@
 node_modules
 client/dist/bundle.js
 client/dist/bundle.js.map
+client/dist/*.png
 .env
 package-lock.json
 bundle.js.map
 bundle.js
-config.js
+MyConfig.js
