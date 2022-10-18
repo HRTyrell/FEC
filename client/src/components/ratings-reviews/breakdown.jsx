@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import styled from "styled-components";
-import Star from '../../assets/star.png';
+import Star from '../../assets/Star.png';
 import quarterStar from '../../assets/quarterStar.png';
 import halfStar from '../../assets/halfStar.png';
 import threefourthsStar from '../../assets/3fourthsStar.png';
@@ -25,6 +25,12 @@ const StyledCharacteristicBar = styled.div`
 const StyledIcon = styled.i`
   position: relative;
   left: ${props=> props.position};
+`;
+
+const StyledHoverable = styled.div`
+  :hover {
+    background: aliceblue;
+  }
 `;
 
 export const getAvg = function(ratings) {
@@ -108,9 +114,9 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
       }
         {Object.keys(metaData.ratings).reverse().map((item, index) => {
           return (
-            <div className='Red_hoverable' key={index} onClick={()=> {onClickBar(item)}}>
+            <StyledHoverable key={index} onClick={()=> {onClickBar(item)}}>
               <label>{item + ' Stars'}</label><StyledProgressBar max={totalRatings} value={metaData.ratings[item]}></StyledProgressBar><label>{metaData.ratings[item]}</label>
-            </div>
+            </StyledHoverable>
             )
         })}
       <label>{`${(Number(metaData.recommended.true) / (Number(metaData.recommended.true) + Number(metaData.recommended.false))).toFixed(2) * 100}% of reviews recommend this product`}</label>
