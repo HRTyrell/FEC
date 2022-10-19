@@ -14,6 +14,7 @@ const StyledContainer = styled.div`
   padding: 10px;
   width: 70%;
 `
+
 const RatingsReviews = () => {
 
   let product_id = 66642;

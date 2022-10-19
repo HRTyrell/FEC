@@ -30,7 +30,9 @@ const FixedWidthLabel = styled.div`
   float: left;
   width: 16px;
 `
-
+const StyledPaddedDiv = styled.div`
+  padding: 10% 0;
+`
 export const getAvg = function(ratings) {
   let averageRating = [];
   for (var key in ratings) {
@@ -118,11 +120,11 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
             )
         })}
       <label>{`${(Number(metaData.recommended.true) / (Number(metaData.recommended.true) + Number(metaData.recommended.false))).toFixed(2) * 100}% of reviews recommend this product`}</label>
-
-      {Object.keys(metaData.characteristics).map((characteristic, index)=> {
-        return <ProductBreakdownFactor key={index} characteristic={characteristic} data={metaData.characteristics[characteristic]}/>
-      })}
-
+      <StyledPaddedDiv>
+        {Object.keys(metaData.characteristics).map((characteristic, index)=> {
+          return <ProductBreakdownFactor key={index} characteristic={characteristic} data={metaData.characteristics[characteristic]}/>
+        })}
+      </StyledPaddedDiv>
     </BreakdownDiv>
   )
 }
