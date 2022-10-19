@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 const SearchBar = ({setSearch}) => {
   const [value, setValue] = useState('');
+
+  const softButton = styled.button`
+    border: none;
+  `
 
   return (
     <div>
@@ -11,7 +16,7 @@ const SearchBar = ({setSearch}) => {
       setValue('');}}>
 
         <input onChange={(e)=> setValue(e.target.value)} placeholder="Search..." value={value}/>
-        <button type="submit">Go!</button>
+        <softButton type="submit">Search</softButton>
       </form>
       </div>
   );
