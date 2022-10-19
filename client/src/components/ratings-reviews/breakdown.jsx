@@ -1,23 +1,10 @@
 import {useState, useEffect} from 'react';
 import styled from "styled-components";
-import Star from '../../assets/Star.png';
-import quarterStar from '../../assets/quarterStar.png';
-import halfStar from '../../assets/halfStar.png';
-import threefourthsStar from '../../assets/3fourthsStar.png';
-import fullstar from '../../assets/fullstar.png';
+import {Starbar} from './starbar.jsx'
+import {ProductBreakdownFactor} from './productBreakdownFactor.jsx'
 
 const StyledProgressBar = styled.progress`
   accent-color: green;
-`;
-
-const StyledCharacteristicBar = styled.div`
-  border-style: solid;
-  background-color: LightGray;
-`;
-
-const StyledIcon = styled.i`
-  position: relative;
-  left: ${props=> props.position};
 `;
 
 const StyledHoverable = styled.div`
@@ -137,44 +124,5 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
       })}
 
     </BreakdownDiv>
-  )
-}
-
-export const Starbar = function ({rating}) {
-
-  rating = ((rating / .25).toFixed(0)) * .25;
-  const ratingsArray = new Array(Math.floor(rating)).fill(fullstar);
-  rating = rating - Math.floor(rating);
-
-  if (rating === .75) {
-    ratingsArray.push(threefourthsStar)
-  } else if (rating === .5) {
-    ratingsArray.push(halfStar)
-  } else if (rating === .25) {
-    ratingsArray.push(quarterStar)
-  }
-  while (ratingsArray.length < 5) {
-    ratingsArray.push(Star)
-  }
-
-  return (
-    <div>
-      {ratingsArray.map((item, index)=> {
-        return <img key={index} src={item}></img>
-      })}
-    </div>
-  )
-}
-
-export const ProductBreakdownFactor = ({characteristic, data})=> {
-
-  let iconPosition = ((Number(data.value) / 5) * 100).toFixed(2);
-  iconPosition = iconPosition > 93? '93%': `${iconPosition}%`;
-
-  return (
-  <div>
-    <header>{characteristic}</header>
-    <StyledCharacteristicBar><StyledIcon position={iconPosition}>▼</StyledIcon></StyledCharacteristicBar>
-  </div>
   )
 }
