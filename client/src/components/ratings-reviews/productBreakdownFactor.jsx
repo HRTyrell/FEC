@@ -39,7 +39,7 @@ export const ProductBreakdownFactor = ({characteristic, data})=> {
   <StyledPadDiv>
     <header>{characteristic}</header>
     <StyledCharacteristicBar><StyledIcon position={iconPosition}>▼</StyledIcon></StyledCharacteristicBar>
-    <StyledFlexbox>{range[characteristic].map((item, index)=> (<caption>{item}</caption>))}</StyledFlexbox>
+    <StyledFlexbox>{range[characteristic].map((item, index)=> (<div>{item}</div>))}</StyledFlexbox>
   </StyledPadDiv>
   )
 }

@@ -44,7 +44,7 @@ const RatingsReviews = () => {
   return (
     <StyledContainer>
       <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
-      <ReviewsList/>
+      <ReviewsList product_id={product_id} starBarFilters={starBarFilters} sort={sort} searchBarTerm={searchBarTerm}/>
     </StyledContainer>
   )
 }
