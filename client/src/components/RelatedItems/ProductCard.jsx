@@ -10,7 +10,6 @@ height: 200px;
 padding: 0;
 `;
 
-
 // const ProductImageOuterDiv = styled.div`
 // width: 100px;
 // height: 66.6666px;
@@ -97,7 +96,7 @@ const ProductCard = ({product}) => {
   return (
     <CardStyled>
       <ProductImageStyled >
-        <ImageStyled src={image} alt="Image of RelatedProduct" />
+        <ImageStyled src={image} alt="Image of RelatedProduct" aria-label="Product Image"/>
         <ButtonStyled src="./star-empty-icon.png"
           onMouseEnter={handleOnMouseEnter}
           onMouseLeave={handleOnMouseLeave}
