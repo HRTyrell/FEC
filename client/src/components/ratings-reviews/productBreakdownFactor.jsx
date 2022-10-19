@@ -15,11 +15,14 @@ export const ProductBreakdownFactor = ({characteristic, data})=> {
 
   let iconPosition = ((Number(data.value) / 5) * 100).toFixed(2);
   iconPosition = iconPosition > 93? '93%': `${iconPosition}%`;
-
+  if (characteristic === 'Comfort') {
+    let
+  }x
   return (
   <div>
     <header>{characteristic}</header>
     <StyledCharacteristicBar><StyledIcon position={iconPosition}>▼</StyledIcon></StyledCharacteristicBar>
+    <div></div>
   </div>
   )
 }
