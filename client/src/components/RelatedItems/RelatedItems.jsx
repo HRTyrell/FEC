@@ -23,10 +23,16 @@ const RelatedItems = () => {
 
 
   return (
-    <MasterDiv>
-      <Carousel data={testData} title="Related Products"><RelatedProducts/></Carousel>
-      <Carousel data={testData} title="Your Outfit"><YourOutfit/></Carousel>
-    </MasterDiv>
+    <>
+      <h5>Related Products</h5>
+      <MasterDiv>
+        <Carousel data={testData} title="Related Products"><RelatedProducts/></Carousel>
+      </MasterDiv>
+      <h5>Your Outfit</h5>
+      <MasterDiv>
+        <Carousel data={testData} title="Your Outfit"><YourOutfit/></Carousel>
+      </MasterDiv>
+    </>
 
   )
 }
