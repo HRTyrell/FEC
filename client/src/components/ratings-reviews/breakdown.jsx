@@ -111,7 +111,7 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
   return (
     <BreakdownDiv>RATINGS & REVIEWS
       <div>
-        <label role="averagerating">{avg}</label>
+        <label data-testid="averagerating">{avg}</label>
         <Starbar rating={avg}></Starbar>
       </div>
       <label>{`${totalRatings} total reviews`}</label>
