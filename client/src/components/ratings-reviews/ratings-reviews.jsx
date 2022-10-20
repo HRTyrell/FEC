@@ -20,8 +20,6 @@ const RatingsReviews = () => {
   const [starBarFilters, setstarBarFilters]  = useState({1:true, 2:true, 3:true, 4:true, 5:true, filtered:false});
   const [metaData, setmetaData]  = useState(null);
 
-  const [searchBarTerm, setsearchBarTerm] = useState('');
-
   useEffect(()=> {
     axios({
       url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/meta/?product_id=${product_id}`,
@@ -44,7 +42,7 @@ const RatingsReviews = () => {
     <StyledContainer>
       <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
 
-      <ReviewsList product_id={product_id} starBarFilters={starBarFilters} searchBarTerm={searchBarTerm}/>
+      <ReviewsList product_id={product_id} starBarFilters={starBarFilters}/>
     </StyledContainer>
   )
 }

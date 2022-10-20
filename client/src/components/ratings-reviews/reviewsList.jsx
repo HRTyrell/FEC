@@ -18,13 +18,18 @@ const ReviewsListOuterDiv = styled.div`
   border-radius: 10px;
   height: fit-content;
 `
+const FlexDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
+`
 
-export const ReviewsList = function ({product_id, starBarFilters, searchBarTerm}) {
+export const ReviewsList = function ({product_id, starBarFilters}) {
 
   const [reviews, setReviews] = useState(null)
   const [countToRender, setcountToRender] = useState(2);
   const [moreAvailable, setmoreAvailable] = useState(false);
   const [selectedSort, setSelectedSort] = useState('relevant');
+  const [searchBarTerm, setsearchBarTerm] = useState('');
 
   useEffect(()=> {
     axios({
@@ -44,22 +49,32 @@ export const ReviewsList = function ({product_id, starBarFilters, searchBarTerm}
       .catch((err)=> {
         alert(err);
       })
-  }, [starBarFilters, countToRender, selectedSort]);
+  }, [starBarFilters, countToRender, selectedSort, searchBarTerm]);
 
-  if (!reviews || reviews.length===0) {
+  const handleSearchBar = (e)=> {
+    if (e.target.value.length >=3) {
+      setsearchBarTerm(e.target.value);
+    } else {
+      setsearchBarTerm('')
+    }
+  }
+
+  if (!reviews) {
     return null;
   }
   //console.log(reviews)
   return (
     <ReviewsListOuterDiv>
-      <label >Sort on:
-        <select value={selectedSort} onChange={(e)=>{setSelectedSort(e.target.value)}}>
-          {['relevant', 'helpful', 'newest'].map((item,index)=>{
-            return <option value={item} key={index}>{item}</option>
-          })}
-        </select>
-      </label>
-
+      <FlexDiv>
+        <label >Sort on:
+          <select value={selectedSort} onChange={(e)=>{setSelectedSort(e.target.value)}}>
+            {['relevant', 'helpful', 'newest'].map((item,index)=>{
+              return <option value={item} key={index}>{item}</option>
+            })}
+          </select>
+        </label>
+        <input type="text" placeholder="Search..." onChange={handleSearchBar} ></input>
+      </FlexDiv>
       <ReviewsListDiv>
         <div>
           {reviews.map((review, index)=> {
@@ -72,40 +87,3 @@ export const ReviewsList = function ({product_id, starBarFilters, searchBarTerm}
     </ReviewsListOuterDiv>
   )
 }
-
-let exampleData = [
-  {
-      "review_id": 1275521,
-      "rating": 3,
-      "summary": "",
-      "recommend": true,
-      "response": null,
-      "body": "trying to upload photos to see if this works we shall see",
-      "date": "2022-07-17T00:00:00.000Z",
-      "reviewer_name": "test101",
-      "helpfulness": 17,
-      "photos": [
-          {
-              "id": 2455420,
-              "url": "http://res.cloudinary.com/djgtrn3gg/image/upload/v1658081306/vfgwjvsppkowoyslzdms.png"
-          }
-      ]
-  },
-  {
-      "review_id": 1276325,
-      "rating": 5,
-      "summary": "Michael Scott",
-      "recommend": true,
-      "response": null,
-      "body": "'You miss 100% of the shots you never take. -Wayne Gretzky' -Michael Scott",
-      "date": "2022-09-02T00:00:00.000Z",
-      "reviewer_name": "Michael",
-      "helpfulness": 5,
-      "photos": [
-          {
-              "id": 2455912,
-              "url": "https://miro.medium.com/max/500/1*xDIevNE7HEMiJQVTYg0qDQ.png"
-          }
-      ]
-  }
-]
