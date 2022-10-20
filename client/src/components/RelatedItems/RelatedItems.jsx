@@ -5,6 +5,8 @@ import YourOutfit from './YourOutfit.jsx';
 import styled from 'styled-components';
 import Carousel from './Carousel.jsx';
 import testData from './TestData.js';
+import {getRelatedProducts} from './parseHelpers.js';
+import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
 
 const Title = styled.h1`
 
@@ -21,16 +23,25 @@ const MasterDiv = styled.div`
 
 const RelatedItems = () => {
 
+  const setRelatedItems = useRelatedItemsStore(state => state.setRelatedItems);
+  useEffect(() => {
+    getRelatedProducts('66643').then(items => {
+      setRelatedItems(items);
+    })
+  }, [])
+
+  const relatedProductData = useRelatedItemsStore(state => state.relatedItemsList);
+  const outfitList = useRelatedItemsStore(state => state.outfitList);
 
   return (
     <>
       <h5>Related Products</h5>
       <MasterDiv>
-        <Carousel data={testData} title="Related Products"><RelatedProducts/></Carousel>
+        <Carousel data={relatedProductData} title="Related Products"><RelatedProducts/></Carousel>
       </MasterDiv>
       <h5>Your Outfit</h5>
       <MasterDiv>
-        <Carousel data={testData} title="Your Outfit"><YourOutfit/></Carousel>
+        <Carousel data={outfitList} title="Your Outfit"><YourOutfit/></Carousel>
       </MasterDiv>
     </>
 

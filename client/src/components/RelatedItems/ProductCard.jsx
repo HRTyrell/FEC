@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import { getProductStyles } from './parseHelpers.js';
 ////////////////Styles//////////////////////////////////////
 const CardStyled = styled.div`
 display: table-cell;
@@ -89,23 +90,39 @@ const ProductCard = ({product}) => {
   const handleReview = () => {
     return '';
   }
+// const [defaultImage, setDefaultImage] = useState('');
 
+useEffect (() => {
+  getProductStyles(product.data.id)
+  .then(product => {
+    return product.data.results[0].photos[0].thumbnail_url
+  }).then(imageUrl => {
+    setDefaultImage(imageUrl);
+  })
+}, [])
+  // const getProductDefaultImage = () => {
+  //   return getProductStyles(product.data.id)
+  //   .then(product => {
+  //     return product.data.results[0].photos[0].thumbnail_url
+  //   })
+  // }
+  const defaultImage = product.styles.data.results[0].photos[0].thumbnail_url;
 
-  const [image, setImage] = useState('./testImage.png');
+  // const [image, setImage] = useState('./testImage.png');
 
   return (
     <CardStyled>
       <ProductImageStyled >
-        <ImageStyled src={image} alt="Image of RelatedProduct" aria-label="Product Image"/>
+        <ImageStyled src={defaultImage} alt="Image of RelatedProduct" aria-label="Product Image"/>
         <ButtonStyled src="./star-empty-icon.png"
           onMouseEnter={handleOnMouseEnter}
           onMouseLeave={handleOnMouseLeave}
           aria-label="Comparison Button"/>
       </ProductImageStyled>
       <OuterDescriptionDiv>
-        <Category>{product.category}</Category>
-        <ProductTitle>{product.name}</ProductTitle>
-        <Price>{product.default_price}</Price>
+        <Category>{product.data.category}</Category>
+        <ProductTitle>{product.data.name}</ProductTitle>
+        <Price>{product.data.default_price}</Price>
         <Review src={handleReview()} />
       </OuterDescriptionDiv>
     </CardStyled>
