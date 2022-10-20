@@ -14,8 +14,8 @@ const YourOutfit = ({data}) => {
 
   return (
     <Div>
-      {data.map((product) => {
-        return <ProductCard product={product}/>
+      {data.map((product, index) => {
+        return <ProductCard product={product} key={index}/>
       })}
       {/* return product card */}
     </Div>

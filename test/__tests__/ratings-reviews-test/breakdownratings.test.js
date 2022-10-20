@@ -1,14 +1,10 @@
+import React from 'react';
+import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
+import {render, screen, waitFor} from '@testing-library/react';
 
-/**
- * @jest-environment jsdom
- */
-
-import {render, screen, cleanup} from '@testing-library/react';
-
-const {Breakdown} = require("../../client/src/components/ratings-reviews/breakdown.jsx");
-const {ProductBreakdownFactor} = require("../../client/src/components/ratings-reviews/breakdown.jsx");
-
-afterEach(()=>{cleanup()});
+const {Breakdown} = require("../../../client/src/components/ratings-reviews/breakdown.jsx");
+const {ProductBreakdownFactor} = require("../../../client/src/components/ratings-reviews/breakdown.jsx");
 
 let fakeData = {
   "product_id": "66642",
@@ -45,7 +41,8 @@ let fakeData = {
 const FakestarBarFilters = {1:true,2:true,3:true,4:true,5:true,filtered:false}
 
 describe('breakdown', ()=> {
-  test("it should render an average rating of 3.6", () => {
+  const user = userEvent.setup()
+  it("should render an average rating of 3.6", () => {
     fakeData.ratings = {
       "1": "0",
       "2": "0",
@@ -54,11 +51,10 @@ describe('breakdown', ()=> {
       "5": "1"
     }
     render(<Breakdown metaData={fakeData} starBarFilters={FakestarBarFilters} setstarBarFilters={()=>{}}/>);
-    const actualAvgRating = screen.getByTestId('averagerating').textContent;
-    expect(actualAvgRating).toEqual('3.6');
+    expect(screen.getByTestId('averagerating').textContent).toEqual('3.6');
   })
 
-  test("it should render a label of '39 total reviews'", () => {
+  it("should render a label of '39 total reviews'", () => {
     fakeData.recommended = {
       "false": 8,
       "true": 31
@@ -67,7 +63,7 @@ describe('breakdown', ()=> {
     expect(screen.getByText('39 total reviews')).not.toBeNull();
   })
 
-  test("it should render a label of '45% of reviews recommend this product'", () => {
+  it("should render a label of '45% of reviews recommend this product'", () => {
     fakeData.recommended = {
       "false": 55,
       "true": 45

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const CarouselStyled = styled.div`
   position: relative;
-  max-width: 500px;
   margin-top: -30px;
   overflow: hidden;
 `;
@@ -35,25 +34,31 @@ const CarouselControlNext = styled(CarouselControl)`
 `;
 const FadedOverlay = styled.div`
 position: absolute;
-background: linear-gradient(to right, rgba(255,255,255,0) 60%, rgba(255,255,255,1) 90%);
+background: linear-gradient(to right, rgba(255,255,255,0) 60%, rgba(255,255,255,1) 99%);
 border: 0px;
 z-index: 3;
-right: 10%;
+right: 0;
 height: 100%;
 width: 100%;
+max-width: 500px;
 pointer-events: none;
 `;
 
 const Carousel = (props) => {
-
+  const [overlay, setOverlay] = useState(true);
   const slide = (e, shift) => {
     e.target.parentNode.scrollLeft -= shift;
+    if (e.target.parentNode.scrollHeight - e.target.parentNode.scrollLeft <= 100) {
+      setOverlay(false);
+    } else {
+      setOverlay(true);
+    }
   }
 
   return (
-    <div>
-    <h5>{props.title}</h5>
-    <FadedOverlay />
+    <div style={{ maxWidth: "500px",
+                  position: "relative"}}>
+    {overlay ? <FadedOverlay /> : null }
     <CarouselStyled aria-label="Product Carousel">
       <CarouselControlPrev data-testid="prevButton" onClick={(e)=> slide(e, 120)}>&#8678;</CarouselControlPrev>
       <CarouselControlNext onClick={(e)=> slide(e, -120)}>&#8680;</CarouselControlNext>
