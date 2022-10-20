@@ -1,26 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 
-const StyleDiv = styled.div`
-margin: 10px 0;
-height: 400px;
-width: 30%;
+import ProductStore from "../Provider/Zus_Provider.jsx";
+
+const ImgS = styled.img`
+height: 50px;
+width: 50px;
+border-radius: 50%;
 border: solid;
-border-radius: 10px;
-text-align: center;
 `
 
-const StyleCart = () => { //{Product, Product_Styles} arguments
+const DivS = styled.div`
+display: flex;
+flex-direction: row;
+gap: 5px;
+`
+
+const StyleSelector = () => {
+
+  const Styles = ProductStore((state) => state.curProductStyles)
+
+  if (!Styles) {
+    return null;
+  }
+
   return (
-    <StyleDiv>
-      <h5>Stars</h5>
-      <h5>Category</h5>
-      <h5>Name</h5>
-      <h5>StyleSelector</h5>
-      <h5>SizeSelector</h5>
-      <h5>AddToCart</h5>
-    </StyleDiv>
+    <DivS>
+      {Styles.map((info) => {
+        return(
+          <>
+            <ImgS title = {info.name} key={info.style_id} src={info.photos[0].thumbnail_url} height="30px" width="30px"/>
+          </>
+        )
+      })}
+    </DivS>
   )
 }
 
-export default StyleCart;
+export default StyleSelector;
