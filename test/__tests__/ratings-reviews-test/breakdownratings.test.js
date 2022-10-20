@@ -3,8 +3,8 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import {render, screen, waitFor} from '@testing-library/react';
 
-const {Breakdown} = require("../../client/src/components/ratings-reviews/breakdown.jsx");
-const {ProductBreakdownFactor} = require("../../client/src/components/ratings-reviews/breakdown.jsx");
+const {Breakdown} = require("../../../client/src/components/ratings-reviews/breakdown.jsx");
+const {ProductBreakdownFactor} = require("../../../client/src/components/ratings-reviews/breakdown.jsx");
 
 let fakeData = {
   "product_id": "66642",
