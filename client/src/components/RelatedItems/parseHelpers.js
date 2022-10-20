@@ -14,11 +14,12 @@ export const getRelatedProducts = productId => {
         return axios.get(`/products/${product.data.id}/styles`, options).then(styles => {
           product.styles = styles;
           return product;
-        }
-
-        )
-        }
-      )
+        })}).then(product => {
+          return axios.get(`/reviews/meta/?product_id=${product.data.id}`, options).then(reviews => {
+            product.reviews = reviews;
+            return product;
+          })
+        })
     })
     return Promise.all(newData);
   })

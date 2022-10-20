@@ -11,14 +11,29 @@ import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
 const Title = styled.h1`
 
 `;
-
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+`;
 const MasterDiv = styled.div`
-  display: table;
-
-  border-spacing: 7px;
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  width: 80%;
+  // height: 15em;
+  border-spacing: 0.5%;
   margin: 0;
   padding: 0;
   line-height: 0.8;
+`;
+const H = styled.h5`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2em;
+  margin-block-start: 2em;
+  margin-block-end: 0;
 `;
 
 const RelatedItems = () => {
@@ -34,16 +49,16 @@ const RelatedItems = () => {
   const outfitList = useRelatedItemsStore(state => state.outfitList);
 
   return (
-    <>
-      <h5>Related Products</h5>
+    <Div>
+      <H>Related Products</H>
       <MasterDiv>
         <Carousel data={relatedProductData} title="Related Products"><RelatedProducts/></Carousel>
       </MasterDiv>
-      <h5>Your Outfit</h5>
+      <H>Your Outfit</H>
       <MasterDiv>
         <Carousel data={outfitList} title="Your Outfit"><YourOutfit/></Carousel>
       </MasterDiv>
-    </>
+    </Div>
 
   )
 }

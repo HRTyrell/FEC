@@ -4,18 +4,31 @@ import ProductCard from './ProductCard.jsx';
 import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
 
 const Div = styled.div`
-  display: table-row;
+  display: flex;
+  justify-content: center;
   border-spacing: 20px;
+  height: 15em;
+  border-style: solid;
+  border-spacing: 20px;
+  padding: 0;
+  width: 8em;
 `;
 const Title = styled.h5`
   position: sticky;
 `;
 
 const CurrentProduct = styled.div`
-  display: table-cell;
-  border-style: solid;
-  border-spacing: 20px;
-  padding: 45px;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+`;
+const Image = styled.img`
+  display: flex;
+  align-self: center;
+  width: 2em;
+  height: 2em;
+  margin: auto;
 `;
 
 const YourOutfit = ({data}) => {
@@ -51,9 +64,7 @@ const YourOutfit = ({data}) => {
   return (
     <Div>
       <CurrentProduct>
-        <img src="./plus.png" alt="add this Product to Outfit"
-          width="20"
-          height="20"
+        <Image src="./plus.png" alt="add this Product to Outfit"
           onClick={addToOutfit}/>
       </CurrentProduct>
       {data.map((product, index) => {
