@@ -9,7 +9,7 @@ border: solid;
 border-radius: 10px;
 `
 
-const Gallery = () => {
+const Gallery = () => { //Product_Styles
   return (
     <GalleryDiv>
       <h1>Gallery</h1>
