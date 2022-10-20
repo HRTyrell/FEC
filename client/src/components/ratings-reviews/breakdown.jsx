@@ -21,6 +21,7 @@ const BreakdownDiv = styled.div`
   border: solid;
   border-radius: 10px;
   width: 30%;
+  height: fit-content;
 `
 const NoShrinkLabel = styled.label`
   flex-shrink: 0;

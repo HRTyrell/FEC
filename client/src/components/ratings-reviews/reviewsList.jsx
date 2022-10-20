@@ -5,11 +5,10 @@ import {TOKEN} from '/MyConfig.js';
 import {ReviewTile} from './reviewTile.jsx'
 
 const ReviewsListDiv = styled.div`
-  margin: 10px 0;
-  padding: 10px;
-  border: solid;
-  border-radius: 10px;
-  width: 70%;
+
+  max-height: 100vh;
+  overflow: auto;
+  margin: 5px;
 `
 
 export const ReviewsList = function ({product_id, starBarFilters, sort, searchBarTerm}) {
@@ -35,7 +34,7 @@ export const ReviewsList = function ({product_id, starBarFilters, sort, searchBa
       .catch((err)=> {
         alert(err);
       })
-  }, []);
+  }, [countToRender]);
 
   if (!reviews) {
     return null;

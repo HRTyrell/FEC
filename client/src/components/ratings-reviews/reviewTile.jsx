@@ -27,8 +27,10 @@ const StyledModal = styled.header`
 `
 const StyledOuterContainer = styled.div`
   padding: 10px 0px;
+  margin-right: 5px;
   border-top: 2px solid grey;
 `
+//padding: 10px 5px 10px 0;
 export const ReviewTile = ({review}) => {
 
   const [showMore, setShowMore] = useState(review.body.length > 250 ? true : false)
@@ -97,6 +99,6 @@ const SizeAdjustableImage = ({url}) => {
       </StyledModal>
     )
   } else {
-    return <img src={url} width="70px" height="70px" onClick={()=>{setModalView(true)}}></img>
+    return <img src={url} width="50px" height="50px" onClick={()=>{setModalView(true)}}></img>
   }
 }

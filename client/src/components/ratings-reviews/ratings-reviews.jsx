@@ -15,12 +15,21 @@ const StyledContainer = styled.div`
   width: 70%;
 `
 
+const ReviewsListDiv = styled.div`
+  margin: 10px 0;
+  padding: 10px;
+  width: 70%;
+  border: solid;
+  border-radius: 10px;
+  height: fit-content;
+`
+
 const RatingsReviews = () => {
 
   let product_id = 66642;
   const [starBarFilters, setstarBarFilters]  = useState({1:true, 2:true, 3:true, 4:true, 5:true, filtered:false});
   const [metaData, setmetaData]  = useState(null);
-  const [sort, setSort]  = useState('relevant');
+  const [sort, setSort]  = useState('Relevant');
   const [searchBarTerm, setsearchBarTerm] = useState('');
 
   useEffect(()=> {
@@ -44,9 +53,32 @@ const RatingsReviews = () => {
   return (
     <StyledContainer>
       <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
-      <ReviewsList product_id={product_id} starBarFilters={starBarFilters} sort={sort} searchBarTerm={searchBarTerm}/>
+
+      <ReviewsListDiv>
+        <label for="sort-select">Sort on:</label>
+        <select id="sort-select">
+          <option value="Relevant"></option>
+          <option value="Helpful"></option>
+          <option value="Newest"></option>
+        </select>
+
+        <ReviewsList product_id={product_id} starBarFilters={starBarFilters} sort={sort} searchBarTerm={searchBarTerm}/>
+      </ReviewsListDiv>
     </StyledContainer>
   )
 }
+
+{/* <StyledContainer>
+      <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
+      <div>
+        <label for="sort-select">Sort on:</label>
+        <select id="sort-select">
+          <option value="Relevant"></option>
+          <option value="Helpful"></option>
+          <option value="Newest"></option>
+        </select>
+        <ReviewsList product_id={product_id} starBarFilters={starBarFilters} sort={sort} searchBarTerm={searchBarTerm}/>
+      </div>
+    </StyledContainer> */}
 
 export default RatingsReviews;
