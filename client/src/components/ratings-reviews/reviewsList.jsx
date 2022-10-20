@@ -10,16 +10,25 @@ const ReviewsListDiv = styled.div`
   overflow: auto;
   margin: 5px;
 `
+const ReviewsListOuterDiv = styled.div`
+  margin: 10px 0;
+  padding: 10px;
+  width: 70%;
+  border: solid;
+  border-radius: 10px;
+  height: fit-content;
+`
 
-export const ReviewsList = function ({product_id, starBarFilters, sort, searchBarTerm}) {
+export const ReviewsList = function ({product_id, starBarFilters, searchBarTerm}) {
 
   const [reviews, setReviews] = useState(null)
   const [countToRender, setcountToRender] = useState(2);
   const [moreAvailable, setmoreAvailable] = useState(false);
+  const [selectedSort, setSelectedSort] = useState('relevant');
 
   useEffect(()=> {
     axios({
-      url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?page=${1}&count=${100000}&sort=${sort}&product_id=${product_id}`,
+      url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?page=${1}&count=${100000}&sort=${selectedSort}&product_id=${product_id}`,
       method: 'get',
       headers: {authorization: TOKEN}
       })
@@ -27,6 +36,7 @@ export const ReviewsList = function ({product_id, starBarFilters, sort, searchBa
         let filteredReviews = val.data.results.filter((review)=> {
           return review.body.indexOf(searchBarTerm) > -1 && starBarFilters[review.rating];
         });
+
         setmoreAvailable(filteredReviews.length > countToRender ? true : false);
         setReviews(filteredReviews.slice(0, countToRender))
 
@@ -34,23 +44,32 @@ export const ReviewsList = function ({product_id, starBarFilters, sort, searchBa
       .catch((err)=> {
         alert(err);
       })
-  }, [countToRender]);
+  }, [starBarFilters, countToRender, selectedSort]);
 
-  if (!reviews) {
+  if (!reviews || reviews.length===0) {
     return null;
   }
   //console.log(reviews)
   return (
-    <ReviewsListDiv>
+    <ReviewsListOuterDiv>
+      <label >Sort on:
+        <select value={selectedSort} onChange={(e)=>{setSelectedSort(e.target.value)}}>
+          {['relevant', 'helpful', 'newest'].map((item,index)=>{
+            return <option value={item} key={index}>{item}</option>
+          })}
+        </select>
+      </label>
 
-      <div>
-        {reviews.map((review, index)=> {
-          return <ReviewTile key={index} review={review}/>
-        })}
-      </div>
+      <ReviewsListDiv>
+        <div>
+          {reviews.map((review, index)=> {
+            return <ReviewTile key={review.review_id} review={review}/>
+          })}
+        </div>
 
-      {moreAvailable && <button onClick={()=>{setcountToRender(countToRender + 2)}}>More Reviews</button>}
-    </ReviewsListDiv>
+        {moreAvailable && <button onClick={()=>{setcountToRender(countToRender + 2)}}>More Reviews</button>}
+      </ReviewsListDiv>
+    </ReviewsListOuterDiv>
   )
 }
 
