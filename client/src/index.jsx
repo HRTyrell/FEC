@@ -24,8 +24,8 @@ const App = () => {
       <NavigationBar />
       <Sdiv>
         <Overview />
-        <QA />
         <RelatedItems />
+        <QA />
         <RatingsReviews />
       </Sdiv>
     </div>
