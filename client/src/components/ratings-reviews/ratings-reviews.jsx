@@ -3,11 +3,18 @@ import axios from 'axios';
 
 import {URL, TOKEN} from '/MyConfig.js';
 import {Breakdown} from './breakdown.jsx';
+import {ReviewsList} from './reviewsList.jsx'
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
-  align-items: left;
-`;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: top;
+  padding: 10px;
+  width: 70%;
+`
 
 const RatingsReviews = () => {
 
@@ -37,10 +44,8 @@ const RatingsReviews = () => {
 
   return (
     <StyledContainer>
-      <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}></Breakdown>
-      <input></input>
-
-
+      <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
+      <ReviewsList product_id={product_id} starBarFilters={starBarFilters} sort={sort} searchBarTerm={searchBarTerm}/>
     </StyledContainer>
   )
 }
