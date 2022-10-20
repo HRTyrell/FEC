@@ -44,7 +44,7 @@ const RatingsReviews = () => {
       .catch((err)=> {
         alert(err);
       })
-  }, []);
+  }, [sort]);
 
   if (!metaData) {
     return null;
@@ -55,30 +55,18 @@ const RatingsReviews = () => {
       <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
 
       <ReviewsListDiv>
-        <label for="sort-select">Sort on:</label>
-        <select id="sort-select">
-          <option value="Relevant"></option>
-          <option value="Helpful"></option>
-          <option value="Newest"></option>
-        </select>
+        <label >Sort on:
+          <select value={sort} onChange={(e)=>{setSort(e.target.value)}}>
+            {['Relevant', 'Helpful', 'Newest'].map((item,index)=>{
+              return <option value={item}>{item}</option>
+            })}
 
+          </select>
+        </label>
         <ReviewsList product_id={product_id} starBarFilters={starBarFilters} sort={sort} searchBarTerm={searchBarTerm}/>
       </ReviewsListDiv>
     </StyledContainer>
   )
 }
-
-{/* <StyledContainer>
-      <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
-      <div>
-        <label for="sort-select">Sort on:</label>
-        <select id="sort-select">
-          <option value="Relevant"></option>
-          <option value="Helpful"></option>
-          <option value="Newest"></option>
-        </select>
-        <ReviewsList product_id={product_id} starBarFilters={starBarFilters} sort={sort} searchBarTerm={searchBarTerm}/>
-      </div>
-    </StyledContainer> */}
 
 export default RatingsReviews;
