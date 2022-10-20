@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 
+import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const Title = styled.h1`
 color: blue;
@@ -14,8 +15,8 @@ border-radius: 10px;
 text-align: center;
 `
 
-const ProductInformation = () => {
-
+const ProductInformation = () => { //Product
+const curProduct = ProductStore((state) => state.curProduct)
 
 
   return (
