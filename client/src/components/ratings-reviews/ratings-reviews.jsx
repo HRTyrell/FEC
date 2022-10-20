@@ -14,6 +14,7 @@ const StyledContainer = styled.div`
   padding: 10px;
   width: 70%;
 `
+
 const RatingsReviews = () => {
 
   let product_id = 66642;
@@ -43,7 +44,7 @@ const RatingsReviews = () => {
   return (
     <StyledContainer>
       <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
-      <ReviewsList/>
+      <ReviewsList product_id={product_id} starBarFilters={starBarFilters} sort={sort} searchBarTerm={searchBarTerm}/>
     </StyledContainer>
   )
 }
