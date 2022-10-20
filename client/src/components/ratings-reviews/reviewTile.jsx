@@ -30,17 +30,17 @@ const StyledOuterContainer = styled.div`
   margin-right: 5px;
   border-top: 2px solid grey;
 `
+export const convertDate = (inp)=> {
+  let formattedDate = new Date(inp)
+  formattedDate=formattedDate.toDateString().split(' ');
+  return `${formattedDate[1]} ${formattedDate[2]}, ${formattedDate[3]}`
+}
+
 //padding: 10px 5px 10px 0;
 export const ReviewTile = ({review}) => {
 
   const [showMore, setShowMore] = useState(review.body.length > 250 ? true : false)
   const [helpful, setHelpful] = useState({voted:false, helpfulCount: review.helpfulness})
-
-  const convertDate = (inp)=> {
-    let formattedDate = new Date(inp)
-    formattedDate=formattedDate.toDateString().split(' ');
-    return `${formattedDate[1]} ${formattedDate[2]}, ${formattedDate[3]}`
-  }
 
   const uploadHelpfulVote = ()=> {
     if (!helpful.voted) {

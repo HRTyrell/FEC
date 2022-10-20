@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, Fragment} from 'react';
 import axios from 'axios';
 import {TOKEN} from '/MyConfig.js';
 import {Breakdown} from './breakdown.jsx';
@@ -37,13 +37,15 @@ const RatingsReviews = () => {
   if (!metaData) {
     return null;
   }
-
   return (
-    <StyledContainer>
-      <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
+    <Fragment>
+      <h2> RATINGS & REVIEWS </h2>
+      <StyledContainer>
+        <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
 
-      <ReviewsList product_id={product_id} starBarFilters={starBarFilters}/>
-    </StyledContainer>
+        <ReviewsList product_id={product_id} starBarFilters={starBarFilters}/>
+      </StyledContainer>
+    </Fragment>
   )
 }
 

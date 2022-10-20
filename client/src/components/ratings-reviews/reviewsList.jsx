@@ -66,7 +66,7 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
   return (
     <ReviewsListOuterDiv>
       <FlexDiv>
-        <label >Sort on:
+        <label>Sort on:
           <select value={selectedSort} onChange={(e)=>{setSelectedSort(e.target.value)}}>
             {['relevant', 'helpful', 'newest'].map((item,index)=>{
               return <option value={item} key={index}>{item}</option>
