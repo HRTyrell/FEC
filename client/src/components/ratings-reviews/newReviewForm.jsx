@@ -73,6 +73,7 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
   const [rating, setRating] = useState(0);
   const [recommended, setRecommended] = useState(null);
   const [characteristicRatings, setCharacteristicRatings] = useState(convertcharacteristicsTable(characteristics));
+  const [reviewSummary, setReviewSummary] = useState('');
 
   const curProduct = ProductStore((state) => state.curProduct);
 
@@ -149,6 +150,12 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
             )
           })}
 
+          <StyledFlexRow>
+            <StyledFlexItemHeader>Review summary:</StyledFlexItemHeader>
+            <StyledPaddedDiv>
+              <input type="text" placeholder="Example: Best purchase ever!" value={reviewSummary} onChange={(e)=>{if (e.target.value.length <=60) {setReviewSummary(e.target.value)}}}></input>
+            </StyledPaddedDiv>
+          </StyledFlexRow>
 
         </StyledForm>
       </StyledModal>
