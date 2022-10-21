@@ -47,7 +47,7 @@ const StyleSelector = () => {
     setStyle(e.target.title);
   }
 
-  console.log(curStyle)
+  // console.log(curStyle)
 
   return (
     <DivS>

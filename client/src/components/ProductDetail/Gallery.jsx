@@ -26,10 +26,15 @@ scroll-snap-type: y mandatory;
   }
 `
 
+const IDiv = styled.div`
+height: 800px;
+border: solid;
+`
+
 const C2img = styled.img`
-max-height: 800px;
+height: 800px;
 /* width: 450px; */
-object-fit: contain;
+object-fit: scale-down;
 scroll-snap-align: center;
 `
 
@@ -46,7 +51,9 @@ const Gallery = () => {
       <C2Div>
         {cStyle.photos.map((img, index) => {
           return(
+            <IDiv>
               <C2img title = {img.name} key={index} src={img.url}/>
+            </IDiv>
           )
         })}
       </C2Div>
