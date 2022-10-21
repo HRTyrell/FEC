@@ -5,6 +5,8 @@ import {TOKEN} from '/MyConfig.js';
 import {Breakdown} from './breakdown.jsx';
 import {ReviewsList} from './reviewsList.jsx'
 import styled from "styled-components";
+import {NewReviewForm} from './newReviewForm.jsx';
+import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -18,6 +20,13 @@ const StyledContainer = styled.div`
 const RatingsReviews = () => {
 
   let product_id = 66642;
+
+  // const curProduct = ProductStore((state) => state.curProduct);
+  // if (!curProduct) {
+  //   return null;
+  // }
+  // console.log('hh: ', curProduct.id);
+
   const [starBarFilters, setstarBarFilters]  = useState({1:true, 2:true, 3:true, 4:true, 5:true, filtered:false});
   const [metaData, setmetaData]  = useState(null);
 
@@ -46,6 +55,7 @@ const RatingsReviews = () => {
 
         <ReviewsList product_id={product_id} starBarFilters={starBarFilters}/>
       </StyledContainer>
+      <NewReviewForm setmetaData={setmetaData}/>
     </Fragment>
   )
 }
