@@ -6,7 +6,7 @@ import QAList from './/QAList.jsx';
 const MainDiv = styled.div`
   width: 70%;
   padding: 20px;
-  // border: dashed;
+  border: solid;
 `
 
   const QA = (/* product_id */ ) => {
