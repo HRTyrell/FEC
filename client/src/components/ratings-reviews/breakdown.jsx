@@ -21,6 +21,7 @@ const BreakdownDiv = styled.div`
   border: solid;
   border-radius: 10px;
   width: 30%;
+  height: fit-content;
 `
 const NoShrinkLabel = styled.label`
   flex-shrink: 0;
@@ -33,6 +34,14 @@ const FixedWidthLabel = styled.div`
 const StyledPaddedDiv = styled.div`
   padding: 10% 0;
 `
+
+const StyledStarBarRatingDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: larger;
+`
+
 export const getAvg = function(ratings) {
   let averageRating = [];
   for (var key in ratings) {
@@ -97,11 +106,12 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
   }
 
   return (
-    <BreakdownDiv>RATINGS & REVIEWS
-      <div>
-        <label>{avg}</label>
+    <BreakdownDiv>
+      <StyledStarBarRatingDiv>
         <Starbar rating={avg}></Starbar>
-      </div>
+        <span>{avg}</span>
+      </StyledStarBarRatingDiv>
+
       <label>{totalRatings} total reviews</label>
       <header> Rating Breakdown</header>
       {starBarFilters.filtered?
