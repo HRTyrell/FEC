@@ -26,13 +26,14 @@ const StyledTitle = styled.header`
   justify-content: center;
   margin-top: 5px;
   font-weight: bold;
-  font-size: ${props => props.fontSize}
+  font-size: ${props => props.fontSize};
 `
 
 const StyledFlexRow = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
   padding: 10px 0px;
   border-top: 2px solid grey;
 `
@@ -42,14 +43,30 @@ const StyledFlexRowAdjustable = styled.div`
   justify-content: ${props=> props.justifyContent};
   padding: 3px;
 `
+
+const StyledFlexItemHeader = styled.label`
+  width: 20%;
+  height: 100%;
+  padding-left: 5%;
+  text-align: left;
+  border-right: 2px solid LightGrey;
+`
+const StyledFlexGrowingDiv = styled.div`
+  flex-grow: 2;
+  padding-right: 5%;
+  padding-left: 5%;
+`
+const StyledPaddedDiv = styled.div`
+  padding-left: 5%;
+`
+
 const convertcharacteristicsTable = (table)=> {
   let tableModded = {};
   for (var key in table) {
-    tableModded[table.key.id] = 0;
+    tableModded[table[key]['id']] = 0;
   }
   return tableModded
 }
-
 export const NewReviewForm = ({setmetaData, characteristics}) => {
 
   const [modalView, setModalView] = useState(false);
@@ -83,20 +100,24 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
           <StyledTitle fontSize="x-large">Write Your Review</StyledTitle>
           <StyledTitle fontSize="large" >About the {curProduct.name}</StyledTitle>
 
-          <StyledFlexRow>Overall rating*:
-            <div>
+          <StyledFlexRow>
+            <StyledFlexItemHeader>Overall rating*:</StyledFlexItemHeader>
+            <StyledPaddedDiv>
               {starsArray.map((item, index)=> {
                 return <img src={item} key={index} onClick={()=>setRating(index+1)}></img>
               })}
-            </div>
+            </StyledPaddedDiv>
             <label>{{1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great'}[rating]}</label>
           </StyledFlexRow>
 
-          <StyledFlexRow>Do you recommend this product?*:
-            <input type="radio" value="no" name="recommend" onChange={()=>setRecommended('no')} id="no"></input>
-            <label for="no">no</label>
-            <input type="radio" value="yes" name="recommend" onChange={()=>setRecommended('yes')} id="yes"></input>
-            <label for="yes">yes</label>
+          <StyledFlexRow>
+            <StyledFlexItemHeader>Do you recommend this product?*:</StyledFlexItemHeader>
+            <StyledPaddedDiv>
+              <input type="radio" value="no" name="recommend" onChange={()=>setRecommended('no')} id="no"></input>
+              <label for="no">no</label>
+              <input type="radio" value="yes" name="recommend" onChange={()=>setRecommended('yes')} id="yes"></input>
+              <label for="yes">yes</label>
+            </StyledPaddedDiv>
           </StyledFlexRow>
 
           {Object.keys(characteristics).map((char, index)=> {
@@ -104,25 +125,26 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
             let charSelectedScore = characteristicRatings[charID];
 
             return (
-              <StyledFlexRow key={index}>{char + ' *:'}
-                <div>
+              <StyledFlexRow key={index}>
+                <StyledFlexItemHeader>{char + ' *:'}</StyledFlexItemHeader>
+                <StyledFlexGrowingDiv>
                  <StyledFlexRowAdjustable justifyContent="center;">
                  {charSelectedScore === 0 ? 'none selected' : characteristicTable[char][charSelectedScore-1]}
                  </StyledFlexRowAdjustable>
 
                  <StyledFlexRowAdjustable justifyContent="space-between">
-                 {[1, 2, 3, 4, 5].map((score, index)=> {
-                  return <input type="radio" key={char + score} value={score} name={char} onChange={(e)=>handleUpdate(charID, e.target.value)}></input>
-                  })
-                 }
-                </StyledFlexRowAdjustable>
+                  {[1, 2, 3, 4, 5].map((score, index)=> {
+                    return <input type="radio" key={char + score} value={score} name={char} onChange={(e)=>handleUpdate(charID, e.target.value)}></input>
+                    })
+                  }
+                  </StyledFlexRowAdjustable>
 
-                <StyledFlexRowAdjustable justifyContent="space-around">
-                 <label>{characteristicTable[char][0]}</label>
-                 <label>{characteristicTable[char][4]}</label>
-                </StyledFlexRowAdjustable>
+                  <StyledFlexRowAdjustable justifyContent="space-between">
+                  <small>{characteristicTable[char][0]}</small>
+                  <small>{characteristicTable[char][4]}</small>
+                  </StyledFlexRowAdjustable>
 
-                </div>
+                </StyledFlexGrowingDiv>
               </StyledFlexRow>
             )
           })}
