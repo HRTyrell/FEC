@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import ProductCard from './ProductCard.jsx';
 import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
+import plus from '../../assets/plus.png';
 
 const Div = styled.div`
   display: flex;
@@ -64,11 +65,11 @@ const YourOutfit = ({data}) => {
   return (
     <Div>
       <CurrentProduct>
-        <Image src="./plus.png" alt="add this Product to Outfit"
+        <Image src={plus} alt="add this Product to Outfit"
           onClick={addToOutfit}/>
       </CurrentProduct>
       {data.map((product, index) => {
-        return <ProductCard product={product} key={index}/>
+        return <ProductCard product={product} key={product.data.id}/>
       })}
       {/* return product card */}
     </Div>
