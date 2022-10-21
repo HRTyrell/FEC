@@ -4,12 +4,19 @@ import {Starbar} from './starbar.jsx';
 import axios from 'axios';
 import {TOKEN} from '/MyConfig.js';
 
-const StyledContainerZ = styled.div`
+const StyledContainerSpread = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`
+
+const StyledContainerStart = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   flex: 1 1 1 1 1
 `
+
 const StyledBold = styled.header`
   font-weight: bold;
 `
@@ -27,18 +34,24 @@ const StyledModal = styled.header`
 `
 const StyledOuterContainer = styled.div`
   padding: 10px 0px;
+  margin-right: 5px;
   border-top: 2px solid grey;
 `
+const StyledImage = styled.img`
+  margin: 2px 3px;
+`
+
+export const convertDate = (inp)=> {
+  let formattedDate = new Date(inp)
+  formattedDate=formattedDate.toDateString().split(' ');
+  return `${formattedDate[1]} ${formattedDate[2]}, ${formattedDate[3]}`
+}
+
+//padding: 10px 5px 10px 0;
 export const ReviewTile = ({review}) => {
 
   const [showMore, setShowMore] = useState(review.body.length > 250 ? true : false)
   const [helpful, setHelpful] = useState({voted:false, helpfulCount: review.helpfulness})
-
-  const convertDate = (inp)=> {
-    let formattedDate = new Date(inp)
-    formattedDate=formattedDate.toDateString().split(' ');
-    return `${formattedDate[1]} ${formattedDate[2]}, ${formattedDate[3]}`
-  }
 
   const uploadHelpfulVote = ()=> {
     if (!helpful.voted) {
@@ -58,10 +71,10 @@ export const ReviewTile = ({review}) => {
 
   return (
     <StyledOuterContainer>
-      <StyledContainerZ>
+      <StyledContainerSpread>
         <Starbar rating={review.rating}/>
         <time>{review.reviewer_name + ', ' + convertDate(review.date)}</time>
-      </StyledContainerZ>
+      </StyledContainerSpread>
       <StyledBold>{review.summary}</StyledBold>
 
       {showMore ?
@@ -73,11 +86,11 @@ export const ReviewTile = ({review}) => {
       <div>{review.body}</div>
       }
 
-      <StyledContainerZ>
+      <StyledContainerStart>
         {review.photos.map((photo, index)=> {
           return <SizeAdjustableImage key={index} url={photo.url}/>
         })}
-      </StyledContainerZ>
+      </StyledContainerStart>
       {review.recommend && <div>✓ I recommend this product</div>}
       {review.response && <div>RESPONSE FROM SELLER: {review.response}</div>}
       <b>Was this review helpful? </b>
@@ -97,6 +110,6 @@ const SizeAdjustableImage = ({url}) => {
       </StyledModal>
     )
   } else {
-    return <img src={url} width="70px" height="70px" onClick={()=>{setModalView(true)}}></img>
+    return <StyledImage src={url} width="50px" height="50px" onClick={()=>{setModalView(true)}}></StyledImage>
   }
 }
