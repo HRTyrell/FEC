@@ -5,9 +5,11 @@ import StyleSelector from "./StyleSelector.jsx"
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const StyleDiv = styled.div`
+display: flex;
+flex-direction: column;
 margin: 10px 0;
-height: 400px;
-width: 30%;
+height: 700px;
+width: 40%;
 border: solid;
 border-radius: 10px;
 text-align: center;
@@ -22,9 +24,6 @@ const StyleCart = () => {
     return null;
   }
 
-  console.log('I am prod', cProduct)
-  console.log('I am style', cStyle)
-
   return (
     <StyleDiv>
       <h5>Stars</h5>
@@ -33,7 +32,7 @@ const StyleCart = () => {
       <h5>{cStyle.original_price}, {cStyle.sale_price}</h5>
       <h5>Style: {cStyle.name}</h5>
       <StyleSelector/>
-      <h5>SizeSelector</h5>
+      <h5>SizeSelector&Quantity</h5>
       <h5>AddToCart</h5>
     </StyleDiv>
   )

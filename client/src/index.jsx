@@ -24,7 +24,7 @@ const App = () => {
       <Sdiv>
         <Overview />
         <RelatedItems />
-        <QA />
+        {/* <QA /> */}
         <RatingsReviews />
       </Sdiv>
     </div>
