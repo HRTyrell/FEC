@@ -1,23 +1,10 @@
 import {useState, useEffect} from 'react';
 import styled from "styled-components";
-import Star from '../../assets/Star.png';
-import quarterStar from '../../assets/quarterStar.png';
-import halfStar from '../../assets/halfStar.png';
-import threefourthsStar from '../../assets/3fourthsStar.png';
-import fullstar from '../../assets/fullstar.png';
+import {Starbar} from './starbar.jsx'
+import {ProductBreakdownFactor} from './productBreakdownFactor.jsx'
 
 const StyledProgressBar = styled.progress`
   accent-color: green;
-`;
-
-const StyledCharacteristicBar = styled.div`
-  border-style: solid;
-  background-color: LightGray;
-`;
-
-const StyledIcon = styled.i`
-  position: relative;
-  left: ${props=> props.position};
 `;
 
 const StyledHoverable = styled.div`
@@ -43,7 +30,9 @@ const FixedWidthLabel = styled.div`
   float: left;
   width: 16px;
 `
-
+const StyledPaddedDiv = styled.div`
+  padding: 10% 0;
+`
 export const getAvg = function(ratings) {
   let averageRating = [];
   for (var key in ratings) {
@@ -56,7 +45,6 @@ export const getAvg = function(ratings) {
 export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}) {
   let avg = getAvg(metaData.ratings);
   let totalRatings = Number(metaData.recommended.false) + Number(metaData.recommended.true);
-  //console.log(metaData);
 
   const onClickBar = (star)=> {
     let newStarBarFilters={};
@@ -131,50 +119,11 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
             )
         })}
       <label>{`${(Number(metaData.recommended.true) / (Number(metaData.recommended.true) + Number(metaData.recommended.false))).toFixed(2) * 100}% of reviews recommend this product`}</label>
-
-      {Object.keys(metaData.characteristics).map((characteristic, index)=> {
-        return <ProductBreakdownFactor key={index} characteristic={characteristic} data={metaData.characteristics[characteristic]}/>
-      })}
-
+      <StyledPaddedDiv>
+        {Object.keys(metaData.characteristics).map((characteristic, index)=> {
+          return <ProductBreakdownFactor key={index} characteristic={characteristic} data={metaData.characteristics[characteristic]}/>
+        })}
+      </StyledPaddedDiv>
     </BreakdownDiv>
-  )
-}
-
-export const Starbar = function ({rating}) {
-
-  rating = ((rating / .25).toFixed(0)) * .25;
-  const ratingsArray = new Array(Math.floor(rating)).fill(fullstar);
-  rating = rating - Math.floor(rating);
-
-  if (rating === .75) {
-    ratingsArray.push(threefourthsStar)
-  } else if (rating === .5) {
-    ratingsArray.push(halfStar)
-  } else if (rating === .25) {
-    ratingsArray.push(quarterStar)
-  }
-  while (ratingsArray.length < 5) {
-    ratingsArray.push(Star)
-  }
-
-  return (
-    <div>
-      {ratingsArray.map((item, index)=> {
-        return <img key={index} src={item}></img>
-      })}
-    </div>
-  )
-}
-
-export const ProductBreakdownFactor = ({characteristic, data})=> {
-
-  let iconPosition = ((Number(data.value) / 5) * 100).toFixed(2);
-  iconPosition = iconPosition > 93? '93%': `${iconPosition}%`;
-
-  return (
-  <div>
-    <header>{characteristic}</header>
-    <StyledCharacteristicBar><StyledIcon position={iconPosition}>▼</StyledIcon></StyledCharacteristicBar>
-  </div>
   )
 }

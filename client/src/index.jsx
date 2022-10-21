@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-
 import styled from "styled-components";
+
 import Overview from './components/ProductDetail/Overview.jsx';
 import NavigationBar from "./components/NavBar/NavigationBar.jsx";
 import QA from "./components/Q&A/QA.jsx";
-
 import RelatedItems from './components/RelatedItems/RelatedItems.jsx';
 import RatingsReviews from './components/ratings-reviews/ratings-reviews.jsx';
 
@@ -24,8 +23,8 @@ const App = () => {
       <NavigationBar />
       <Sdiv>
         <Overview />
-        <QA />
         <RelatedItems />
+        <QA />
         <RatingsReviews />
       </Sdiv>
     </div>

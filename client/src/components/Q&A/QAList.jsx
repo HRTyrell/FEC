@@ -4,8 +4,20 @@ import styled from 'styled-components'
 import Answers from ".//Answers.jsx";
 import { TOKEN } from "/MyConfig.js";
 
-const softButton = styled.button`
-border: none;
+const SoftButton = styled.button`
+  border: none;
+  background:none;
+  text-decoration: underline;
+  color: #404040;
+`
+const Inline = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  // border: dotted;
+  // border-color: red;
+  height: 20px;
+  width: 100%;
 `
 
 
@@ -18,7 +30,7 @@ const QAList = (/*   product_id   */) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/qa/questions/?product_id=${product_id}&page=2`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/qa/questions/?product_id=${product_id}`,
       headers: {
         Authorization: TOKEN
       }
@@ -37,16 +49,15 @@ const QAList = (/*   product_id   */) => {
   return (
     <div>
       {questions.slice(0, n).map((question) => (
-        <> <span>
-          {/* <label>Q:</label> */}
-          <p>Q: {question.question_body}</p>
-
-          <small> Helpful? <softButton>Yes </softButton>
+      <>
+        <Inline>
+          <p><b><large>Q: &nbsp; {question.question_body}</large></b></p>
+          <small>
+            Helpful? <SoftButton>Yes </SoftButton>
             ({question.question_helpfulness}) |
-            <softButton> Report</softButton> |
-             <softButton> Add Answer</softButton>
+            <SoftButton> Add Answer</SoftButton>
           </small>
-        </span>
+        </Inline>
           <Answers key={question.question_id} question={question} />
         </>
       ))}

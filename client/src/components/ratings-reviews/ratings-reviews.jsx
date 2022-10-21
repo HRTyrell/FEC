@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import {TOKEN} from '/MyConfig.js';
+
+import {URL, TOKEN} from '/MyConfig.js';
 import {Breakdown} from './breakdown.jsx';
 import {ReviewsList} from './reviewsList.jsx'
 import styled from "styled-components";
@@ -14,6 +15,7 @@ const StyledContainer = styled.div`
   padding: 10px;
   width: 70%;
 `
+
 const RatingsReviews = () => {
 
   let product_id = 66642;
@@ -24,7 +26,7 @@ const RatingsReviews = () => {
 
   useEffect(()=> {
     axios({
-      url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/meta/?product_id=${product_id}`,
+      url: `${URL}/reviews/meta/?product_id=${product_id}`,
       method: 'get',
       headers: {authorization: TOKEN}
       })
@@ -43,7 +45,7 @@ const RatingsReviews = () => {
   return (
     <StyledContainer>
       <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
-      <ReviewsList/>
+      <ReviewsList product_id={product_id} starBarFilters={starBarFilters} sort={sort} searchBarTerm={searchBarTerm}/>
     </StyledContainer>
   )
 }
