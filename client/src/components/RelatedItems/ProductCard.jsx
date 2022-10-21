@@ -2,6 +2,9 @@ import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { getProductStyles } from './parseHelpers.js';
 import SmallStarBar from './SmallStarbar.jsx';
+import ComparisonModal from './ComparisonModal.jsx';
+import yellowStar from '../../assets/yellow-star.png';
+
 ////////////////Styles//////////////////////////////////////
 const CardStyled = styled.div`
 display: flex;
@@ -21,6 +24,7 @@ height: 100%;
 
 const ProductImageStyled = styled.div`
 display: flex;
+flex-direction: Column;
 align-items: center;
 justify-content: center;
 flex-grow: 3;
@@ -90,33 +94,18 @@ font-size: 0.9em;
 ///////////////React Component///////////////////////////
 const ProductCard = ({product}) => {
 
-  const handleOnMouseEnter = () => {
+  const [modalIsOpen, setIsOpen] = useState(false);
 
+
+  const handleOnMouseEnter = () => {
+    setTimeout(setIsOpen, 500, true);
   }
 
   const handleOnMouseLeave = () => {
-
+    setTimeout(setIsOpen, 200, false);
   }
 
-  const handleReview = () => {
-    return '';
-  }
-// const [defaultImage, setDefaultImage] = useState('');
 
-useEffect (() => {
-  getProductStyles(product.data.id)
-  .then(product => {
-    return product.data.results[0].photos[0].thumbnail_url
-  }).then(imageUrl => {
-    setDefaultImage(imageUrl);
-  })
-}, [])
-  // const getProductDefaultImage = () => {
-  //   return getProductStyles(product.data.id)
-  //   .then(product => {
-  //     return product.data.results[0].photos[0].thumbnail_url
-  //   })
-  // }
   const defaultImage = product.styles.data.results[0].photos[0].thumbnail_url;
 
   const averageRating = () => {
@@ -133,18 +122,19 @@ useEffect (() => {
   // const [image, setImage] = useState('./testImage.png');
   return (
     <CardStyled>
+      <ComparisonModal modalIsOpen={modalIsOpen} />
       <ProductImageStyled >
         <ImageStyled src={defaultImage} alt="Image of RelatedProduct" aria-label="Product Image"/>
-        <ButtonStyled src="./yellow-star.png"
+        <ButtonStyled src={yellowStar}
           onMouseEnter={handleOnMouseEnter}
           onMouseLeave={handleOnMouseLeave}
           aria-label="Comparison Button"/>
+        <SmallStarBar rating={rating}/>
       </ProductImageStyled>
       <OuterDescriptionDiv>
         <Category>{product.data.category}</Category>
         <ProductTitle>{product.data.name}</ProductTitle>
         <Price>${product.data.default_price}</Price>
-        <SmallStarBar rating={rating}/>
       </OuterDescriptionDiv>
     </CardStyled>
   )

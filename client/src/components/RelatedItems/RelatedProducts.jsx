@@ -17,7 +17,7 @@ const RelatedProducts = ({data}) => {
   return (
     <Div>
       {data.map((product, index) => {
-        return <ProductCard product={product} key={product.id}/>
+        return <ProductCard product={product} key={product.data.id}/>
       })}
     </Div>
   )
