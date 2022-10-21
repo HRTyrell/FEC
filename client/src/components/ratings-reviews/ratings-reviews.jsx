@@ -55,7 +55,7 @@ const RatingsReviews = () => {
 
         <ReviewsList product_id={product_id} starBarFilters={starBarFilters}/>
       </StyledContainer>
-      <NewReviewForm setmetaData={setmetaData}/>
+      <NewReviewForm setmetaData={setmetaData} characteristics={metaData.characteristics}/>
     </Fragment>
   )
 }
