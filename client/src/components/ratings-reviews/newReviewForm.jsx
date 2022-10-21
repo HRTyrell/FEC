@@ -39,18 +39,40 @@ const StyledFlexRow = styled.div`
 const StyledFlexRowAdjustable = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: ${props=> props.alignment};
+  justify-content: ${props=> props.justifyContent};
+  padding: 3px;
 `
+const convertcharacteristicsTable = (table)=> {
+  let tableModded = {};
+  for (var key in table) {
+    tableModded[table.key.id] = 0;
+  }
+  return tableModded
+}
 
 export const NewReviewForm = ({setmetaData, characteristics}) => {
 
   const [modalView, setModalView] = useState(false);
   const [rating, setRating] = useState(0);
-  let starsArray = new Array(rating).fill(fullstar).concat(new Array(5-rating).fill(Star))
-
   const [recommended, setRecommended] = useState(null);
+  const [characteristicRatings, setCharacteristicRatings] = useState(convertcharacteristicsTable(characteristics));
 
   const curProduct = ProductStore((state) => state.curProduct);
+
+  let starsArray = new Array(rating).fill(fullstar).concat(new Array(5-rating).fill(Star))
+
+  const characteristicTable = {
+    Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
+    Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+    Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+    Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+    Length: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+    Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
+  }
+
+  const handleUpdate = (char, newScore) => {
+    setCharacteristicRatings ({...characteristicRatings, [char]: newScore})
+  }
 
   if (!modalView) {
     return <button onClick={()=>setModalView(true)}>Submit New Review</button>
@@ -77,10 +99,30 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
             <label for="yes">yes</label>
           </StyledFlexRow>
 
-          {Object.keys(characteristics).map((item, index)=> {
-            return (
-              <StyledFlexRow>
+          {Object.keys(characteristics).map((char, index)=> {
+            let charID = characteristics[char].id
+            let charSelectedScore = characteristicRatings[charID];
 
+            return (
+              <StyledFlexRow key={index}>{char + ' *:'}
+                <div>
+                 <StyledFlexRowAdjustable justifyContent="center;">
+                 {charSelectedScore === 0 ? 'none selected' : characteristicTable[char][charSelectedScore-1]}
+                 </StyledFlexRowAdjustable>
+
+                 <StyledFlexRowAdjustable justifyContent="space-between">
+                 {[1, 2, 3, 4, 5].map((score, index)=> {
+                  return <input type="radio" key={char + score} value={score} name={char} onChange={(e)=>handleUpdate(charID, e.target.value)}></input>
+                  })
+                 }
+                </StyledFlexRowAdjustable>
+
+                <StyledFlexRowAdjustable justifyContent="space-around">
+                 <label>{characteristicTable[char][0]}</label>
+                 <label>{characteristicTable[char][4]}</label>
+                </StyledFlexRowAdjustable>
+
+                </div>
               </StyledFlexRow>
             )
           })}
