@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import ProductStore from "../Provider/Zus_Provider.jsx";
 import Star from '../../assets/Star.png';
 import fullstar from '../../assets/fullstar.png';
+import CryptoJS from 'crypto-js'
+import axios from 'axios';
+import {CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUD_NAME} from '/MyConfig.js';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -93,6 +96,26 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
     setCharacteristicRatings ({...characteristicRatings, [char]: newScore})
   }
 
+  const handlePhotoUpload = (e)=>{
+
+    const formData = new FormData();
+    let timeStamp=Date.now();
+    let signature = CryptoJS.SHA1(`timestamp=${timeStamp}${CLOUDINARY_API_SECRET}`).toString(CryptoJS.enc.Hex);
+
+    formData.append("file", e.target.files[0]);
+    formData.append("api_key", CLOUDINARY_API_KEY);
+    formData.append("timestamp", timeStamp);
+    formData.append("signature", signature);
+
+    axios({
+      url: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
+        method: 'post',
+        data: formData
+      })
+      .then((val)=>{console.log(val)})
+      .catch((err)=>{console.log(err)})
+    }
+
   if (!modalView) {
     return <button onClick={()=>setModalView(true)}>Submit New Review</button>
   } else {
@@ -116,9 +139,10 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
             <StyledFlexItemHeader>Do you recommend this product?*:</StyledFlexItemHeader>
             <StyledPaddedDiv>
               <input type="radio" value="no" name="recommend" onChange={()=>setRecommended('no')} id="no"></input>
-              <label for="no">no</label>
+              <label htmlFor="no">no</label>
+
               <input type="radio" value="yes" name="recommend" onChange={()=>setRecommended('yes')} id="yes"></input>
-              <label for="yes">yes</label>
+              <label htmlFor="yes">yes</label>
             </StyledPaddedDiv>
           </StyledFlexRow>
 
@@ -154,18 +178,19 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
           <StyledFlexRow>
             <StyledFlexItemHeader>Review summary:</StyledFlexItemHeader>
             <StyledFlexGrowingDiv>
-              <textarea type="text" placeholder="Example: Best purchase ever!" ref={reviewSummary} maxlength="60" size="60" cols="60" rows="1"></textarea>
+              <textarea type="text" placeholder="Example: Best purchase ever!" ref={reviewSummary} maxLength="60" size="60" cols="60" rows="1"></textarea>
             </StyledFlexGrowingDiv>
           </StyledFlexRow>
 
           <StyledFlexRow>
             <StyledFlexItemHeader>Review body:</StyledFlexItemHeader>
             <StyledFlexGrowingDiv>
-              <textarea type="text" placeholder="Why did you like the product or not" minlength="50" maxlength="1000" size="1000" cols="91" rows="11" onChange={(e)=> {setReviewBody(e.target.value)}}></textarea>
+              <textarea type="text" placeholder="Why did you like the product or not" minLength="50" maxLength="1000" size="1000" cols="91" rows="11" onChange={(e)=> {setReviewBody(e.target.value)}}></textarea>
 
               <small style={{display:'block'}}>{reviewBody.length > 50? 'Minimum reached' : `Minimum required characters left: ${50-reviewBody.length}`}</small>
             </StyledFlexGrowingDiv>
           </StyledFlexRow>
+          <input type="file" onChange={handlePhotoUpload}></input>
 
         </StyledForm>
       </StyledModal>
