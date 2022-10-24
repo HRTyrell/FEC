@@ -10,7 +10,7 @@ display: flex;
 flex-direction: column;
 margin: 10px 0;
 height: 800px;
-width: 40%;
+width: 30%;
 /* align-items: center; */
 
 /* border: solid; */
@@ -26,20 +26,34 @@ margin: 0px 20px;
 height: 50px;
 display:flex;
 flex-direction: row;
-justify-content: start;
+justify-content: end;
 align-items: center;
 gap: 10px;
-text-align: left;
+`
+
+const H1 = styled.h1`
+margin: 0px 20px;
+font-family: 'Cinzel';
+font-weight: 600;
+font-size: 48px;
+color: Gold;
+text-align: center;
+`
+
+const H4 = styled.h4`
+font-family: 'OldStandard';
+letter-spacing: 1px;
 `
 
 const H2 = styled.h2`
+margin: ${props => props.margin};
 font-family: 'Cinzel';
+font-weight: 200;
 color: Gold;
+text-align: left;
+
 `
-const PH2 = styled.h2`
-font-family: 'Cinzel';
-color: Gold;
-`
+
 const A1 = styled.a`
 color: Gold;
 text-decoration: none;
@@ -61,12 +75,12 @@ const StyleCart = () => {
   return (
     <StyleDiv>
       <Fdiv>
-        <PH2>{cStar.avg}</PH2>
+        <H2 margin="0">{cStar.avg}</H2>
         <Starbar rating = {cStar.avg}/>
-        <h5><A1 href="#Ratings">Read All <u>{cStar.overall}</u> Reviews</A1></h5>
+        <H4><A1 href="#Ratings">Read All <u>{cStar.overall}</u> Reviews</A1></H4>
       </Fdiv>
-      <h5>{cProduct.category}</h5>
-      <H2>{cProduct.name}</H2>
+      <H2 margin="10px 20px 0">Category: {cProduct.category}</H2>
+      <H1>{cProduct.name}</H1>
       <h5>{cStyle.original_price}, {cStyle.sale_price}</h5>
       <h5>Style: {cStyle.name}</h5>
       <StyleSelector/>
