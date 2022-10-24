@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import checkMark from '../../assets/checkMark.png';
+import cross from '../../assets/cross.png';
 
 
 const Feature = ({currentProductFeatures, comparisonProductFeatures, feature}) => {
@@ -12,27 +13,23 @@ const Feature = ({currentProductFeatures, comparisonProductFeatures, feature}) =
     <div style={{
       display: 'flex',
       flexDirection: 'row',
-
+      justifyContent: 'space-between'
     }}>
+      <img src={existsInCurrent ? checkMark : cross }style={{
+              display: 'flex',
+              alignSelf: 'center',
+              height: "1em",
+              width: "1em"
+            }}/>
 
-      {existsInCurrent ? <img src={checkMark} style={{
-        display: 'flex',
-        alignSelf: 'left',
-        height: "1em",
-        width: "1em"
-      }}/> : null}
+      <p>{feature.value + ' ' + feature.feature}</p>
 
-      <p style={{
-        display: 'flex',
-        alignSelf: 'center'
-      }}>{feature.value + ' ' + feature.feature}</p>
-
-      {existsInComparison ? <img src={checkMark}style={{
-        display: 'flex',
-        alignSelf: 'right',
-        height: "1em",
-        width: "1em"
-      }}/> : null}
+      <img src={existsInComparison ? checkMark : cross }style={{
+              display: 'flex',
+              alignSelf: 'center',
+              height: "1em",
+              width: "1em"
+            }}/>
     </div>
 
   )

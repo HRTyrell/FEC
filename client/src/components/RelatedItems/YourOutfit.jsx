@@ -44,12 +44,12 @@ const YourOutfit = ({data}) => {
   const addToOutfitHandler = (e) => {
     e.preventDefault();
     getProduct(curProduct.id).then(product => {
-      outfitList.push(product);
+      outfitList[product.data.id] = product;
       setOutfit(outfitList);
     })
 
   }
-
+  const outfitArray = Object.values(outfitList);
 
 
   return (
@@ -57,8 +57,8 @@ const YourOutfit = ({data}) => {
       <CurrentProduct onClick={addToOutfitHandler} >
         <Image src={plus} alt="add this Product to Outfit"/>
       </CurrentProduct>
-      {data.map((product, index) => {
-        return <ProductCard product={product} key={product.data.id}/>
+      {outfitArray.map((product, index) => {
+        return <ProductCard product={product} key={product.data.id} isStar={false}/>
       })}
     </Div>
   )

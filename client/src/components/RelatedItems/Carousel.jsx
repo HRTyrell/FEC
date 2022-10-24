@@ -38,17 +38,16 @@ const CarouselControlPrev = styled(CarouselControl)`
 const CarouselControlNext = styled(CarouselControl)`
   left: 95%;
 `;
-const FadedOverlay = styled.div`
-position: absolute;
-background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1) 99%);
-border: 0px;
-z-index: 3;
-right: 2;
-height: 100%;
+// const FadedOverlay = styled.div`
+// position: absolute;
+// background: linear-gradient(to right, rgba(255,255,255,0) 80%, rgba(255,255,255,1) 99%);
+// border: 0px;
+// z-index: 3;
+// height: 100%;
 // width: 100%;
-max-width: 500px;
-pointer-events: none;
-`;
+
+// pointer-events: none;
+// `;
 
 const MDiv = styled.div`
   height: 100%;
@@ -68,32 +67,31 @@ const Carousel = (props) => {
     if(ref.current.clientWidth > ref.current.parentElement.clientWidth) {
       setShowNext(true);
     }
+    console.log(props.children);
+    if (props.children.type.name === 'YourOutfit' && Object.keys(outfitList).length === 0 ) {
+      setShowNext(false);
+    }
   }, [outfitList, relatedItemsList])
 
   const slide = (e, shift) => {
     e.target.parentNode.scrollLeft -= shift;
     let distanceToEndOfScroll = e.target.parentNode.scrollHeight - e.target.parentNode.scrollLeft
-    if (distanceToEndOfScroll <= 100) {
-      setOverlay(false);
-    } else {
-      setOverlay(true);
-      setShowNext(true);
-    }
     if (e.target.parentNode.scrollLeft > 0) {
       setShowPrevious(true);
     } else {
       setShowPrevious(false);
     }
-    if (distanceToEndOfScroll <= 20) {
-      setShowNext(false);
-    } else {
+    if (e.target.parentNode.scrollLeft > 0) {
       setShowNext(true);
+    } else {
+      setShowNext(false);
     }
+
   }
 
   return (
     <MDiv ref={ref}>
-    {overlay ? <FadedOverlay /> : null }
+    {/* {overlay ? <FadedOverlay /> : null } */}
     <CarouselStyled aria-label="Product Carousel">
       {showPrevious ? <CarouselControlPrev data-testid="prevControl" onClick={(e)=> slide(e, 120)}>&#60;</CarouselControlPrev> : null }
       {showNext ? <CarouselControlNext data-testid="nextControl" onClick={(e)=> slide(e, -120)}>&#62;</CarouselControlNext> : null }

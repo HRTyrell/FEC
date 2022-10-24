@@ -78,6 +78,11 @@ const ProductStore = create((set, get) => ({
         set(() => ({curStyle: info}));
       }
     })
+  },
+  setCurrProdFromObject: (product) => {
+    set(() => ({curProduct: product.data}));
+    set(() => ({curStyle: product.styles.data.results[0]}));
+    set(() => ({curProductStyles: product.styles.data.results}));
   }
 }))
 

@@ -13,11 +13,17 @@ const Title = styled.h5`
 `;
 
 const RelatedProducts = ({data}) => {
+  let uniqueData = {};
+  data.forEach(item => {
+    uniqueData[item.data.id] = item;
+  })
+  const uniqueDataArray = Object.values(uniqueData);
+
 
   return (
     <Div>
-      {data.map((product, index) => {
-        return <ProductCard product={product} key={product.data.id}/>
+      {uniqueDataArray.map((product, index) => {
+        return <ProductCard product={product} key={product.data.id} isStar={true}/>
       })}
     </Div>
   )
