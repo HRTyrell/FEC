@@ -43,8 +43,6 @@ const NavigationBar = () => {
     return null;
   }
 
-  console.log(Product);
-
   return (
     <Wrap>
       <Title>NavigationBar</Title>
