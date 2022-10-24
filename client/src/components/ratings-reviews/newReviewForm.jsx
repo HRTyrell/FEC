@@ -79,6 +79,67 @@ const convertcharacteristicsTable = (table)=> {
   }
   return tableModded
 }
+
+export const cloudinaryPostRequest = (arrayOfFiles) => {
+  console.log(arrayOfFiles)
+  Promise.all(arrayOfFiles.map((file)=>{
+    const formData = new FormData();
+    let timeStamp=Date.now();
+    let signature = CryptoJS.SHA1(`timestamp=${timeStamp}${CLOUDINARY_API_SECRET}`).toString(CryptoJS.enc.Hex);
+
+    formData.append("file", file);
+    formData.append("api_key", CLOUDINARY_API_KEY);
+    formData.append("timestamp", timeStamp);
+    formData.append("signature", signature);
+    return axios({
+    url: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
+      method: 'post',
+      data: formData
+    })
+  }))
+  .then((results)=>{results.forEach((result)=>{console.log(result)})})
+
+
+
+  // let promisesArray = arrayOfFiles.map((file)=> {
+  //   const formData = new FormData();
+  //   let timeStamp=Date.now();
+  //   let signature = CryptoJS.SHA1(`timestamp=${timeStamp}${CLOUDINARY_API_SECRET}`).toString(CryptoJS.enc.Hex);
+
+  //   formData.append("file", e.target.files[0]);
+  //   formData.append("api_key", CLOUDINARY_API_KEY);
+  //   formData.append("timestamp", timeStamp);
+  //   formData.append("signature", signature);
+  //   return new Promise((resolve, reject) => {
+  //     axios({
+  //     url: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
+  //       method: 'post',
+  //       data: formData
+  //     })
+  //     .then((val)=>{console.log(val);
+  //       // resolve(val)
+  //       return val})
+  //   })
+  // })
+  // Promise.all(promisesArray).then((values)=>{console.log(values)})
+
+  // const formData = new FormData();
+  // let timeStamp=Date.now();
+  // let signature = CryptoJS.SHA1(`timestamp=${timeStamp}${CLOUDINARY_API_SECRET}`).toString(CryptoJS.enc.Hex);
+
+  // formData.append("file", e.target.files[0]);
+  // formData.append("api_key", CLOUDINARY_API_KEY);
+  // formData.append("timestamp", timeStamp);
+  // formData.append("signature", signature);
+  // axios({
+  //   url: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
+  //     method: 'post',
+  //     data: formData
+  //   })
+  // .then((val)=>{console.log(val)})
+  // .catch((err)=>{console.log(err)})
+}
+
 export const NewReviewForm = ({setmetaData, characteristics}) => {
 
   const [modalView, setModalView] = useState(false);
@@ -87,6 +148,7 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
   const [characteristicRatings, setCharacteristicRatings] = useState(convertcharacteristicsTable(characteristics));
   const reviewSummary = useRef('');
   const [reviewBody, setReviewBody] = useState('');
+  const [userPhotos, setUserPhotos] = useState([]);
 
   const curProduct = ProductStore((state) => state.curProduct);
 
@@ -98,30 +160,18 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
 
   const handlePhotoUpload = (e)=>{
 
-    const formData = new FormData();
-    let timeStamp=Date.now();
-    let signature = CryptoJS.SHA1(`timestamp=${timeStamp}${CLOUDINARY_API_SECRET}`).toString(CryptoJS.enc.Hex);
-
-    formData.append("file", e.target.files[0]);
-    formData.append("api_key", CLOUDINARY_API_KEY);
-    formData.append("timestamp", timeStamp);
-    formData.append("signature", signature);
-
-    axios({
-      url: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
-        method: 'post',
-        data: formData
-      })
-      .then((val)=>{console.log(val)})
-      .catch((err)=>{console.log(err)})
+    if (e.target.files.length>0 && userPhotos.length < 5) {
+      setUserPhotos([...userPhotos, e.target.files[0]]);
     }
+    console.log(userPhotos)
+  }
 
   if (!modalView) {
     return <button onClick={()=>setModalView(true)}>Submit New Review</button>
   } else {
     return (
       <StyledModal>
-        <StyledForm>
+        <StyledForm onSubmit={()=>{setReviewBody('done')}}>
           <StyledTitle fontSize="x-large">Write Your Review</StyledTitle>
           <StyledTitle fontSize="large" >About the {curProduct.name}</StyledTitle>
 
@@ -190,10 +240,23 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
               <small style={{display:'block'}}>{reviewBody.length > 50? 'Minimum reached' : `Minimum required characters left: ${50-reviewBody.length}`}</small>
             </StyledFlexGrowingDiv>
           </StyledFlexRow>
-          <input type="file" onChange={handlePhotoUpload}></input>
+
+          <StyledFlexRow>
+            <StyledFlexItemHeader>Upload your photos:</StyledFlexItemHeader>
+            <StyledPaddedDiv>
+              <input type="file" accept="image/*" onInput={handlePhotoUpload}></input>
+              {userPhotos.map((photo, index)=>{
+                return <img src={URL.createObjectURL(photo)} key={index} width="35px" height="35px"></img>
+              })}
+            </StyledPaddedDiv>
+
+          </StyledFlexRow>
+          <div onClick={()=>{cloudinaryPostRequest(userPhotos)}}>clickME</div>
 
         </StyledForm>
       </StyledModal>
     )
   }
 }
+
+<input type="submit" value="Submit" />
