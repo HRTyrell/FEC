@@ -11,7 +11,7 @@ import ProductStore from "../Provider/Zus_Provider.jsx";
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
   align-items: top;
   padding: 10px;
