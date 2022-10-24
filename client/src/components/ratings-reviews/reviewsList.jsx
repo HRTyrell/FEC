@@ -40,6 +40,7 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
       headers: {authorization: TOKEN}
       })
       .then((val)=> {
+        console.log(val.data.results)
         let filteredReviews = val.data.results.filter((review)=> {
           return review.body.indexOf(searchBarTerm) > -1 && starBarFilters[review.rating];
         });
