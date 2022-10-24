@@ -3,26 +3,28 @@ import styled from 'styled-components';
 import ProductCard from './ProductCard.jsx';
 import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
 import plus from '../../assets/plus.png';
+import ProductStore from '../Provider/Zus_Provider.jsx';
+import {getProduct} from './parseHelpers.js';
 
 const Div = styled.div`
-  display: flex;
-  justify-content: center;
-  border-spacing: 20px;
-  height: 15em;
-  border-style: solid;
-  border-spacing: 20px;
-  padding: 0;
-  width: 8em;
-`;
-const Title = styled.h5`
-  position: sticky;
+display: flex;
+flex-direction: row;
+align-items: left;
+// border-spacing: 20px;
+padding: 0;
 `;
 
 const CurrentProduct = styled.div`
   display: flex;
+  justify-content: center;
+  height: 18em;
+  border-style: solid;
+  //border-spacing: 20px;
+  margin: 2px;
+  padding: 0;
+  width: 8em;
   align-items: center;
   align-self: center;
-  justify-content: center;
 `;
 const Image = styled.img`
   display: flex;
@@ -33,45 +35,31 @@ const Image = styled.img`
 `;
 
 const YourOutfit = ({data}) => {
-  function addToOutfit() {
-    useRelatedItemsStore((state) => state.addToOutfit(product))
-  };
 
-  const product = {
-    "id": 66643,
-    "campus": "hr-rfc",
-    "name": "Bright Future Sunglasses",
-    "slogan": "You've got to wear shades",
-    "description": "Where you're going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.",
-    "category": "Accessories",
-    "default_price": "69.00",
-    "created_at": "2022-03-31T21:13:15.875Z",
-    "updated_at": "2022-03-31T21:13:15.875Z",
-    "features": [
-        {
-            "feature": "Lenses",
-            "value": "Ultrasheen"
-        },
-        {
-            "feature": "UV Protection",
-            "value": null
-        },
-        {
-            "feature": "Frames",
-            "value": "LightCompose"
-        }
-    ]
-}; //change me to actual currentProduct later
+  const setOutfit = useRelatedItemsStore((state) => state.setOutfit)
+  const outfitList = useRelatedItemsStore.getState().outfitList;
+
+  const {curProduct} = ProductStore();
+
+  const addToOutfitHandler = (e) => {
+    e.preventDefault();
+    getProduct(curProduct.id).then(product => {
+      outfitList.push(product);
+      setOutfit(outfitList);
+    })
+
+  }
+
+
+
   return (
     <Div>
-      <CurrentProduct>
-        <Image src={plus} alt="add this Product to Outfit"
-          onClick={addToOutfit}/>
+      <CurrentProduct onClick={addToOutfitHandler} >
+        <Image src={plus} alt="add this Product to Outfit"/>
       </CurrentProduct>
       {data.map((product, index) => {
         return <ProductCard product={product} key={product.data.id}/>
       })}
-      {/* return product card */}
     </Div>
   )
 };
