@@ -21,12 +21,15 @@ text-align: center;
 `
 
 const InfoDiv = styled.div`
+margin: 20px 0;
 display: flex;
 flex-direction: row;
 width: 70%;
-border: solid;
-border-radius: 10px;
 text-align: center;
+border-radius: 30px;
+background: #e0e0e0;
+box-shadow: 15px 15px 30px #bebebe,
+            -15px -15px 30px #ffffff;
 `
 
 //Completion of props and state

@@ -8,12 +8,12 @@ import StyleCart from "./StyleCart.jsx";
 import Gallery from "./Gallery.jsx";
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
-
 const S2div = styled.div`
 display: flex;
 width: 70%;
 flex-direction: row;
-gap: 10px;
+/* flex-wrap: wrap; */
+gap: 30px;
 justify-content: center;
 align-items: center;
 /* text-align: center; */

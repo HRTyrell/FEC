@@ -125,7 +125,7 @@ const answerModal = () => {
     <div>
       <QA>
       {questions.slice(0, count).map((question) => (
-      <>
+      <div key={question.question_id}>
         <Inline>
            <strong><label>Q:
           &nbsp; {question.question_body}</label></strong>
@@ -137,7 +137,7 @@ const answerModal = () => {
           </small>
         </Inline>
         <Answers key={question.question_id} question={question} />
-      </>
+      </div>
       ))}
       </QA>
       {(questions.length > 2 && count < questions.length) ?

@@ -41,7 +41,6 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
         let filteredReviews = val.data.results.filter((review)=> {
           return review.body.indexOf(searchBarTerm) > -1 && starBarFilters[review.rating];
         });
-
         setmoreAvailable(filteredReviews.length > countToRender ? true : false);
         setReviews(filteredReviews.slice(0, countToRender))
 
