@@ -81,7 +81,7 @@ const convertcharacteristicsTable = (table)=> {
 }
 
 export const cloudinaryPostRequest = (arrayOfFiles) => {
-  console.log(arrayOfFiles)
+
   Promise.all(arrayOfFiles.map((file)=>{
     const formData = new FormData();
     let timeStamp=Date.now();
@@ -98,46 +98,6 @@ export const cloudinaryPostRequest = (arrayOfFiles) => {
     })
   }))
   .then((results)=>{results.forEach((result)=>{console.log(result)})})
-
-
-
-  // let promisesArray = arrayOfFiles.map((file)=> {
-  //   const formData = new FormData();
-  //   let timeStamp=Date.now();
-  //   let signature = CryptoJS.SHA1(`timestamp=${timeStamp}${CLOUDINARY_API_SECRET}`).toString(CryptoJS.enc.Hex);
-
-  //   formData.append("file", e.target.files[0]);
-  //   formData.append("api_key", CLOUDINARY_API_KEY);
-  //   formData.append("timestamp", timeStamp);
-  //   formData.append("signature", signature);
-  //   return new Promise((resolve, reject) => {
-  //     axios({
-  //     url: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
-  //       method: 'post',
-  //       data: formData
-  //     })
-  //     .then((val)=>{console.log(val);
-  //       // resolve(val)
-  //       return val})
-  //   })
-  // })
-  // Promise.all(promisesArray).then((values)=>{console.log(values)})
-
-  // const formData = new FormData();
-  // let timeStamp=Date.now();
-  // let signature = CryptoJS.SHA1(`timestamp=${timeStamp}${CLOUDINARY_API_SECRET}`).toString(CryptoJS.enc.Hex);
-
-  // formData.append("file", e.target.files[0]);
-  // formData.append("api_key", CLOUDINARY_API_KEY);
-  // formData.append("timestamp", timeStamp);
-  // formData.append("signature", signature);
-  // axios({
-  //   url: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
-  //     method: 'post',
-  //     data: formData
-  //   })
-  // .then((val)=>{console.log(val)})
-  // .catch((err)=>{console.log(err)})
 }
 
 export const NewReviewForm = ({setmetaData, characteristics}) => {
@@ -163,7 +123,6 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
     if (e.target.files.length>0 && userPhotos.length < 5) {
       setUserPhotos([...userPhotos, e.target.files[0]]);
     }
-    console.log(userPhotos)
   }
 
   if (!modalView) {
