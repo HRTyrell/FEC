@@ -42,18 +42,30 @@ align-items: center;
 gap: 10px;
 `
 
+const F3div = styled.div`
+/* margin: 0px 20px;
+height: 50px; */
+display:flex;
+flex-direction: row;
+/* justify-content: start;
+align-items: center;
+gap: 10px; */
+`
+
 const H1 = styled.h1`
 margin: 0px 20px;
 font-family: 'Cinzel';
-font-weight: 600;
-font-size: 48px;
+font-weight: 800;
+font-size: 52px;
 color: Gold;
 text-align: center;
 `
 
 const H4 = styled.h4`
+margin: ${props => props.margin || "0"};
 font-family: 'OldStandard';
 letter-spacing: 1px;
+color: Gold;
 `
 
 const H2 = styled.h2`
@@ -62,6 +74,7 @@ font-family: 'Cinzel';
 font-weight: 200;
 color: ${props => props.color || 'Gold'};
 text-align: left;
+font-size: 32px;
 
 `
 
@@ -81,7 +94,7 @@ const StyleCart = () => {
     return null;
   }
 
-  let price = (cStyle.sale_price) ? <><H2 margin="0 20px">Price:&nbsp;<strike>${cStyle.original_price}</strike></H2><H2 color="red" margin="0 20px">Sale Price:&nbsp;${cStyle.sale_price}</H2></> : <><H2 margin="0 20px">Price:&nbsp;${cStyle.original_price}</H2><H2 margin="0 20px" height="32px">&nbsp;</H2></>
+  let price = (cStyle.sale_price) ? <F3div><H2 margin="0 20px">Price:&nbsp;<strike>${cStyle.original_price}</strike></H2><H2 color="red" margin="0">&nbsp;${cStyle.sale_price}</H2></F3div> : <F3div><H2 margin="0 20px">Price:&nbsp;${cStyle.original_price}</H2><H2 margin="0 20px" height="32px">&nbsp;</H2></F3div>
 
   console.log(cStyle)
 
@@ -96,10 +109,10 @@ const StyleCart = () => {
       <H1>{cProduct.name}</H1>
       {price}
       <div>
-        <H2 margin="10px 40px 0">Style</H2>
+        <H2 margin="0px 20px 0">Style</H2>
         <F2div>
           <FullArrow/>
-          <h5>{cStyle.name}</h5>
+          <H4 margin ="0 40px">{cStyle.name}</H4>
         </F2div>
       </div>
       <StyleSelector/>

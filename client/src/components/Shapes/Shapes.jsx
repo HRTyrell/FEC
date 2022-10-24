@@ -30,16 +30,24 @@ const Arrow2 = styled.div`
   border-bottom: 20px solid transparent;
   mix-blend-mode: normal;
 `
+const F2div = styled.div`
+margin: 0px 20px;
+height: 50px;
+display:flex;
+flex-direction: row;
+align-items: center;
+gap: 10px;
+`
 
 export const FullArrow = () => {
   return(
-    <>
+    <F2div>
       <Arrow>
         <Arrow2/>
       </Arrow>
       <Arrow>
         <Arrow2/>
       </Arrow>
-    </>
+    </F2div>
   )
 }
