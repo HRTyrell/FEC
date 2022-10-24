@@ -40,7 +40,7 @@ const RatingsReviews = () => {
   }
   return (
     <Fragment>
-      <h2> RATINGS & REVIEWS </h2>
+      <h2 id="Ratings"> RATINGS & REVIEWS </h2>
       <StyledContainer>
         <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
 

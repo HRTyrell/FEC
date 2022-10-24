@@ -19,7 +19,7 @@ height: 780px;
 width: 100%;
 display: flex;
 flex-direction: column;
-/* gap: 20px; */
+gap: 20px;
 overflow-y: auto;
 scroll-snap-type: y mandatory;
 ::-webkit-scrollbar {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled from "styled-components";
 
+import GlobalFonts from './fonts/fonts.js';
 import Overview from './components/ProductDetail/Overview.jsx';
 import NavigationBar from "./components/NavBar/NavigationBar.jsx";
 import QA from "./components/Q&A/QA.jsx";
@@ -20,6 +21,7 @@ const App = () => {
 
   return (
     <div>
+      <GlobalFonts/>
       <NavigationBar />
       <Sdiv>
         <Overview />

@@ -27,8 +27,9 @@ flex-direction: row;
 width: 70%;
 text-align: center;
 border-radius: 30px;
-background: #e0e0e0;
-box-shadow: 15px 15px 30px #bebebe,
+background: rgba(120,81,169,0.7819502801120448);
+text-align: center;
+box-shadow: 15px 15px 30px #aa82dac7,
             -15px -15px 30px #ffffff;
 `
 

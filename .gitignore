@@ -5,3 +5,4 @@ client/dist/bundle.js.map
 package-lock.json
 MyConfig.js
 client/dist/*.png
+client/dist/*.ttf

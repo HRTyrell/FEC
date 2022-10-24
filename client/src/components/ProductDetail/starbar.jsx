@@ -9,11 +9,9 @@ import emptyStar from '../../assets/YellowStar/emptyStar.png';
 
 
 const ImgS = styled.img`
-margin: 10px 0px;
-height: 2vw;
-width: 2vw;
+height: 20px;
+width: 20px;
 `
-
 
 //From Ben Tanaka
 const Starbar = function ({rating}) {
