@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import styled from 'styled-components';
 import ProductStore from "../Provider/Zus_Provider.jsx";
 import Star from '../../assets/Star.png';
@@ -14,18 +14,18 @@ const StyledModal = styled.div`
 `
 const StyledForm = styled.form`
   position: fixed;
-  top: 10vh;
-  left:  15vw;
-  right:  15vw;
-  bottom:  10vh;
+  top: 3vh;
+  left:  8vh;
+  right:  8vh;
+  bottom:  3vh;
   border-radius: 20px;
   background-color: white;
 `
 const StyledTitle = styled.header`
   display: flex;
   justify-content: center;
-  margin-top: 5px;
-  font-weight: bold;
+  margin-top: 1px;
+  font-style: italic;
   font-size: ${props => props.fontSize};
 `
 
@@ -34,14 +34,14 @@ const StyledFlexRow = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px 0px;
+  padding: 5px 0px;
   border-top: 2px solid grey;
 `
 const StyledFlexRowAdjustable = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: ${props=> props.justifyContent};
-  padding: 3px;
+  padding: 1px;
 `
 
 const StyledFlexItemHeader = styled.label`
@@ -60,6 +60,15 @@ const StyledPaddedDiv = styled.div`
   padding-left: 5%;
 `
 
+const characteristicTable = {
+  Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
+  Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+  Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+  Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+  Length: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+  Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
+}
+
 const convertcharacteristicsTable = (table)=> {
   let tableModded = {};
   for (var key in table) {
@@ -73,20 +82,12 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
   const [rating, setRating] = useState(0);
   const [recommended, setRecommended] = useState(null);
   const [characteristicRatings, setCharacteristicRatings] = useState(convertcharacteristicsTable(characteristics));
-  const [reviewSummary, setReviewSummary] = useState('');
+  const reviewSummary = useRef('');
+  const [reviewBody, setReviewBody] = useState('');
 
   const curProduct = ProductStore((state) => state.curProduct);
 
   let starsArray = new Array(rating).fill(fullstar).concat(new Array(5-rating).fill(Star))
-
-  const characteristicTable = {
-    Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
-    Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
-    Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-    Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
-    Length: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-    Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
-  }
 
   const handleUpdate = (char, newScore) => {
     setCharacteristicRatings ({...characteristicRatings, [char]: newScore})
@@ -152,9 +153,18 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
 
           <StyledFlexRow>
             <StyledFlexItemHeader>Review summary:</StyledFlexItemHeader>
-            <StyledPaddedDiv>
-              <input type="text" placeholder="Example: Best purchase ever!" value={reviewSummary} onChange={(e)=>{if (e.target.value.length <=60) {setReviewSummary(e.target.value)}}}></input>
-            </StyledPaddedDiv>
+            <StyledFlexGrowingDiv>
+              <textarea type="text" placeholder="Example: Best purchase ever!" ref={reviewSummary} maxlength="60" size="60" cols="60" rows="1"></textarea>
+            </StyledFlexGrowingDiv>
+          </StyledFlexRow>
+
+          <StyledFlexRow>
+            <StyledFlexItemHeader>Review body:</StyledFlexItemHeader>
+            <StyledFlexGrowingDiv>
+              <textarea type="text" placeholder="Why did you like the product or not" minlength="50" maxlength="1000" size="1000" cols="91" rows="11" onChange={(e)=> {setReviewBody(e.target.value)}}></textarea>
+
+              <small style={{display:'block'}}>{reviewBody.length > 50? 'Minimum reached' : `Minimum required characters left: ${50-reviewBody.length}`}</small>
+            </StyledFlexGrowingDiv>
           </StyledFlexRow>
 
         </StyledForm>
