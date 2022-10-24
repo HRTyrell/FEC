@@ -3,73 +3,59 @@ import axios from 'axios';
 
 import {URL, TOKEN} from '/MyConfig.js';
 
+const GetRequest = (req) => {
+  return axios.get(req, {
+    baseURL: URL,
+    headers: {'Authorization': TOKEN}
+  });
+}
 
-//REFACTOR GET LADDER
-const ProductStore = create((set, get) => ({
+const WeightedAvg = (obj) => {
+  let count = 0;
+  let holder = 0;
+  for (let key in obj) {
+    holder += key * obj[key];
+    count += obj[key] * 1;
+  }
+  //To see current Stars
+  // console.log('I AM NUM', (Math.round((holder/count) * 4) / 4))
+  return (Math.round((holder/count) * 4) / 4);
+}
+
+const ProductStore2 = create((set, get) => ({
   Products: null,
   curProduct: null,
   curProductStyles: null,
   curStyle: null,
+  curStars: null,
   getProducts: () => {
-    axios.get('/products', {
-      baseURL: URL,
-      headers: {'Authorization': TOKEN}
-    })
+    GetRequest('/products')
     .then(({data}) => {
       set(() => ({Products: data}));
-      return data;
-    })
-    .then((data) => {
-      axios.get(`/products/${data[0].id}`, {
-        baseURL: URL,
-        headers: {'Authorization': TOKEN}
-      })
-      .then(({data}) => {
-        set(() => ({curProduct: data}))
-        return data;
-      })
-      .then((data) => {
-        axios.get(`/products/${data.id}/styles`, {
-          baseURL: URL,
-          headers: {'Authorization': TOKEN}
-        })
-        .then(({data}) => {
-          set(() => ({curProductStyles: data.results, }));
-          data.results.map((obj) => {
-            if (obj["default?"] === true) {
-              set(() => ({curStyle: obj}))
-            }
-          })
-        })
-      })
+      get().setCurProduct(data[0].name);
     })
   },
   setCurProduct: (title) => {
     get().Products.map((info)=> {
       if (info.name === title) {
-        axios.get(`/products/${info.id}`, {
-          baseURL: URL,
-          headers: {'Authorization': TOKEN}
-        })
+        get().setStars(info.id);
+        GetRequest(`/products/${info.id}`)
         .then(({data}) => {
           set(() => ({curProduct: data}))
-          return data;
-        })
-        .then((data) => {
-          axios.get(`/products/${data.id}/styles`, {
-            baseURL: URL,
-            headers: {'Authorization': TOKEN}
-          })
-          .then(({data}) => {
-            set(() => ({curProductStyles: data.results, }));
-            data.results.map((obj) => {
-              if (obj["default?"] === true) {
-                set(() => ({curStyle: obj}))
-              }
-            })
-          })
+          get().setCurStyles(data);
         })
       }
+    })
+  },
+  setCurStyles: (data) => {
+    GetRequest(`/products/${data.id}/styles`)
+    .then(({data}) => {
+      set(() => ({curProductStyles: data.results}));
+      data.results.map((obj) => {
+        if (obj["default?"] === true) {
+          set(() => ({curStyle: obj}))
+        }
+      })
     })
   },
   setStyle: (title) => {
@@ -78,8 +64,14 @@ const ProductStore = create((set, get) => ({
         set(() => ({curStyle: info}));
       }
     })
+  },
+  setStars: (id) => {
+    GetRequest(`/reviews/meta/?product_id=${id}`)
+    .then(({data}) => {
+      let holder = WeightedAvg(data.ratings);
+      set(() => ({curStars: holder}))
+    })
   }
 }))
 
-
-export default ProductStore;
+export default ProductStore2;

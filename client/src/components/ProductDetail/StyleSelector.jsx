@@ -4,21 +4,21 @@ import styled from "styled-components";
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const ImgS = styled.img`
-height: 80px;
-width: 80px;
+height: 3.5vw;
+width: 3.5vw;
 border-radius: 50%;
 border: solid;
 `
 const ImgY = styled.img`
-height: 80px;
-width: 80px;
+height: 3.5vw;
+width: 3.5vw;
 border-radius: 50%;
 border: solid;
 border-color: red;
 `
 
 const DivS = styled.div`
-width: 100%;
+width: 80%;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
@@ -47,18 +47,18 @@ const StyleSelector = () => {
     setStyle(e.target.title);
   }
 
-  console.log(curStyle)
+  // console.log(curStyle)
 
   return (
     <DivS>
       {Styles.map((info) => {
         if (info.style_id === curStyle.style_id) {
           return(
-            <ImgY title = {info.name} key={info.style_id} value={info.style_id} src={info.photos[0].thumbnail_url} height="30px" width="30px"/>
+            <ImgY title = {info.name} key={info.style_id} value={info.style_id} src={info.photos[0].thumbnail_url} />
           )
         }
         return(
-          <ImgS title = {info.name} key={info.style_id} value={info.style_id} src={info.photos[0].thumbnail_url} height="30px" width="30px" onClick = {(e) => handleClick(e)} />
+          <ImgS title = {info.name} key={info.style_id} value={info.style_id} src={info.photos[0].thumbnail_url} onClick = {(e) => handleClick(e)} />
         )
       })}
     </DivS>
