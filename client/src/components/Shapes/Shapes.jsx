@@ -87,7 +87,7 @@ const Bubble = styled.div`
   bottom:-100px;
   width:40px;
   height: 40px;
-  background:red;
+  background:linear-gradient(129deg, rgba(250,76,255,1) 0%, rgba(113,0,255,1) 100%);
   border-radius:50%;
   opacity:0.5;
   animation: rise 20s infinite ease-in;
@@ -170,7 +170,7 @@ const Bubble = styled.div`
     transform:translate(100px);
   }
   100%{
-    bottom:3500px;
+    bottom:3570px;
     transform:translateX(-200px);
   }
 }
