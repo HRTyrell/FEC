@@ -16,6 +16,8 @@ flex-direction: column;
 max-width: 100%;
 justify-content: center;
 align-items: center;
+background: rgb(250,76,255);
+background: linear-gradient(129deg, rgba(250,76,255,1) 0%, rgba(113,0,255,1) 100%);
 `
 
 const App = () => {

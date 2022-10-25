@@ -25,7 +25,7 @@ const Arrow2 = styled.div`
   bottom: 0;
   width: 0;
   height: 0;
-  border-left: 20px solid #6e5278;
+  border-left: 20px solid white;
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   mix-blend-mode: normal;

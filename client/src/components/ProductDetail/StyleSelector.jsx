@@ -86,6 +86,41 @@ const StyleSelector = () => {
       {Styles.map((info) => {
         if (info.style_id === curStyle.style_id) {
           return(
+            <SDiv key={info.style_id}>
+              <ImgY title = {info.name} value={info.style_id} src={info.photos[0].thumbnail_url} />
+            </SDiv>
+          )
+        }
+        return(
+          <ImgS title = {info.name} key={info.style_id} value={info.style_id} src={info.photos[0].thumbnail_url} onClick = {(e) => handleClick(e)} />
+        )
+      })}
+    </DivS>
+  )
+}
+
+const StyleSelector2 = () => {
+
+  const Styles = ProductStore((state) => state.curProductStyles);
+  const curStyle = ProductStore((state) => state.curStyle);
+
+  const setStyle = ProductStore((state) => state.setStyle);
+
+  if (!Styles) {
+    return null;
+  }
+
+  const handleClick = (e) => {
+    setStyle(e.target.title);
+  }
+
+  // console.log(curStyle)
+
+  return (
+    <DivS>
+      {Styles.map((info) => {
+        if (info.style_id === curStyle.style_id) {
+          return(
             <SDiv>
               <ImgY title = {info.name} key={info.style_id} value={info.style_id} src={info.photos[0].thumbnail_url} />
             </SDiv>
@@ -98,5 +133,6 @@ const StyleSelector = () => {
     </DivS>
   )
 }
+
 
 export default StyleSelector;

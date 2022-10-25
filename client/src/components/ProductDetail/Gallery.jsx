@@ -5,7 +5,7 @@ import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const GalleryDiv = styled.div`
 margin: 10px 0;
-height: 800px;
+height: 1000px;
 width: 70%;
 border-radius: 30px;
 /* background: #e0e0e0;

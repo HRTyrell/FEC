@@ -5,6 +5,8 @@ html,body
     margin: 0px;
     padding: 0px;
     scroll-behavior: smooth;
+    /* background: rgb(113,0,255);
+    background: linear-gradient(129deg, rgba(113,0,255,1) 0%, rgba(250,76,255,1) 100%); */
     /* background: black; */
     /* overflow-x: hidden; */
 }
