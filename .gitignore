@@ -6,3 +6,4 @@ package-lock.json
 MyConfig.js
 client/dist/*.png
 coverage
+.DS_Store

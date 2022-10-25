@@ -3,9 +3,18 @@ import quarterStar from '../../assets/quarterStar.png';
 import halfStar from '../../assets/halfStar.png';
 import threefourthsStar from '../../assets/3fourthsStar.png';
 import fullstar from '../../assets/fullstar.png';
+import styled from 'styled-components';
 
-export const Starbar = function ({rating}) {
+/////////////Styles////////////////////////////////
+const AStar = styled.img`
+  width: 1em;
+  height: auto;
+`;
 
+
+
+//credit Ben Tanaka
+const SmallStarBar = function ({rating}) {
 
   rating = ((rating / .25).toFixed(0)) * .25;
   const ratingsArray = new Array(Math.floor(rating)).fill(fullstar);
@@ -25,8 +34,9 @@ export const Starbar = function ({rating}) {
   return (
     <div>
       {ratingsArray.map((item, index)=> {
-        return <img key={index} src={item}></img>
+        return <AStar key={index} src={item}></AStar>
       })}
     </div>
   )
 }
+export default SmallStarBar
