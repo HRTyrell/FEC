@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
+import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
 
 const CarouselStyled = styled.div`
   display: flex;
@@ -45,15 +46,18 @@ z-index: 3;
 right: 2;
 height: 100%;
 // width: 100%;
-//max-width: 500px;
+max-width: 500px;
 pointer-events: none;
 `;
 
 const MDiv = styled.div`
   height: 100%;
+  max-width: 52em;
 `;
 
 const Carousel = (props) => {
+
+  const { relatedItemsList, outfitList} = useRelatedItemsStore();
 
   const ref = useRef(null);
   const [overlay, setOverlay] = useState(true);
@@ -61,10 +65,10 @@ const Carousel = (props) => {
   const [showNext, setShowNext] = useState(false);
 
   useEffect(() => {
-    if(ref.current.clientWidth < ref.current.scrollWidth) {
+    if(ref.current.clientWidth > ref.current.parentElement.clientWidth) {
       setShowNext(true);
     }
-  }, [Carousel])
+  }, [outfitList, relatedItemsList])
 
   const slide = (e, shift) => {
     e.target.parentNode.scrollLeft -= shift;

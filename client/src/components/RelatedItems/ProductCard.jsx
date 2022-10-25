@@ -4,6 +4,7 @@ import { getProductStyles } from './parseHelpers.js';
 import SmallStarBar from './SmallStarbar.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import yellowStar from '../../assets/yellow-star.png';
+import ProductStore from '../Provider/Zus_Provider.jsx';
 
 ////////////////Styles//////////////////////////////////////
 const CardStyled = styled.div`
@@ -14,13 +15,9 @@ border-spacing: 20px;
 margin: 2px;
 padding: 0;
 width: 8em;
-height: 100%;
+height: 18em;
 `;
 
-// const ProductImageOuterDiv = styled.div`
-// width: 100px;
-// height: 66.6666px;
-// `;
 
 const ProductImageStyled = styled.div`
 display: flex;
@@ -31,7 +28,6 @@ flex-grow: 3;
 margin: auto;
 position: relative;
 width: auto;
-//height: 80%;
 
 `;
 
@@ -40,9 +36,6 @@ const ImageStyled = styled.img`
 display: flex;
 align-items: center
 position: relative;
-// display: block;
-// margin-left: auto;
-// margin-right: auto;
 width: 90%;
 height: auto;
 padding: 2%;
@@ -59,7 +52,6 @@ width: 1.5em;
 const OuterDescriptionDiv = styled.div`
 display: flex;
 flex-direction: column;
-//flex-grow: 3;
 justify-content: center;
 align-items: center;
 width: 100%
@@ -85,10 +77,6 @@ margin: 0.1em 0, 0.1em 0;
 font-size: 0.9em;
 `;
 
-// const Review = styled(Starbar)`
-//   display: flex;
-//   flex-shrink: 1;
-// `;
 
 
 ///////////////React Component///////////////////////////
@@ -96,15 +84,22 @@ const ProductCard = ({product}) => {
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
+  const {curProduct} = ProductStore();
+  console.log(curProduct);
 
   const handleOnMouseEnter = () => {
-    setTimeout(setIsOpen, 500, true);
+    setTimeout(setIsOpen, 200, true);
   }
 
   const handleOnMouseLeave = () => {
     setTimeout(setIsOpen, 200, false);
   }
 
+
+  const handleCardClick = (e) => {
+    console.log('Clicked on ', product);
+    console.log(product.data);
+  }
 
   const defaultImage = product.styles.data.results[0].photos[0].thumbnail_url;
 
@@ -121,8 +116,8 @@ const ProductCard = ({product}) => {
   const rating = averageRating();
   // const [image, setImage] = useState('./testImage.png');
   return (
-    <CardStyled>
-      <ComparisonModal modalIsOpen={modalIsOpen} />
+    <CardStyled onClick={handleCardClick}>
+      <ComparisonModal modalIsOpen={modalIsOpen} currentProduct={curProduct} comparisonProduct={product.data}/>
       <ProductImageStyled >
         <ImageStyled src={defaultImage} alt="Image of RelatedProduct" aria-label="Product Image"/>
         <ButtonStyled src={yellowStar}
