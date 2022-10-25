@@ -106,14 +106,6 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
   }
 
   return (
-<<<<<<< HEAD
-    <BreakdownDiv>RATINGS & REVIEWS
-      <div>
-        <label data-testid="averagerating">{avg}</label>
-        <Starbar rating={avg}></Starbar>
-      </div>
-      <label>{`${totalRatings} total reviews`}</label>
-=======
     <BreakdownDiv>
       <StyledStarBarRatingDiv>
         <Starbar rating={avg}></Starbar>
@@ -121,7 +113,6 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
       </StyledStarBarRatingDiv>
 
       <label>{totalRatings} total reviews</label>
->>>>>>> main
       <header> Rating Breakdown</header>
       {starBarFilters.filtered?
         <div>

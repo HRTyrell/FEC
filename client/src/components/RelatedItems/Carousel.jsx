@@ -95,13 +95,8 @@ const Carousel = (props) => {
     <MDiv ref={ref}>
     {overlay ? <FadedOverlay /> : null }
     <CarouselStyled aria-label="Product Carousel">
-<<<<<<< HEAD
-      <CarouselControlPrev data-testid="prevButton" onClick={(e)=> slide(e, 120)}>&#8678;</CarouselControlPrev>
-      <CarouselControlNext onClick={(e)=> slide(e, -120)}>&#8680;</CarouselControlNext>
-=======
       {showPrevious ? <CarouselControlPrev data-testid="prevControl" onClick={(e)=> slide(e, 120)}>&#60;</CarouselControlPrev> : null }
       {showNext ? <CarouselControlNext data-testid="nextControl" onClick={(e)=> slide(e, -120)}>&#62;</CarouselControlNext> : null }
->>>>>>> main
       {React.cloneElement(props.children, {data: props.data}, null)}
     </CarouselStyled>
     </MDiv>
