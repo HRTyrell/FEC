@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import getProducts from './parseHelpers.js';
 import RelatedProducts from './RelatedProducts.jsx';
 import YourOutfit from './YourOutfit.jsx';
@@ -7,6 +7,7 @@ import Carousel from './Carousel.jsx';
 import testData from './TestData.js';
 import {getRelatedProducts} from './parseHelpers.js';
 import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
+import ProductStore from '../Provider/Zus_Provider.jsx';
 
 const Title = styled.h1`
 
@@ -21,7 +22,6 @@ const MasterDiv = styled.div`
   flex-direction: row;
   align-content: space-between;
   width: 80%;
-  // height: 15em;
   border-spacing: 0.5%;
   margin: 0;
   padding: 0;
@@ -39,20 +39,25 @@ const H = styled.h5`
 const RelatedItems = () => {
 
   const setRelatedItems = useRelatedItemsStore(state => state.setRelatedItems);
-  useEffect(() => {
-    getRelatedProducts('66643').then(items => {
-      setRelatedItems(items);
-    })
-  }, [])
+  const {curProduct} = ProductStore();
+  const isMounted = useRef(false);
 
-  const relatedProductData = useRelatedItemsStore(state => state.relatedItemsList);
-  const outfitList = useRelatedItemsStore(state => state.outfitList);
+  useEffect(() => {
+    if(isMounted.current) {
+      getRelatedProducts(curProduct.id).then(items => {
+        setRelatedItems(items);
+      })
+    } else {
+      isMounted.current = true;
+    }
+  }, [curProduct])
+  const { relatedItemsList, outfitList} = useRelatedItemsStore();
 
   return (
     <Div>
       <H>Related Products</H>
       <MasterDiv>
-        <Carousel data={relatedProductData} title="Related Products"><RelatedProducts/></Carousel>
+        <Carousel data={relatedItemsList} title="Related Products"><RelatedProducts/></Carousel>
       </MasterDiv>
       <H>Your Outfit</H>
       <MasterDiv>
