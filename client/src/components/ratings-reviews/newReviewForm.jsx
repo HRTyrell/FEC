@@ -6,6 +6,7 @@ import fullstar from '../../assets/fullstar.png';
 import CryptoJS from 'crypto-js'
 import axios from 'axios';
 import {CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUD_NAME} from '/MyConfig.js';
+import {TOKEN} from '/MyConfig.js';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -62,6 +63,10 @@ const StyledFlexGrowingDiv = styled.div`
 const StyledPaddedDiv = styled.div`
   padding-left: 5%;
 `
+const StyledBigInput = styled.input`
+  height: 100%;
+  font-size: larger;
+`
 
 const characteristicTable = {
   Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
@@ -80,7 +85,7 @@ const convertcharacteristicsTable = (table)=> {
   return tableModded
 }
 
-export const cloudinaryPostRequest = (arrayOfFiles) => {
+export const cloudinaryPostRequest = (arrayOfFiles, successPhotosCallback) => {
 
   Promise.all(arrayOfFiles.map((file)=>{
     const formData = new FormData();
@@ -97,7 +102,10 @@ export const cloudinaryPostRequest = (arrayOfFiles) => {
       data: formData
     })
   }))
-  .then((results)=>{results.forEach((result)=>{console.log(result)})})
+  // .then((results)=>{results.forEach((result)=>{console.log(result)})})
+  .then((results)=>{return results.map((result)=>{return result.data.url})})
+  .then((results)=>{successPhotosCallback(results)})
+  .catch((err)=>alert(err))
 }
 
 export const NewReviewForm = ({setmetaData, characteristics}) => {
@@ -109,6 +117,8 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
   const reviewSummary = useRef('');
   const [reviewBody, setReviewBody] = useState('');
   const [userPhotos, setUserPhotos] = useState([]);
+  const nickname = useRef('');
+  const email = useRef('');
 
   const curProduct = ProductStore((state) => state.curProduct);
 
@@ -119,9 +129,56 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
   }
 
   const handlePhotoUpload = (e)=>{
-
-    if (e.target.files.length>0 && userPhotos.length < 5) {
+    if (e.target.files.length>0) {
       setUserPhotos([...userPhotos, e.target.files[0]]);
+    }
+  }
+
+  const verifyFormSuccessCallback = (photosArray) => {
+    axios({
+      method: 'post',
+      url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?product_id=${curProduct}&rating=${rating}&summary=${reviewSummary}&body=${reviewBody}&recommend=${recommended}&name=${nickname}&email=${email}&photos=${photosArray}&characteristics=${characteristicRatings}`,
+      headers: {authorization: TOKEN}
+    })
+    .then((val)=> {
+      console.log(val)
+      setModalView(false)
+    })
+    .catch((err)=> {
+      alert(err);
+    })
+  }
+
+  const verifyForm = (e) => {
+    e.preventDefault();
+    let requiredButBlank = [];
+    if (rating === 0) {
+      requiredButBlank.push('Overall Rating')
+    }
+    if (!recommended) {
+      requiredButBlank.push('Do you recommend this product?')
+    }
+    Object.keys(characteristics).forEach((key)=> {
+      let charID = characteristics[char].id
+      let charSelectedScore = characteristicRatings[charID];
+      if (charSelectedScore === 0) {
+        requiredButBlank.push(key)
+      }
+    })
+
+    if (reviewBody.length < 50) {
+      requiredButBlank.push('Review body (less than 50 characters)')
+    }
+    if (!nickname) {
+      requiredButBlank.push('What is your nickname')
+    }
+    if (!email || email.indexOf('@') < 0 || email.indexOf('.com') < 0) {
+      requiredButBlank.push('Your email')
+    }
+    if (requiredButBlank.length > 0) {
+      alert(`Required fields missing: ${requiredButBlank.join(', ')}`)
+    } else {
+      cloudinaryPostRequest(userPhotos, verifyFormSuccessCallback);
     }
   }
 
@@ -130,7 +187,7 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
   } else {
     return (
       <StyledModal>
-        <StyledForm onSubmit={()=>{setReviewBody('done')}}>
+        <StyledForm onSubmit={verifyForm}>
           <StyledTitle fontSize="x-large">Write Your Review</StyledTitle>
           <StyledTitle fontSize="large" >About the {curProduct.name}</StyledTitle>
 
@@ -203,19 +260,38 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
           <StyledFlexRow>
             <StyledFlexItemHeader>Upload your photos:</StyledFlexItemHeader>
             <StyledPaddedDiv>
-              <input type="file" accept="image/*" onInput={handlePhotoUpload}></input>
+              {userPhotos.length < 5 && <input type="file" accept="image/*" onInput={handlePhotoUpload}></input>}
               {userPhotos.map((photo, index)=>{
                 return <img src={URL.createObjectURL(photo)} key={index} width="35px" height="35px"></img>
               })}
             </StyledPaddedDiv>
 
           </StyledFlexRow>
-          <div onClick={()=>{cloudinaryPostRequest(userPhotos)}}>clickME</div>
+
+          <StyledFlexRow>
+            <StyledFlexItemHeader>What is your nickname*:</StyledFlexItemHeader>
+            <StyledFlexGrowingDiv>
+              <textarea type="text" ref={nickname} placeholder="Example: jackson11!" size="60" cols="60" rows="1"></textarea>
+              <small style={{display:'block'}}>For privacy reasons, do not use your full name or email address</small>
+            </StyledFlexGrowingDiv>
+
+          </StyledFlexRow>
+
+          <StyledFlexRow>
+            <StyledFlexItemHeader>Your email*:</StyledFlexItemHeader>
+            <StyledFlexGrowingDiv>
+              <input type="email" ref={email} placeholder="Example: jackson11@email.com" size="60"></input>
+              <small style={{display:'block'}}>For authentication reasons, you will not be emailed</small>
+            </StyledFlexGrowingDiv>
+
+          </StyledFlexRow>
+
+          <StyledFlexRowAdjustable justifyContent={'center'}>
+            <StyledBigInput type="submit" value="Submit"></StyledBigInput>
+          </StyledFlexRowAdjustable>
 
         </StyledForm>
       </StyledModal>
     )
   }
 }
-
-<input type="submit" value="Submit" />
