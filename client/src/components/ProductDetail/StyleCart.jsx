@@ -4,7 +4,7 @@ import styled from "styled-components";
 import StyleSelector from "./StyleSelector.jsx"
 import ProductStore from "../Provider/Zus_Provider.jsx";
 import Starbar from "./starbar.jsx";
-import { FullArrow } from "../Shapes/Shapes.jsx";
+import { FullArrow, Circles } from "../Shapes/Shapes.jsx";
 import SizeSelector from "./SizeSelector.jsx";
 
 const StyleDiv = styled.div`
@@ -14,6 +14,7 @@ margin: 10px 0;
 height: 1000px;
 width: 30%;
 gap: 20px;
+z-index: 2;
 /* align-items: center; */
 
 /* border: solid; */
@@ -21,7 +22,7 @@ background: white;
 border-radius: 30px;
 text-align: center;
 box-shadow: 15px 15px 30px #ecc3ea,
-            -10px -5px 30px #ecc3ea;
+            -1px -5px 30px #ecc3ea;
 `
 
 const Fdiv = styled.div`
@@ -125,6 +126,7 @@ const StyleCart = () => {
         <li>Pintrest</li>
         <li>Twitter</li>
       </div>
+      <Circles/>
     </StyleDiv>
   )
 }
