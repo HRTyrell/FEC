@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
 
 const Arrow = styled.div`
   margin: 5px 5px;
@@ -74,12 +75,11 @@ box-shadow: 15px 15px 30px 5px rgba(113,0,255,1),
 const Bubbles = styled.div`
   position:absolute;
   width:100%;
-  min-height:280%;
+  min-height:${props => (props.hei - 284) + 'px'  || "270%"};
   z-index:10;
   overflow:hidden;
-  top:150px;
+  top:284px;
   right:0;
-  /* transform: rotate(-90deg); */
 `
 
 const Bubble = styled.div`
@@ -87,7 +87,8 @@ const Bubble = styled.div`
   bottom:-100px;
   width:40px;
   height: 40px;
-  background:linear-gradient(129deg, rgba(250,76,255,1) 0%, rgba(113,0,255,1) 100%);
+  background: rgb(99,22,187);
+  background: linear-gradient(129deg, rgba(99,22,187,1) 12%, rgba(255,0,181,1) 100%);
   border-radius:50%;
   opacity:0.5;
   animation: rise 20s infinite ease-in;
@@ -203,9 +204,23 @@ export const Circles = (props) => {
 }
 
 export const BGBubbles = () => {
+
+  const [H, setH] = useState(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      let h = document.body.scrollHeight
+      console.log('I AM', h)
+      setH(h);
+    }, 2000);
+  })
+
+  if (!H) {
+    return null;
+  }
+
   return(
-    <section className="sticky">
-      <Bubbles>
+      <Bubbles hei = {H}>
         <Bubble/>
         <Bubble/>
         <Bubble/>
@@ -217,6 +232,6 @@ export const BGBubbles = () => {
         <Bubble/>
         <Bubble/>
       </Bubbles>
-    </section>
   )
+
 }
