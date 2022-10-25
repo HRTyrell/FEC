@@ -111,7 +111,7 @@ export const cloudinaryPostRequest = (arrayOfFiles, successPhotosCallback) => {
   }
 }
 
-export const NewReviewForm = ({setmetaData, characteristics}) => {
+export const NewReviewForm = ({setmetaData, characteristics, product_id, product_name}) => {
 
   const [modalView, setModalView] = useState(false);
   const [rating, setRating] = useState(0);
@@ -122,8 +122,6 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
   const [userPhotos, setUserPhotos] = useState([]);
   const nickname = useRef('');
   const email = useRef('');
-
-  const curProduct = ProductStore((state) => state.curProduct);
 
   let starsArray = new Array(rating).fill(fullstar).concat(new Array(5-rating).fill(Star))
 
@@ -139,7 +137,7 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
 
   const verifyFormSuccessCallback = (photosArray) => {
     let dataz = {
-      product_id: curProduct.id,
+      product_id: product_id,
       rating: rating,
       summary: reviewSummary.current.value,
       body: reviewBody,
@@ -205,7 +203,7 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
       <StyledModal>
         <StyledForm onSubmit={verifyForm}>
           <StyledTitle fontSize="x-large">Write Your Review</StyledTitle>
-          <StyledTitle fontSize="large" >About the {curProduct.name}</StyledTitle>
+          <StyledTitle fontSize="large" >About the {product_name}</StyledTitle>
 
           <StyledFlexRow>
             <StyledFlexItemHeader>Overall rating*:</StyledFlexItemHeader>
