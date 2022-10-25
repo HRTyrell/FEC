@@ -24,6 +24,7 @@ const StyledForm = styled.form`
   bottom:  3vh;
   border-radius: 20px;
   background-color: white;
+  overflow: auto;
 `
 const StyledTitle = styled.header`
   display: flex;
@@ -86,26 +87,28 @@ const convertcharacteristicsTable = (table)=> {
 }
 
 export const cloudinaryPostRequest = (arrayOfFiles, successPhotosCallback) => {
+  if (arrayOfFiles.length > 0) {
+    Promise.all(arrayOfFiles.map((file)=>{
+      const formData = new FormData();
+      let timeStamp=Date.now();
+      let signature = CryptoJS.SHA1(`timestamp=${timeStamp}${CLOUDINARY_API_SECRET}`).toString(CryptoJS.enc.Hex);
 
-  Promise.all(arrayOfFiles.map((file)=>{
-    const formData = new FormData();
-    let timeStamp=Date.now();
-    let signature = CryptoJS.SHA1(`timestamp=${timeStamp}${CLOUDINARY_API_SECRET}`).toString(CryptoJS.enc.Hex);
-
-    formData.append("file", file);
-    formData.append("api_key", CLOUDINARY_API_KEY);
-    formData.append("timestamp", timeStamp);
-    formData.append("signature", signature);
-    return axios({
-    url: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
-      method: 'post',
-      data: formData
-    })
-  }))
-  // .then((results)=>{results.forEach((result)=>{console.log(result)})})
-  .then((results)=>{return results.map((result)=>{return result.data.url})})
-  .then((results)=>{successPhotosCallback(results)})
-  .catch((err)=>alert(err))
+      formData.append("file", file);
+      formData.append("api_key", CLOUDINARY_API_KEY);
+      formData.append("timestamp", timeStamp);
+      formData.append("signature", signature);
+      return axios({
+      url: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
+        method: 'post',
+        data: formData
+      })
+    }))
+    .then((results)=>{return results.map((result)=>{return result.data.url})})
+    .then((results)=>{successPhotosCallback(results)})
+    .catch((err)=>alert(err))
+  } else {
+    successPhotosCallback([]);
+  }
 }
 
 export const NewReviewForm = ({setmetaData, characteristics}) => {
@@ -125,7 +128,7 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
   let starsArray = new Array(rating).fill(fullstar).concat(new Array(5-rating).fill(Star))
 
   const handleUpdate = (char, newScore) => {
-    setCharacteristicRatings ({...characteristicRatings, [char]: newScore})
+    setCharacteristicRatings ({...characteristicRatings, [char]: Number(newScore)})
   }
 
   const handlePhotoUpload = (e)=>{
@@ -135,13 +138,24 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
   }
 
   const verifyFormSuccessCallback = (photosArray) => {
+    let dataz = {
+      product_id: curProduct.id,
+      rating: rating,
+      summary: reviewSummary.current.value,
+      body: reviewBody,
+      recommend: recommended,
+      name: nickname.current.value,
+      email: email.current.value,
+      photos: photosArray,
+      characteristics: characteristicRatings
+    }
     axios({
       method: 'post',
-      url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?product_id=${curProduct}&rating=${rating}&summary=${reviewSummary}&body=${reviewBody}&recommend=${recommended}&name=${nickname}&email=${email}&photos=${photosArray}&characteristics=${characteristicRatings}`,
-      headers: {authorization: TOKEN}
+      url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews`,
+      headers: {authorization: TOKEN},
+      data: dataz
     })
     .then((val)=> {
-      console.log(val)
       setModalView(false)
     })
     .catch((err)=> {
@@ -158,25 +172,27 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
     if (!recommended) {
       requiredButBlank.push('Do you recommend this product?')
     }
-    Object.keys(characteristics).forEach((key)=> {
+    Object.keys(characteristics).forEach((char)=> {
       let charID = characteristics[char].id
       let charSelectedScore = characteristicRatings[charID];
       if (charSelectedScore === 0) {
-        requiredButBlank.push(key)
+        requiredButBlank.push(char)
       }
     })
 
     if (reviewBody.length < 50) {
       requiredButBlank.push('Review body (less than 50 characters)')
     }
-    if (!nickname) {
+    if (!nickname.current.value) {
       requiredButBlank.push('What is your nickname')
     }
-    if (!email || email.indexOf('@') < 0 || email.indexOf('.com') < 0) {
+
+    if (!email.current.value || email.current.value.indexOf('@') < 0 || email.current.value.indexOf('.com') < 0) {
       requiredButBlank.push('Your email')
     }
+
     if (requiredButBlank.length > 0) {
-      alert(`Required fields missing: ${requiredButBlank.join(', ')}`)
+      alert(`You must enter the following: ${requiredButBlank.join(', ')}`)
     } else {
       cloudinaryPostRequest(userPhotos, verifyFormSuccessCallback);
     }
@@ -204,11 +220,11 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
           <StyledFlexRow>
             <StyledFlexItemHeader>Do you recommend this product?*:</StyledFlexItemHeader>
             <StyledPaddedDiv>
-              <input type="radio" value="no" name="recommend" onChange={()=>setRecommended('no')} id="no"></input>
-              <label htmlFor="no">no</label>
+              <input type="radio" value="false" name="recommend" onChange={()=>setRecommended(false)} id="false"></input>
+              <label htmlFor="false">no</label>
 
-              <input type="radio" value="yes" name="recommend" onChange={()=>setRecommended('yes')} id="yes"></input>
-              <label htmlFor="yes">yes</label>
+              <input type="radio" value="true" name="recommend" onChange={()=>setRecommended(true)} id="true"></input>
+              <label htmlFor="true">yes</label>
             </StyledPaddedDiv>
           </StyledFlexRow>
 
@@ -251,7 +267,7 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
           <StyledFlexRow>
             <StyledFlexItemHeader>Review body:</StyledFlexItemHeader>
             <StyledFlexGrowingDiv>
-              <textarea type="text" placeholder="Why did you like the product or not" minLength="50" maxLength="1000" size="1000" cols="91" rows="11" onChange={(e)=> {setReviewBody(e.target.value)}}></textarea>
+              <textarea type="text" placeholder="Why did you like the product or not" maxLength="1000" size="1000" cols="91" rows="11" onChange={(e)=> {setReviewBody(e.target.value)}}></textarea>
 
               <small style={{display:'block'}}>{reviewBody.length > 50? 'Minimum reached' : `Minimum required characters left: ${50-reviewBody.length}`}</small>
             </StyledFlexGrowingDiv>
@@ -280,7 +296,7 @@ export const NewReviewForm = ({setmetaData, characteristics}) => {
           <StyledFlexRow>
             <StyledFlexItemHeader>Your email*:</StyledFlexItemHeader>
             <StyledFlexGrowingDiv>
-              <input type="email" ref={email} placeholder="Example: jackson11@email.com" size="60"></input>
+              <input type="text" ref={email} placeholder="Example: jackson11@email.com" size="60"></input>
               <small style={{display:'block'}}>For authentication reasons, you will not be emailed</small>
             </StyledFlexGrowingDiv>
 
