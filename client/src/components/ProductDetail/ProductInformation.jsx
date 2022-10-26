@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const DivS = styled.div`
+margin: 0 20px;
 display: flex;
 flex-direction: column;
 text-align: left;
@@ -25,11 +26,13 @@ margin: 20px 0;
 display: flex;
 flex-direction: row;
 width: 70%;
-text-align: center;
+
+
+background: white;
 border-radius: 30px;
-background: #e0e0e0;
-box-shadow: 15px 15px 30px #bebebe,
-            -15px -15px 30px #ffffff;
+text-align: center;
+box-shadow: 15px 15px 30px #ecc3ea,
+            -10px -5px 30px #ecc3ea;
 `
 
 //Completion of props and state
@@ -53,9 +56,9 @@ const ProductInformation = () => {
         <h5>Features</h5>
         {curProduct.features.map((item, index) => {
           return (
-              <li key={index}>
-                The {item.feature} is {item.value}
-              </li>
+              <h5 key={index}>
+                {item.feature}: {item.value}
+              </h5>
           )
         })}
       </DivS2>

@@ -8,6 +8,8 @@ display: block;
 background-color: White;
 color: black;
 text-align: center;
+font-family: 'Cinzel';
+font-weight: 400;
 `;
 
 const Wrap = styled.div`
@@ -31,6 +33,7 @@ display: block;
 background-color: white;
 color: black;
 text-align: center;
+font-family: 'OldStandard';
 `;
 
 
@@ -50,7 +53,7 @@ const NavigationBar = () => {
       <Sdiv>
         {Product.map((info) => {
           return(
-            <h4 key={info.id} title={info.name} onClick = {(e) => setProduct(e.target.title)}>{info.name}  |&nbsp;&nbsp;</h4>
+            <H5 key={info.id} title={info.name} onClick = {(e) => setProduct(e.target.title)}>{info.name}  |&nbsp;&nbsp;</H5>
           )
         })}
       </Sdiv>

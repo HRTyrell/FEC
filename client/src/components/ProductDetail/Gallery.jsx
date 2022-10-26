@@ -5,7 +5,7 @@ import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const GalleryDiv = styled.div`
 margin: 10px 0;
-height: 800px;
+height: 1000px;
 width: 70%;
 border-radius: 30px;
 /* background: #e0e0e0;
@@ -19,7 +19,7 @@ height: 780px;
 width: 100%;
 display: flex;
 flex-direction: column;
-/* gap: 20px; */
+gap: 20px;
 overflow-y: auto;
 scroll-snap-type: y mandatory;
 ::-webkit-scrollbar {
