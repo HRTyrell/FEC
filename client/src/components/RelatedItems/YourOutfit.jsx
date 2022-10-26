@@ -18,9 +18,6 @@ const CurrentProduct = styled.div`
   display: flex;
   justify-content: center;
   border-style: solid;
-  margin: 2px;
-  padding: 0;
-  width: 8em;
   align-items: center;
   align-self: center;
   width: 12em;
@@ -29,6 +26,7 @@ const CurrentProduct = styled.div`
   box-shadow:6px 6px 10px #bebebe,
               -6px -6px 10px #ffffff;
   background-color: rgba(255, 255, 255, 1);
+  margin: 0 0 0 -2em;
 `;
 const Image = styled.img`
   display: flex;

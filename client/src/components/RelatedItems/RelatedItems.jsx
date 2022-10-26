@@ -38,6 +38,7 @@ const H = styled.h5`
 const RelatedItems = () => {
 
   const setRelatedItems = useRelatedItemsStore(state => state.setRelatedItems);
+  const getOutfitFromLocalStorage = useRelatedItemsStore(state => state.getOutfitFromLocalStorage);
   const {curProduct} = ProductStore();
   const isMounted = useRef(false);
 
@@ -45,6 +46,9 @@ const RelatedItems = () => {
     if(isMounted.current) {
       getRelatedProducts(curProduct.id).then(items => {
         setRelatedItems(items);
+        return
+      }).then(() => {
+        getOutfitFromLocalStorage();
       })
     } else {
       isMounted.current = true;
