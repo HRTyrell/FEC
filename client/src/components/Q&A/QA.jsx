@@ -3,10 +3,14 @@ import styled from 'styled-components'
 import SearchBar from './/SearchBar.jsx';
 import QAList from './/QAList.jsx';
 
+
 const MainDiv = styled.div`
   width: 70%;
+  height 75vh;
   padding: 20px;
+  bachground: white;
   border: solid;
+  border-color: #ededed;
 `
 
   const QA = (/* product_id */ ) => {
