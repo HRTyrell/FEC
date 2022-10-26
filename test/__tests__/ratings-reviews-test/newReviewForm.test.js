@@ -55,11 +55,41 @@ describe('newReviewForm component', ()=> {
     .then(()=> {
       return user.click(screen.getByTestId('newreviewbuttonTEST'))
       .then(()=> {
-        fireEvent(screen.getAllByRole('setratingTEST')[1], new MouseEvent('click'))
+
+        fireEvent(screen.getAllByRole('setratingTEST')[4], new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        }))
+        expect(screen.getByText('Great')).toBeInTheDocument();
+
+        fireEvent(screen.getByTestId('recommendedfalseTEST'), new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        }))
+
+        expect(screen.getByRole("radio", {name: /no/})).toBeChecked();
+
+        const allRadios= screen.getAllByTestId('characteristicradioTEST-1')
+        allRadios.forEach((item)=> {
+          fireEvent(item, new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+          }))
+        })
+
+        fireEvent.change(screen.getByPlaceholderText('Example: Best purchase ever!'), {target: {value:'xxxxxxxxxx'}})
+
+        fireEvent.change(screen.getByPlaceholderText('Why did you like the product or not'), {target: {value:'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh'}})
+
+        fireEvent.change(screen.getByPlaceholderText('Example: jackson11!'), {target: {value:''}})
+
+        fireEvent.change(screen.getByPlaceholderText('Example: jackson11@email.com'), {target: {value:'xxxxxx@gmail.com'}})
+
         return user.click(screen.getByTestId('newreviewformsubmitTEST'))
         .then(()=> {
           expect(screen.queryByTestId('newreviewbuttonTEST')).not.toBeInTheDocument();
           expect(screen.queryByTestId('newreviewformTEST')).toBeInTheDocument();
+
         })
       })
     })

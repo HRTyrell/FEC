@@ -188,11 +188,13 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
     if (!email.current.value || email.current.value.indexOf('@') < 0 || email.current.value.indexOf('.com') < 0) {
       requiredButBlank.push('Your email')
     }
-
+    console.log(`You must enter the following: ${requiredButBlank.join(', ')}`)
     if (requiredButBlank.length > 0) {
+
       alert(`You must enter the following: ${requiredButBlank.join(', ')}`)
     } else {
-      cloudinaryPostRequest(userPhotos, verifyFormSuccessCallback);
+      setModalView(false)
+      // cloudinaryPostRequest(userPhotos, verifyFormSuccessCallback);
     }
   }
 
@@ -218,7 +220,7 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
           <StyledFlexRow>
             <StyledFlexItemHeader>Do you recommend this product?*:</StyledFlexItemHeader>
             <StyledPaddedDiv>
-              <input type="radio" value="false" name="recommend" onChange={()=>setRecommended(false)} id="false"></input>
+              <input type="radio" value="false" data-testid="recommendedfalseTEST" name="recommend" onChange={()=>setRecommended(false)} id="false"></input>
               <label htmlFor="false">no</label>
 
               <input type="radio" value="true" name="recommend" onChange={()=>setRecommended(true)} id="true"></input>
@@ -240,7 +242,7 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
 
                  <StyledFlexRowAdjustable justifyContent="space-between">
                   {[1, 2, 3, 4, 5].map((score, index)=> {
-                    return <input type="radio" key={char + score} value={score} name={char} onChange={(e)=>handleUpdate(charID, e.target.value)}></input>
+                    return <input data-testid={'characteristicradioTEST-' + index}type="radio" key={char + score} value={score} name={char} onChange={(e)=>handleUpdate(charID, e.target.value)}></input>
                     })
                   }
                   </StyledFlexRowAdjustable>
