@@ -49,7 +49,6 @@ export const convertDate = (inp)=> {
 
 //padding: 10px 5px 10px 0;
 export const ReviewTile = ({review}) => {
-
   const [showMore, setShowMore] = useState(review.body.length > 250 ? true : false)
   const [helpful, setHelpful] = useState({voted:false, helpfulCount: review.helpfulness})
 
@@ -86,7 +85,7 @@ export const ReviewTile = ({review}) => {
       <div>{review.body}</div>
       }
 
-      <StyledContainerStart>
+      <StyledContainerStart data-testid="photocontainerTEST">
         {review.photos.map((photo, index)=> {
           return <SizeAdjustableImage key={index} url={photo.url}/>
         })}
@@ -94,7 +93,7 @@ export const ReviewTile = ({review}) => {
       {review.recommend && <div>✓ I recommend this product</div>}
       {review.response && <div>RESPONSE FROM SELLER: {review.response}</div>}
       <b>Was this review helpful? </b>
-      <a href="#/" onClick={uploadHelpfulVote}>Yes ({helpful.helpfulCount})</a>
+      <a href="#/" data-testid="helpfulVoteTEST" onClick={uploadHelpfulVote}>Yes ({helpful.helpfulCount})</a>
     </StyledOuterContainer>
 
   )
@@ -106,10 +105,10 @@ const SizeAdjustableImage = ({url}) => {
   if (modalView) {
     return (
       <StyledModal>
-        <img src={url} onClick={()=>{setModalView(false)}}></img>
+        <img src={url} onClick={()=>{setModalView(false)}} role="zzzLarge"></img>
       </StyledModal>
     )
   } else {
-    return <StyledImage src={url} width="50px" height="50px" onClick={()=>{setModalView(true)}}></StyledImage>
+    return <StyledImage src={url} width="50px" height="50px" onClick={()=>{setModalView(true)}} role="zzz"></StyledImage>
   }
 }

@@ -35,9 +35,7 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
 
 
   useEffect(()=> {
-    if (starBarFilters['4']===false) {
-      console.log(product_id)
-    }
+
     const cancelToken = axios.CancelToken.source();
     axios({
       url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?page=${1}&count=${100000}&sort=${selectedSort}&product_id=${product_id}`,
@@ -54,9 +52,7 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
 
       })
       .catch((err)=> {
-        if (axios.isCancel(err)) {
-          console.log('canceled')
-        } else {
+        if (!axios.isCancel(err)) {
           alert(err);
         }
       })
@@ -74,7 +70,7 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
   if (!reviews) {
     return null;
   }
-  //console.log(reviews)
+
   return (
     <ReviewsListOuterDiv data-testid="h3TEST">
       <FlexDiv>

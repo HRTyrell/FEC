@@ -95,32 +95,4 @@ describe('breakdown', ()=> {
         })
     })
   })
-
-  // it ('should clear the filter message upon clicking Remove All Filters', ()=> {
-  //   render(<RatingsReviews curProduct={{id: 66642, name:'camo'}}/>);
-  //   return waitFor(()=> {expect(screen.getByTestId('h2TEST')).toBeInTheDocument()})
-  //   .then(()=> {
-  //     return user.click(screen.getAllByRole('onclickbar')[2])
-
-  //       .then(()=> {
-  //         return waitFor(()=> {expect(screen.getByTestId('h2TEST')).toBeInTheDocument()})
-  //           .then(()=>{
-  //             return user.click(screen.getByTestId('removefiltersTEST'))
-  //             .then(()=> {
-  //               return waitFor(()=> {expect(screen.getByTestId('h2TEST')).toBeInTheDocument()})
-  //                 .then(()=>{
-  //                   expect(screen.queryAllByText(/Filtered for .* star reviews/).length).toEqual(0);
-
-  //                   // expect(screen.getByText(/Filtered for .* star reviews/)).not.toBeInTheDocument();
-  //               })
-  //             })
-
-  //           })
-  //       })
-
-  //   })
-  // })
-
-
-
 });

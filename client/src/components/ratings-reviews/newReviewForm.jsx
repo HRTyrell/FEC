@@ -197,11 +197,11 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
   }
 
   if (!modalView) {
-    return <button onClick={()=>setModalView(true)}>Submit New Review</button>
+    return <button data-testid ="newreviewbuttonTEST" onClick={()=>setModalView(true)}>Submit New Review</button>
   } else {
     return (
-      <StyledModal>
-        <StyledForm onSubmit={verifyForm}>
+      <StyledModal data-testid ="newreviewformTEST">
+        <StyledForm data-testid ="newreviewformsubmitTEST" onSubmit={verifyForm}>
           <StyledTitle fontSize="x-large">Write Your Review</StyledTitle>
           <StyledTitle fontSize="large" >About the {product_name}</StyledTitle>
 
@@ -209,7 +209,7 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
             <StyledFlexItemHeader>Overall rating*:</StyledFlexItemHeader>
             <StyledPaddedDiv>
               {starsArray.map((item, index)=> {
-                return <img src={item} key={index} onClick={()=>setRating(index+1)}></img>
+                return <img role="setratingTEST" src={item} key={index} onClick={()=>setRating(index+1)}></img>
               })}
             </StyledPaddedDiv>
             <label>{{1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great'}[rating]}</label>
