@@ -1,8 +1,8 @@
-import Star from '../../assets/Star.png';
-import quarterStar from '../../assets/quarterStar.png';
-import halfStar from '../../assets/halfStar.png';
-import threefourthsStar from '../../assets/3fourthsStar.png';
-import fullstar from '../../assets/fullstar.png';
+import Star from '../../assets/YellowStar/emptyStar.png';
+import quarterStar from '../../assets/YellowStar/1Star.png';
+import halfStar from '../../assets/YellowStar/halfStar.png';
+import threefourthsStar from '../../assets/YellowStar/3Star.png';
+import fullstar from '../../assets/YellowStar/yellowStar.png';
 
 export const Starbar = function ({rating}) {
 
@@ -25,7 +25,7 @@ export const Starbar = function ({rating}) {
   return (
     <div>
       {ratingsArray.map((item, index)=> {
-        return <img key={index} src={item}></img>
+        return <img key={index} src={item} width="23px" height="23px"></img>
       })}
     </div>
   )

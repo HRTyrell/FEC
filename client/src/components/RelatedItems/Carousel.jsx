@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
 
-
 const CarouselStyled = styled.div`
   display: flex;
   justify-content: start;
@@ -60,13 +59,13 @@ const CarouselControl = styled.button`
   }
   `;
 
-
 const MDiv = styled.div`
   height: 100%;
   max-width: 52em;
 `;
 
 const Carousel = (props) => {
+
 
 
   const [showPrevious, setShowPrevious] = useState(false); //Change these both

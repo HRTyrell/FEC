@@ -17,6 +17,8 @@ const ReviewsListOuterDiv = styled.div`
   border: solid;
   border-radius: 10px;
   height: fit-content;
+  box-shadow: 8px 8px 16px black,
+  -8px -8px 16px #ffffff;
 `
 const FlexDiv = styled.div`
   display: flex;
