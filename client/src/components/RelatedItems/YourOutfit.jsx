@@ -9,22 +9,26 @@ import {getProduct} from './parseHelpers.js';
 const Div = styled.div`
 display: flex;
 flex-direction: row;
+justify-content: flex-start;
 align-items: left;
-// border-spacing: 20px;
 padding: 0;
 `;
 
 const CurrentProduct = styled.div`
   display: flex;
   justify-content: center;
-  height: 18em;
   border-style: solid;
-  //border-spacing: 20px;
   margin: 2px;
   padding: 0;
   width: 8em;
   align-items: center;
   align-self: center;
+  width: 12em;
+  height: 24em;
+  border-radius: 30px;
+  box-shadow:6px 6px 10px #bebebe,
+              -6px -6px 10px #ffffff;
+  background-color: rgba(255, 255, 255, 1);
 `;
 const Image = styled.img`
   display: flex;
@@ -32,6 +36,7 @@ const Image = styled.img`
   width: 2em;
   height: 2em;
   margin: auto;
+
 `;
 
 const YourOutfit = ({data}) => {

@@ -17,8 +17,11 @@ border-style: solid;
 border-spacing: 20px;
 margin: 2px;
 padding: 0;
-width: 8em;
-height: 18em;
+width: 12em;
+height: 24em;
+border-radius: 30px;
+box-shadow:6px 6px 10px #bebebe,
+            -6px -6px 10px #ffffff;
 `;
 
 
@@ -31,6 +34,8 @@ flex-grow: 3;
 margin: auto;
 position: relative;
 width: auto;
+background-color: rgba(255, 255, 255, 1);
+border-radius: 30px 30px 0 0 ;
 
 `;
 
@@ -42,6 +47,7 @@ position: relative;
 width: 90%;
 height: auto;
 padding: 2%;
+border-radius: 10px;
 `;
 
 const ButtonStyled = styled.img`
@@ -62,6 +68,7 @@ height: 5em;
 bottom: 1;
 padding: 0.5em 0 0.5em 0;
 background-color: rgba(211, 211, 211, 0.5);
+border-radius: 30px;
 `;
 const Category = styled.p`
   margin-top: 0;

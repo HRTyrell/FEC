@@ -4,7 +4,6 @@ import RelatedProducts from './RelatedProducts.jsx';
 import YourOutfit from './YourOutfit.jsx';
 import styled from 'styled-components';
 import Carousel from './Carousel.jsx';
-import testData from './TestData.js';
 import {getRelatedProducts} from './parseHelpers.js';
 import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
 import ProductStore from '../Provider/Zus_Provider.jsx';
@@ -21,7 +20,7 @@ const MasterDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-content: space-between;
-  width: 80%;
+  width: 51em;
   border-spacing: 0.5%;
   margin: 0;
   padding: 0;
