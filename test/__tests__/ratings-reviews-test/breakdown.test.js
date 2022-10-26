@@ -5,6 +5,7 @@ import {render, screen, waitFor} from '@testing-library/react';
 
 const {Breakdown} = require("../../../client/src/components/ratings-reviews/breakdown.jsx");
 const {ProductBreakdownFactor} = require("../../../client/src/components/ratings-reviews/breakdown.jsx");
+import RatingsReviews from "../../../client/src/components/ratings-reviews/ratings-reviews.jsx";
 
 let fakeData = {
   "product_id": "66642",
@@ -71,5 +72,55 @@ describe('breakdown', ()=> {
     render(<Breakdown metaData={fakeData} starBarFilters={FakestarBarFilters} setstarBarFilters={()=>{}}/>);
     expect(screen.getByText('45% of reviews recommend this product')).not.toBeNull();
   })
+
+  it ('should render exactly 5 clickable starbars', ()=> {
+    render(<RatingsReviews curProduct={{id: 66642, name:'camo'}}/>);
+
+    return waitFor(()=> {expect(screen.getByTestId('h2TEST')).toBeInTheDocument()})
+    .then(()=> {
+      expect(screen.getAllByRole('onclickbar')).toHaveLength(5);
+    })
+  })
+
+  it ('should correctly update starbar filter message upon star click', ()=> {
+    render(<RatingsReviews curProduct={{id: 66642, name:'camo'}}/>);
+    return waitFor(()=> {expect(screen.getByTestId('h2TEST')).toBeInTheDocument()})
+    .then(()=> {
+      return user.click(screen.getAllByRole('onclickbar')[0])
+        .then(()=> {
+          return waitFor(()=> {expect(screen.getByTestId('h2TEST')).toBeInTheDocument()})
+            .then(()=>{
+              expect(screen.getByText('Filtered for 5 star reviews')).toBeInTheDocument();
+            })
+        })
+    })
+  })
+
+  // it ('should clear the filter message upon clicking Remove All Filters', ()=> {
+  //   render(<RatingsReviews curProduct={{id: 66642, name:'camo'}}/>);
+  //   return waitFor(()=> {expect(screen.getByTestId('h2TEST')).toBeInTheDocument()})
+  //   .then(()=> {
+  //     return user.click(screen.getAllByRole('onclickbar')[2])
+
+  //       .then(()=> {
+  //         return waitFor(()=> {expect(screen.getByTestId('h2TEST')).toBeInTheDocument()})
+  //           .then(()=>{
+  //             return user.click(screen.getByTestId('removefiltersTEST'))
+  //             .then(()=> {
+  //               return waitFor(()=> {expect(screen.getByTestId('h2TEST')).toBeInTheDocument()})
+  //                 .then(()=>{
+  //                   expect(screen.queryAllByText(/Filtered for .* star reviews/).length).toEqual(0);
+
+  //                   // expect(screen.getByText(/Filtered for .* star reviews/)).not.toBeInTheDocument();
+  //               })
+  //             })
+
+  //           })
+  //       })
+
+  //   })
+  // })
+
+
 
 });

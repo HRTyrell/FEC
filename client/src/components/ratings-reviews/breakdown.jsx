@@ -119,13 +119,13 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
       {starBarFilters.filtered?
         <div>
           <header>{getfilterMessage()}</header>
-          <button onClick={onClickRemoveAllFilters}>Remove All Filters</button>
+          <button onClick={onClickRemoveAllFilters} data-testid="removefiltersTEST" >Remove All Filters</button>
         </div> :
         <label></label>
       }
         {Object.keys(metaData.ratings).reverse().map((item, index) => {
           return (
-            <StyledHoverable key={index} onClick={()=> {onClickBar(item)}}>
+            <StyledHoverable key={index} role="onclickbar" onClick={()=> {onClickBar(item)}}>
               <NoShrinkLabel>{item + ' Stars'}</NoShrinkLabel><StyledProgressBar max={totalRatings} value={metaData.ratings[item]}></StyledProgressBar><FixedWidthLabel>{metaData.ratings[item]}</FixedWidthLabel>
             </StyledHoverable>
             )

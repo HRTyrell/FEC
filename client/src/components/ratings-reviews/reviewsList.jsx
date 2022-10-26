@@ -29,15 +29,21 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
 
   const [reviews, setReviews] = useState(null)
   const [countToRender, setcountToRender] = useState(2);
-  const [moreAvailable, setmoreAvailable] = useState(false);
+  const [moreAvailable, setmoreAvailable] = useState(true);
   const [selectedSort, setSelectedSort] = useState('relevant');
   const [searchBarTerm, setsearchBarTerm] = useState('');
 
+
   useEffect(()=> {
+    if (starBarFilters['4']===false) {
+      console.log(product_id)
+    }
+    const cancelToken = axios.CancelToken.source();
     axios({
       url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?page=${1}&count=${100000}&sort=${selectedSort}&product_id=${product_id}`,
       method: 'get',
-      headers: {authorization: TOKEN}
+      headers: {authorization: TOKEN},
+      cancelToken:cancelToken.token
       })
       .then((val)=> {
         let filteredReviews = val.data.results.filter((review)=> {
@@ -48,8 +54,13 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
 
       })
       .catch((err)=> {
-        alert(err);
+        if (axios.isCancel(err)) {
+          console.log('canceled')
+        } else {
+          alert(err);
+        }
       })
+    return ()=> {cancelToken.cancel()}
   }, [starBarFilters, countToRender, selectedSort, searchBarTerm]);
 
   const handleSearchBar = (e)=> {
@@ -65,7 +76,7 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
   }
   //console.log(reviews)
   return (
-    <ReviewsListOuterDiv>
+    <ReviewsListOuterDiv data-testid="h3TEST">
       <FlexDiv>
         <label>Sort on:
           <select value={selectedSort} onChange={(e)=>{setSelectedSort(e.target.value)}}>
@@ -79,7 +90,7 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
       <ReviewsListDiv>
         <div>
           {reviews.map((review, index)=> {
-            return <ReviewTile key={review.review_id} review={review}/>
+            return <div role="reviewtileTEST" key={review.review_id}><ReviewTile key={review.review_id} review={review}/></div>
           })}
         </div>
 
