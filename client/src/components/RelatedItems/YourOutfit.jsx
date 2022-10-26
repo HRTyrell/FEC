@@ -11,7 +11,6 @@ display: flex;
 flex-direction: row;
 justify-content: flex-start;
 align-items: left;
-padding: 0;
 `;
 
 const CurrentProduct = styled.div`

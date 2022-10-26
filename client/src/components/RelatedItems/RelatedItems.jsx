@@ -23,7 +23,6 @@ const MasterDiv = styled.div`
   width: 51em;
   border-spacing: 0.5%;
   margin: 0;
-  padding: 0;
   line-height: 0.8;
 `;
 const H = styled.h5`
