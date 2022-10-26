@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import styled from "styled-components";
 import axios from 'axios';
-import {TOKEN} from '/MyConfig.js';
+import {TOKEN} from '../../../../MyConfig.js';
 import {ReviewTile} from './reviewTile.jsx'
 
 const ReviewsListDiv = styled.div`

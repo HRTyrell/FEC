@@ -1,7 +1,7 @@
 import create from 'zustand';
 import axios from 'axios';
 
-import {URL, TOKEN} from '/MyConfig.js';
+import {URL, TOKEN} from '../../../../MyConfig.js';
 
 const GetRequest = (req) => {
   return axios.get(req, {

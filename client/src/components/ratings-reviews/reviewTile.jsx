@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import styled from "styled-components";
 import {Starbar} from './starbar.jsx';
 import axios from 'axios';
-import {TOKEN} from '/MyConfig.js';
+import {TOKEN} from '../../../../MyConfig.js';
 
 const StyledContainerSpread = styled.div`
   display: flex;
