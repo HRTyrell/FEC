@@ -9,6 +9,7 @@ import QA from "./components/Q&A/QA.jsx";
 import RelatedItems from './components/RelatedItems/RelatedItems.jsx';
 import RatingsReviews from './components/ratings-reviews/ratings-reviews.jsx';
 import ClickStore from './components/Provider/Zus_ClickStore.jsx';
+import {BGBubbles} from './components/Shapes/Shapes.jsx';
 
 const Sdiv = styled.div`
 display: flex;
@@ -16,9 +17,15 @@ flex-direction: column;
 max-width: 100%;
 justify-content: center;
 align-items: center;
-background: rgb(250,76,255);
-background: linear-gradient(129deg, rgba(250,76,255,1) 0%, rgba(113,0,255,1) 100%);
+background: white;
 `
+
+const FullDiv = styled.div`
+height: 100%;
+width: 100%;
+`
+
+
 
 const App = () => {
 
@@ -36,7 +43,8 @@ const App = () => {
   // console.log(Targets);
 
   return (
-    <div>
+    <FullDiv>
+      {/* <BGBubbles/> */}
       <GlobalFonts/>
       <NavigationBar />
       <Sdiv>
@@ -45,7 +53,7 @@ const App = () => {
         <QA />
         <RatingsReviews />
       </Sdiv>
-    </div>
+    </FullDiv>
   )
 }
 

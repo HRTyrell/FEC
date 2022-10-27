@@ -4,8 +4,9 @@ import styled from "styled-components";
 import StyleSelector from "./StyleSelector.jsx"
 import ProductStore from "../Provider/Zus_Provider.jsx";
 import Starbar from "./starbar.jsx";
-import { FullArrow } from "../Shapes/Shapes.jsx";
+import { FullArrow, Circles } from "../Shapes/Shapes.jsx";
 import SizeSelector from "./SizeSelector.jsx";
+import AddToCart from "./AddtoCart.jsx";
 
 const StyleDiv = styled.div`
 display: flex;
@@ -14,14 +15,13 @@ margin: 10px 0;
 height: 1000px;
 width: 30%;
 gap: 20px;
-/* align-items: center; */
-
-/* border: solid; */
+z-index: 2;
+border-left: solid;
 background: white;
-border-radius: 30px;
 text-align: center;
-box-shadow: 15px 15px 30px #ecc3ea,
-            -10px -5px 30px #ecc3ea;
+@media (max-width: 1300px) {
+  width: 40%
+}
 `
 
 const Fdiv = styled.div`
@@ -45,13 +45,8 @@ gap: 10px;
 `
 
 const F3div = styled.div`
-/* margin: 0px 20px;
-height: 50px; */
 display:flex;
 flex-direction: row;
-/* justify-content: start;
-align-items: center;
-gap: 10px; */
 `
 
 const H1 = styled.h1`
@@ -86,6 +81,13 @@ color: Black;
 text-decoration: none;
 `
 
+//TODO Make this DROPDOWN
+const Button2 = styled.button`
+margin: auto;
+height: 100px;
+width: 100px;
+`
+
 
 const StyleCart = () => {
 
@@ -107,8 +109,8 @@ const StyleCart = () => {
         <Starbar rating = {cStar.avg}/>
         <H4><A1 href="#Ratings">Read All <u>{cStar.overall}</u> Reviews</A1></H4>
       </Fdiv>
-      <H1>{cProduct.name}</H1>
-      <H2 margin="10px 20px 0">Category: {cProduct.category}</H2>
+      <H1><em>{cProduct.name}</em></H1>
+      <H2 margin="10px 20px 0">Category: <em>{cProduct.category}</em></H2>
       {price}
       <div>
         <H2 margin="0px 20px 0">Style:</H2>
@@ -119,12 +121,8 @@ const StyleCart = () => {
       </div>
       <StyleSelector/>
       <SizeSelector style ={cStyle}/>
-      <button>AddToCart</button>
-      <div>
-        <li>Facebook</li>
-        <li>Pintrest</li>
-        <li>Twitter</li>
-      </div>
+      <AddToCart/>
+      {/* <Circles/> */}
     </StyleDiv>
   )
 }
