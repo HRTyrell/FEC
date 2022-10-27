@@ -15,6 +15,7 @@ const StyledModal = styled.div`
   right:  0px;
   bottom:  0px;
   background-color: rgba(0, 0, 0, .8);
+
 `
 const StyledForm = styled.form`
   position: fixed;
@@ -30,8 +31,9 @@ const StyledTitle = styled.header`
   display: flex;
   justify-content: center;
   margin-top: 1px;
-  font-style: italic;
-  font-size: ${props => props.fontSize};
+  font-family: 'Cinzel';
+  font-weight: 200;
+  font-size: 25px;
 `
 
 const StyledFlexRow = styled.div`
@@ -67,6 +69,12 @@ const StyledPaddedDiv = styled.div`
 const StyledBigInput = styled.input`
   height: 100%;
   font-size: larger;
+`
+const StyledCinzelButton = styled.button`
+  font-family: 'Cinzel';
+  font-weight: 400;
+  font-size: 25px;
+  margin-bottom: 5%;
 `
 
 const characteristicTable = {
@@ -197,7 +205,7 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
   }
 
   if (!modalView) {
-    return <button onClick={()=>setModalView(true)}>Submit New Review</button>
+    return <StyledCinzelButton onClick={()=>setModalView(true)}>Submit New Review</StyledCinzelButton>
   } else {
     return (
       <StyledModal>

@@ -13,7 +13,9 @@ const StyledHoverable = styled.div`
   :hover {
     background: aliceblue;
   };
-`;
+  font-family: 'OldStandard';
+  font-size: 15px;
+`
 
 const BreakdownDiv = styled.div`
   margin: 10px 0;
@@ -22,7 +24,7 @@ const BreakdownDiv = styled.div`
   border-radius: 10px;
   width: 30%;
   height: fit-content;
-  box-shadow:6px 6px 10px #bebebe
+  box-shadow:6px 6px 10px #bebebe;
 `
 const NoShrinkLabel = styled.label`
   flex-shrink: 0;
@@ -34,6 +36,8 @@ const FixedWidthLabel = styled.div`
 `
 const StyledPaddedDiv = styled.div`
   padding: 10% 0;
+  font-family: 'OldStandard';
+  font-size: 15px;
 `
 
 const StyledStarBarRatingDiv = styled.div`
@@ -41,6 +45,26 @@ const StyledStarBarRatingDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   font-size: larger;
+`
+const StyledCinzel = styled.div`
+  font-family: 'Cinzel';
+  font-weight: 200;
+  font-size: .9em;
+  padding-top: 2%;
+`
+const StyledCinzelH2 = styled.h2`
+  font-family: 'Cinzel';
+  font-weight: 400;
+  font-size: 1.125em;
+`
+const StyledOldStandardDiv = styled.div`
+  font-family: 'OldStandard';
+  font-size: 15px;
+`
+const StyledCinzelButton = styled.button`
+  font-family: 'Cinzel';
+  font-weight: 400;
+  font-size: 15px;
 `
 
 export const getAvg = function(ratings) {
@@ -113,13 +137,13 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
         <span>{avg}</span>
       </StyledStarBarRatingDiv>
 
-      <label>{totalRatings} total reviews</label>
-      <header> Rating Breakdown</header>
+      <StyledCinzel>{totalRatings} total reviews</StyledCinzel>
+      <StyledCinzelH2> Rating Breakdown</StyledCinzelH2>
       {starBarFilters.filtered?
-        <div>
+        <StyledOldStandardDiv>
           <header>{getfilterMessage()}</header>
-          <button onClick={onClickRemoveAllFilters}>Remove All Filters</button>
-        </div> :
+          <StyledCinzelButton onClick={onClickRemoveAllFilters}>Remove All Filters</StyledCinzelButton>
+        </StyledOldStandardDiv> :
         <label></label>
       }
         {Object.keys(metaData.ratings).reverse().map((item, index) => {
@@ -129,7 +153,7 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
             </StyledHoverable>
             )
         })}
-      <label>{`${(Number(metaData.recommended.true) / (Number(metaData.recommended.true) + Number(metaData.recommended.false))).toFixed(2) * 100}% of reviews recommend this product`}</label>
+      <StyledCinzel>{`${(Number(metaData.recommended.true) / (Number(metaData.recommended.true) + Number(metaData.recommended.false))).toFixed(2) * 100}% of reviews recommend this product`}</StyledCinzel>
       <StyledPaddedDiv>
         {Object.keys(metaData.characteristics).map((characteristic, index)=> {
           return <ProductBreakdownFactor key={index} characteristic={characteristic} data={metaData.characteristics[characteristic]}/>

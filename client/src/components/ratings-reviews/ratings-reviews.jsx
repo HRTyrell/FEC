@@ -17,6 +17,10 @@ const StyledContainer = styled.div`
   padding: 10px;
   width: 70%;
 `
+const StyledCinzel = styled.h2`
+  font-family: 'Cinzel';
+  font-weight: 200;
+`
 const RatingsReviews = () => {
 
   const {curProduct} = ProductStore();
@@ -48,7 +52,7 @@ const RatingsReviews = () => {
   }
   return (
     <Fragment>
-      <h2 id="Ratings"> RATINGS & REVIEWS </h2>
+      <StyledCinzel id="Ratings"> RATINGS & REVIEWS </StyledCinzel>
       <StyledContainer>
         <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
 
