@@ -15,7 +15,6 @@ const StyledModal = styled.div`
   right:  0px;
   bottom:  0px;
   background-color: rgba(0, 0, 0, .8);
-
 `
 const StyledForm = styled.form`
   position: fixed;
@@ -25,7 +24,9 @@ const StyledForm = styled.form`
   bottom:  3vh;
   border-radius: 20px;
   background-color: white;
-  overflow: auto;
+
+  overflow-y: auto;
+  padding-right: 10px;
 `
 const StyledTitle = styled.header`
   display: flex;
@@ -33,7 +34,7 @@ const StyledTitle = styled.header`
   margin-top: 1px;
   font-family: 'Cinzel';
   font-weight: 200;
-  font-size: 25px;
+  font-size: 20px;
 `
 
 const StyledFlexRow = styled.div`
@@ -49,6 +50,8 @@ const StyledFlexRowAdjustable = styled.div`
   flex-direction: row;
   justify-content: ${props=> props.justifyContent};
   padding: 1px;
+  font-family: 'OldStandard';
+  font-size: 14px;
 `
 
 const StyledFlexItemHeader = styled.label`
@@ -57,6 +60,10 @@ const StyledFlexItemHeader = styled.label`
   padding-left: 5%;
   text-align: left;
   border-right: 2px solid LightGrey;
+  font-family: 'Cinzel';
+  font-weight: 200;
+  font-size: 15px;
+
 `
 const StyledFlexGrowingDiv = styled.div`
   flex-grow: 2;
@@ -66,17 +73,29 @@ const StyledFlexGrowingDiv = styled.div`
 const StyledPaddedDiv = styled.div`
   padding-left: 5%;
 `
-const StyledBigInput = styled.input`
-  height: 100%;
-  font-size: larger;
-`
+// const StyledBigInput = styled.input`
+//   height: 100%;
+//   font-size: larger;
+// `
 const StyledCinzelButton = styled.button`
   font-family: 'Cinzel';
   font-weight: 400;
   font-size: 25px;
   margin-bottom: 5%;
 `
-
+const StyledOldStandardLabel= styled.label`
+  font-family: 'OldStandard';
+  font-size: 15px;
+`
+const StyledSmallOld = styled.small`
+  font-family: 'OldStandard';
+  font-size: 15px;
+`
+const StyledCinzelInput = styled.input`
+  font-family: 'Cinzel';
+  font-weight: 400;
+  font-size: 15px;
+`
 const characteristicTable = {
   Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
   Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -220,17 +239,17 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
                 return <img width="25px" height="25px" src={item} key={index} onClick={()=>setRating(index+1)}></img>
               })}
             </StyledPaddedDiv>
-            <label>{{1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great'}[rating]}</label>
+            <StyledOldStandardLabel>{{1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great'}[rating]}</StyledOldStandardLabel>
           </StyledFlexRow>
 
           <StyledFlexRow>
             <StyledFlexItemHeader>Do you recommend this product?*:</StyledFlexItemHeader>
             <StyledPaddedDiv>
               <input type="radio" value="false" name="recommend" onChange={()=>setRecommended(false)} id="false"></input>
-              <label htmlFor="false">no</label>
+              <StyledOldStandardLabel htmlFor="false">no</StyledOldStandardLabel>
 
               <input type="radio" value="true" name="recommend" onChange={()=>setRecommended(true)} id="true"></input>
-              <label htmlFor="true">yes</label>
+              <StyledOldStandardLabel htmlFor="true">yes</StyledOldStandardLabel>
             </StyledPaddedDiv>
           </StyledFlexRow>
 
@@ -275,14 +294,14 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
             <StyledFlexGrowingDiv>
               <textarea type="text" placeholder="Why did you like the product or not" maxLength="1000" size="1000" cols="91" rows="11" onChange={(e)=> {setReviewBody(e.target.value)}}></textarea>
 
-              <small style={{display:'block'}}>{reviewBody.length > 50? 'Minimum reached' : `Minimum required characters left: ${50-reviewBody.length}`}</small>
+              <StyledSmallOld style={{display:'block'}}>{reviewBody.length > 50? 'Minimum reached' : `Minimum required characters left: ${50-reviewBody.length}`}</StyledSmallOld>
             </StyledFlexGrowingDiv>
           </StyledFlexRow>
 
           <StyledFlexRow>
             <StyledFlexItemHeader>Upload your photos:</StyledFlexItemHeader>
             <StyledPaddedDiv>
-              {userPhotos.length < 5 && <input type="file" accept="image/*" onInput={handlePhotoUpload}></input>}
+              {userPhotos.length < 5 && <StyledCinzelInput type="file" accept="image/*" onInput={handlePhotoUpload}></StyledCinzelInput>}
               {userPhotos.map((photo, index)=>{
                 return <img src={URL.createObjectURL(photo)} key={index} width="35px" height="35px"></img>
               })}
@@ -294,7 +313,7 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
             <StyledFlexItemHeader>What is your nickname*:</StyledFlexItemHeader>
             <StyledFlexGrowingDiv>
               <textarea type="text" ref={nickname} placeholder="Example: jackson11!" size="60" cols="60" rows="1"></textarea>
-              <small style={{display:'block'}}>For privacy reasons, do not use your full name or email address</small>
+              <StyledSmallOld style={{display:'block'}}>For privacy reasons, do not use your full name or email address</StyledSmallOld>
             </StyledFlexGrowingDiv>
 
           </StyledFlexRow>
@@ -303,13 +322,13 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
             <StyledFlexItemHeader>Your email*:</StyledFlexItemHeader>
             <StyledFlexGrowingDiv>
               <input type="text" ref={email} placeholder="Example: jackson11@email.com" size="60"></input>
-              <small style={{display:'block'}}>For authentication reasons, you will not be emailed</small>
+              <StyledSmallOld style={{display:'block'}}>For authentication reasons, you will not be emailed</StyledSmallOld>
             </StyledFlexGrowingDiv>
 
           </StyledFlexRow>
 
           <StyledFlexRowAdjustable justifyContent={'center'}>
-            <StyledBigInput type="submit" value="Submit"></StyledBigInput>
+            <StyledCinzelInput type="submit" value="Submit"></StyledCinzelInput>
           </StyledFlexRowAdjustable>
 
         </StyledForm>
