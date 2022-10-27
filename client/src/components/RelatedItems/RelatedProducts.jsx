@@ -1,23 +1,28 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import ProductCard from './ProductCard.jsx';
 import styled from 'styled-components';
 
 const Div = styled.div`
 display: flex;
 flex-direction: row;
-border-spacing: 20px;
-padding: 0;
-`;
-const Title = styled.h5`
-
+justify-content: flex-start;
+align-items: left;
 `;
 
 const RelatedProducts = ({data}) => {
 
+  let uniqueData = {};
+  data.forEach(item => {
+    uniqueData[item.data.id] = item;
+  })
+  const uniqueDataArray = Object.values(uniqueData);
+  const dataToRender = uniqueDataArray.slice(0, 4);
+
+
   return (
     <Div>
-      {data.map((product, index) => {
-        return <ProductCard product={product} key={product.data.id}/>
+      {uniqueDataArray.map((product, index) => {
+        return <ProductCard product={product} key={product.data.id} isStar={true}/>
       })}
     </Div>
   )

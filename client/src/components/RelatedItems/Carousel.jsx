@@ -4,51 +4,60 @@ import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
 
 const CarouselStyled = styled.div`
   display: flex;
+  justify-content: start;
   height: 100%;
+  width: 51.5em;
   position: relative;
   padding: 1em;
-  margin: 1em;
+  left: -4.5em;
   overflow: hidden;
+  margin-left: auto;
 `;
 
 const CarouselControl = styled.button`
-  position: sticky;
-  display: flex;
-  align-self: center;
   z-index: 9;
-  background-color: rgba(0, 0, 0, 0.2);
+  position: sticky;
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20%;
-  border: none;
   font-size: 1.5rem;
-  top: 50%;
+  height: 2em;
+  top: 45%;
   color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
 
   &:hover {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(0, 0, 0, 0.5);
   }`;
 
+  const CarouselControlPrev = styled(CarouselControl)`
+  width: 2em;
+  left: 2.5em;
+  `;
+  const HiddenControlPrev = styled(CarouselControl)`
+  left: 2em;
+  opacity: 0;
+  display: flex;
+  width: 1.9em;
+  align-self: start;
 
-const CarouselControlPrev = styled(CarouselControl)`
-  left: 0.5rem;
+  &:hover {
+    opacity: 0;
+  }
+  `;
 
-`;
+  const CarouselControlNext = styled(CarouselControl)`
+  left: 96.5%;
+  `;
+  const HiddenControlNext = styled(CarouselControl)`
+  left: 96.5%;
+  opacity: 0;
+  display: flex;
+  align-self: end;
 
-const CarouselControlNext = styled(CarouselControl)`
-  left: 95%;
-`;
-const FadedOverlay = styled.div`
-position: absolute;
-background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1) 99%);
-border: 0px;
-z-index: 3;
-right: 2;
-height: 100%;
-// width: 100%;
-max-width: 500px;
-pointer-events: none;
-`;
+  &:hover {
+    opacity: 0;
+  }
+  `;
 
 const MDiv = styled.div`
   height: 100%;
@@ -57,49 +66,77 @@ const MDiv = styled.div`
 
 const Carousel = (props) => {
 
-  const { relatedItemsList, outfitList} = useRelatedItemsStore();
 
-  const ref = useRef(null);
-  const [overlay, setOverlay] = useState(true);
-  const [showPrevious, setShowPrevious] = useState(false)
-  const [showNext, setShowNext] = useState(false);
+
+  const [showPrevious, setShowPrevious] = useState(false); //Change these both
+  const [showNext, setShowNext] = useState(false);         //to false
+
+
+  const { relatedItemsList, outfitList} = useRelatedItemsStore();
+  const outfitListKeys = Object.keys(outfitList);
+  let componentBeingRendered = props.title;
+  let nOfCards = props.title === 'Related Products' ? relatedItemsList.length : outfitListKeys.length;
+  const [currentCard, setCurrentCard] = useState(0);
+
 
   useEffect(() => {
-    if(ref.current.clientWidth > ref.current.parentElement.clientWidth) {
+    //set Number of Cards on list Render
+    nOfCards = props.title === 'Related Products' ? relatedItemsList.length : outfitListKeys.length;
+    let startingCard = props.title === 'Related Products' ? 4 : 3;
+    //set Whether to show next button on itemsRender
+    if( nOfCards > startingCard) {
       setShowNext(true);
+    } else {
+      setShowNext(false);
+    }
+    //set Number of cards
+    if (nOfCards > startingCard) {
+      setCurrentCard(startingCard);
     }
   }, [outfitList, relatedItemsList])
 
+  //scroll Component
   const slide = (e, shift) => {
-    e.target.parentNode.scrollLeft -= shift;
-    let distanceToEndOfScroll = e.target.parentNode.scrollHeight - e.target.parentNode.scrollLeft
-    if (distanceToEndOfScroll <= 100) {
-      setOverlay(false);
-    } else {
-      setOverlay(true);
-      setShowNext(true);
-    }
-    if (e.target.parentNode.scrollLeft > 0) {
-      setShowPrevious(true);
-    } else {
-      setShowPrevious(false);
-    }
-    if (distanceToEndOfScroll <= 20) {
-      setShowNext(false);
-    } else {
-      setShowNext(true);
+    const parent = e.target.parentNode;
+    const cardLength = e.target.parentElement.children[2].children[0].offsetWidth;
+    const howCloseToEnd = parent.offsetWidth + parent.scrollLeft - parent.scrollWidth;
+    //scroll component
+    e.target.parentNode.scrollLeft += (cardLength * shift) + (cardLength * 0.05 * shift);
+    //set currentCard
+    if (shift > 0) {
+      setCurrentCard(currentCard + 1);
+    } else if (shift < 0) {
+      setCurrentCard(currentCard - 1);
     }
   }
 
+  //update next and previous buttons on card change
+  useEffect(() => {
+    if (currentCard === nOfCards) {
+      setShowNext(false);
+    } else if (currentCard < nOfCards && nOfCards > 4 && componentBeingRendered === 'Related Products' ||
+              currentCard < nOfCards && nOfCards > 3 && componentBeingRendered === 'Your Outfit') {
+                setShowNext(true);
+              }
+    if(currentCard > 4 && componentBeingRendered === 'Related Products' ||
+      currentCard > 3 && componentBeingRendered === 'Your Outfit') {
+        setShowPrevious(true);
+    } else {
+      setShowPrevious(false);
+    }
+  }, [currentCard])
+
+
   return (
-    <MDiv ref={ref}>
-    {overlay ? <FadedOverlay /> : null }
+    <>
+    <MDiv>
     <CarouselStyled aria-label="Product Carousel">
-      {showPrevious ? <CarouselControlPrev data-testid="prevControl" onClick={(e)=> slide(e, 120)}>&#60;</CarouselControlPrev> : null }
-      {showNext ? <CarouselControlNext data-testid="nextControl" onClick={(e)=> slide(e, -120)}>&#62;</CarouselControlNext> : null }
+      {showPrevious ? <CarouselControlPrev data-testid="prevControl" onClick={(e)=> slide(e, -1)}>&#60;</CarouselControlPrev> : <HiddenControlPrev></HiddenControlPrev> }
+      {showNext ? <CarouselControlNext data-testid="nextControl" onClick={(e)=> slide(e, 1)}>&#62;</CarouselControlNext> : <HiddenControlNext></HiddenControlNext> }
       {React.cloneElement(props.children, {data: props.data}, null)}
     </CarouselStyled>
     </MDiv>
+    </>
   )
 }
 

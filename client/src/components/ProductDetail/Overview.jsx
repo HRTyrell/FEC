@@ -16,6 +16,9 @@ flex-direction: row;
 gap: 30px;
 justify-content: center;
 align-items: center;
+@media (max-width: 1300px) {
+  width: 100%;
+}
 `
 
 const Overview = () => {

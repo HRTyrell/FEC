@@ -8,17 +8,20 @@ margin: 10px 0;
 height: 1000px;
 width: 70%;
 border-radius: 30px;
-/* background: #e0e0e0;
-box-shadow: 15px 15px 30px #bebebe,
-            -15px -15px 30px #ffffff; */
+background: white;
+@media (max-width: 1300px) {
+  width: 60%
+}
 `
 
+//TODO CONTAINER QUERIES
 const C2Div = styled.div`
-margin: 10px 0;
+margin: 10px;
 height: 780px;
 width: 100%;
 display: flex;
 flex-direction: column;
+align-items: center;
 gap: 20px;
 overflow-y: auto;
 scroll-snap-type: y mandatory;
@@ -27,6 +30,7 @@ scroll-snap-type: y mandatory;
   }
 `
 
+//TODO CONTAINER QUERIES
 const IDiv = styled.div`
 height: 800px;
 /* border: solid; */
@@ -34,6 +38,7 @@ display: flex;
 justify-content: center;
 `
 
+//TODO CONTAINER QUERIES
 const C2img = styled.img`
 height: 780px;
 max-width: 95%;

@@ -65,13 +65,17 @@ const ProductStore2 = create((set, get) => ({
       }
     })
   },
+  setCurrProdFromObject: (product) => {
+    set(() => ({curProduct: product.data}));
+    set(() => ({curStyle: product.styles.data.results[0]}));
+    set(() => ({curProductStyles: product.styles.data.results}));
+  },
   setStars: (id) => {
     GetRequest(`/reviews/meta/?product_id=${id}`)
     .then(({data}) => {
       let holder = WeightedAvg(data.ratings);
       set(() => ({curStars: holder}))
     })
-  }
-}))
+}}))
 
 export default ProductStore2;

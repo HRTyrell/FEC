@@ -4,7 +4,10 @@ import { getProductStyles } from './parseHelpers.js';
 import SmallStarBar from './SmallStarbar.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import yellowStar from '../../assets/yellow-star.png';
+import sorryNoPictureAvailable from '../../assets/sorryNoPictureAvailable.png';
 import ProductStore from '../Provider/Zus_Provider.jsx';
+import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
+import cross from '../../assets/cross.png';
 
 ////////////////Styles//////////////////////////////////////
 const CardStyled = styled.div`
@@ -13,9 +16,11 @@ flex-direction: column;
 border-style: solid;
 border-spacing: 20px;
 margin: 2px;
-padding: 0;
-width: 8em;
-height: 18em;
+width: 12em;
+height: 24em;
+border-radius: 30px;
+box-shadow:6px 6px 10px #bebebe,
+            -6px -6px 10px #ffffff;
 `;
 
 
@@ -28,6 +33,8 @@ flex-grow: 3;
 margin: auto;
 position: relative;
 width: auto;
+background-color: rgba(255, 255, 255, 1);
+border-radius: 30px 30px 0 0 ;
 
 `;
 
@@ -39,6 +46,7 @@ position: relative;
 width: 90%;
 height: auto;
 padding: 2%;
+border-radius: 10px;
 `;
 
 const ButtonStyled = styled.img`
@@ -59,6 +67,7 @@ height: 5em;
 bottom: 1;
 padding: 0.5em 0 0.5em 0;
 background-color: rgba(211, 211, 211, 0.5);
+border-radius: 30px;
 `;
 const Category = styled.p`
   margin-top: 0;
@@ -80,13 +89,19 @@ font-size: 0.9em;
 
 
 ///////////////React Component///////////////////////////
-const ProductCard = ({product}) => {
+const ProductCard = ({product, isStar}) => {
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const {curProduct} = ProductStore();
-  console.log(curProduct);
+  const {setCurrProdFromObject} = ProductStore();
+  //***********Deal with default Image being null*************
+  let defaultImage = product.styles.data.results[0].photos[0].thumbnail_url;
+  if(defaultImage === null) {
+    defaultImage = sorryNoPictureAvailable;
+  }
 
+  //**************Handle hover over Star**********************
   const handleOnMouseEnter = () => {
     setTimeout(setIsOpen, 200, true);
   }
@@ -95,14 +110,21 @@ const ProductCard = ({product}) => {
     setTimeout(setIsOpen, 200, false);
   }
 
-
+  //**************Handle setting current Product on click****
   const handleCardClick = (e) => {
-    console.log('Clicked on ', product);
-    console.log(product.data);
+    if (isStar) {
+      setCurrProdFromObject(product);
+    }
+  }
+  //*************Handle removing product from YourOutfit********** */
+  const setOutfit = useRelatedItemsStore((state) => state.setOutfit)
+  const outfitList = useRelatedItemsStore.getState().outfitList;
+  const onCrossClickHandler = (e) => {
+    delete outfitList[product.data.id];
+    setOutfit(outfitList);
   }
 
-  const defaultImage = product.styles.data.results[0].photos[0].thumbnail_url;
-
+  //****************Handle Grabbing average Review*********
   const averageRating = () => {
     const reviewObject = product.reviews.data.ratings;
     let sumTotal = 0;
@@ -114,16 +136,27 @@ const ProductCard = ({product}) => {
     return sumTotal/sumReviewers;
   };
   const rating = averageRating();
-  // const [image, setImage] = useState('./testImage.png');
+
+  //************ set top right icon depending on whether its on RP or YO********** */
+  const setCrossIcon = (
+    <ButtonStyled src={cross}
+          onClick={onCrossClickHandler}
+          aria-label="remove from outfit Button"/>
+  );
+
+  const setStarIcon = (
+    <ButtonStyled src={yellowStar}
+          onMouseEnter={handleOnMouseEnter}
+          onMouseLeave={handleOnMouseLeave}
+          aria-label="Comparison Button"/>
+  )
+
   return (
     <CardStyled onClick={handleCardClick}>
       <ComparisonModal modalIsOpen={modalIsOpen} currentProduct={curProduct} comparisonProduct={product.data}/>
       <ProductImageStyled >
         <ImageStyled src={defaultImage} alt="Image of RelatedProduct" aria-label="Product Image"/>
-        <ButtonStyled src={yellowStar}
-          onMouseEnter={handleOnMouseEnter}
-          onMouseLeave={handleOnMouseLeave}
-          aria-label="Comparison Button"/>
+        {isStar ? setStarIcon : setCrossIcon}
         <SmallStarBar rating={rating}/>
       </ProductImageStyled>
       <OuterDescriptionDiv>
