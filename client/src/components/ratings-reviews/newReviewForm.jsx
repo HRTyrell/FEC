@@ -167,7 +167,7 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
     if (rating === 0) {
       requiredButBlank.push('Overall Rating')
     }
-    if (!recommended) {
+    if (recommended === null) {
       requiredButBlank.push('Do you recommend this product?')
     }
     Object.keys(characteristics).forEach((char)=> {
