@@ -35,9 +35,26 @@ const App = () => {
 
   useEffect(() => {
     window.onclick = (e) => {
+      console.log(e)
       Clicks(e.target.outerHTML);
     }
   }, [])
+
+  //RatingsReviews
+  //QandA
+  //RelatedItems
+  //Navbar
+  //ProductInfo
+
+
+  // axios({
+  //   url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/interactions`,
+  //   method: 'post',
+  //   headers: {authorization: TOKEN},
+  //   data: {element:'<h2></h2>', widget: 'ratingsReviews',time: new Date().toJSON()}
+  //   })
+  // .then(val=>console.log('wokr'))
+  // .catch(err=>console.log(err));
 
   //Uncomment to see Clicks
   // console.log(Targets);

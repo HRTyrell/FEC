@@ -55,8 +55,8 @@ const RatingsReviews = () => {
     return null;
   }
   return (
-    <StylizedOuterContainer>
-      <StyledCinzel id="Ratings"> RATINGS & REVIEWS </StyledCinzel>
+    <StylizedOuterContainer id="RatingsReviews">
+      <StyledCinzel> RATINGS & REVIEWS </StyledCinzel>
       <StyledContainer>
         <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
 

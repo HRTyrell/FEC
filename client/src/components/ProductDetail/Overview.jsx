@@ -42,11 +42,11 @@ const Overview = () => {
 
   return (
     <>
-      <S2div>
+      <S2div id="ProductInfo2">
         <Gallery/>
         <StyleCart/>
       </S2div>
-      <ProductInformation/>
+      <ProductInformation />
     </>
   )
 }
