@@ -19,6 +19,9 @@ border-left: solid;
 justify-content: center;
 align-items: center;
 text-align: center;
+@media (max-width: 1300px) {
+  width: 40%
+}
 `
 
 const InfoDiv = styled.div`
@@ -26,13 +29,15 @@ margin: 20px 0;
 display: flex;
 flex-direction: row;
 width: 70%;
-
+border-top: double;
 
 background: white;
-border-radius: 30px;
 text-align: center;
-box-shadow: 15px 15px 30px #ecc3ea,
-            -10px -5px 30px #ecc3ea;
+/* box-shadow: 15px 15px 30px #5f5f5f,
+            -10px -5px 30px #ffffff; */
+@media (max-width: 1300px) {
+  width: 100%;
+}
 `
 
 //Completion of props and state

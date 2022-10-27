@@ -15,14 +15,12 @@ height: 1000px;
 width: 30%;
 gap: 20px;
 z-index: 2;
-/* align-items: center; */
-
-/* border: solid; */
+border-left: solid;
 background: white;
-border-radius: 30px;
 text-align: center;
-box-shadow: 15px 15px 30px #ecc3ea,
-            -1px -5px 30px #ecc3ea;
+@media (max-width: 1300px) {
+  width: 40%
+}
 `
 
 const Fdiv = styled.div`
@@ -46,13 +44,8 @@ gap: 10px;
 `
 
 const F3div = styled.div`
-/* margin: 0px 20px;
-height: 50px; */
 display:flex;
 flex-direction: row;
-/* justify-content: start;
-align-items: center;
-gap: 10px; */
 `
 
 const H1 = styled.h1`
@@ -126,7 +119,7 @@ const StyleCart = () => {
         <li>Pintrest</li>
         <li>Twitter</li>
       </div>
-      <Circles/>
+      {/* <Circles/> */}
     </StyleDiv>
   )
 }
