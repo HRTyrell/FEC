@@ -7,6 +7,7 @@ display: flex;
 flex-direction: row;
 justify-content: flex-start;
 align-items: left;
+padding: 0;
 `;
 
 const RelatedProducts = ({data}) => {
@@ -16,7 +17,6 @@ const RelatedProducts = ({data}) => {
     uniqueData[item.data.id] = item;
   })
   const uniqueDataArray = Object.values(uniqueData);
-  const dataToRender = uniqueDataArray.slice(0, 4);
 
 
   return (
