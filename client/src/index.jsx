@@ -10,6 +10,7 @@ import RelatedItems from './components/RelatedItems/RelatedItems.jsx';
 import RatingsReviews from './components/ratings-reviews/ratings-reviews.jsx';
 import ClickStore from './components/Provider/Zus_ClickStore.jsx';
 import {BGBubbles} from './components/Shapes/Shapes.jsx';
+import {URL, TOKEN} from '/MyConfig.js';
 
 const Sdiv = styled.div`
 display: flex;
@@ -25,36 +26,44 @@ height: 100%;
 width: 100%;
 `
 
+const widgetsIDs ={
+  RatingsReviews: 'RatingsReviews',
+  QandA: 'QandA',
+  RelatedItems: 'RelatedItems',
+  ProductInfo1: 'ProductInfo',
+  ProductInfo2: 'ProductInfo',
+  ProductInfo3: 'ProductInfo'
+};
 
+const postInteractionsAPI = (data) => {
+  return axios({
+    url: '/interactions',
+    method: 'post',
+    headers: {authorization: TOKEN},
+    data: data
+  })
+//.then(val=>console.log('wokr'))
+.catch(err=>alert(err));
+}
 
 const App = () => {
-
-  const Clicks = ClickStore((state) => state.AddDomElement);
-  const Targets = ClickStore((state) => state.DomElements);
-
 
   useEffect(() => {
     window.onclick = (e) => {
       console.log(e)
-      Clicks(e.target.outerHTML);
+      for (let i = 0; i < e.path[i].length; i ++) {
+        let widget = widgetsIDs[e.path[i].id]
+        if (widget!= undefined) {
+          postInteractionsAPI({
+            element: e.target.outerHTML.replace(e.target.innerHTML, ''),
+            widget: widget,
+            time: new Date().toJSON()
+          });
+          break;
+        }
+      }
     }
   }, [])
-
-  //RatingsReviews
-  //QandA
-  //RelatedItems
-  //Navbar
-  //ProductInfo
-
-
-  // axios({
-  //   url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/interactions`,
-  //   method: 'post',
-  //   headers: {authorization: TOKEN},
-  //   data: {element:'<h2></h2>', widget: 'ratingsReviews',time: new Date().toJSON()}
-  //   })
-  // .then(val=>console.log('wokr'))
-  // .catch(err=>console.log(err));
 
   //Uncomment to see Clicks
   // console.log(Targets);
