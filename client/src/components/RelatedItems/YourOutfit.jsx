@@ -52,7 +52,6 @@ const YourOutfit = ({data}) => {
 
   }
   var outfitArray;
-  console.log(outfitList)
   if (outfitList != null) {
     outfitArray = Object.values(outfitList);
   } else {

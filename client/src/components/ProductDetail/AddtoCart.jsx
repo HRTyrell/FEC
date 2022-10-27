@@ -124,9 +124,6 @@ const AddToCart = () => {
         <BottomKey2/>
       </Fancy>
       <div>
-        <li>Facebook</li>
-        <li>Pintrest</li>
-        <li>Twitter</li>
       </div>
     </div>
   )

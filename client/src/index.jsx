@@ -44,6 +44,7 @@ const App = () => {
 
   return (
     <FullDiv>
+
       {/* <BGBubbles/> */}
       <GlobalFonts/>
       <NavigationBar />

@@ -56,7 +56,9 @@ const SizeSelector = ({style}) => {
     }
   }
 
-  // if (size.Choice) ?
+  for (let elem in style.skus) {
+    console.log(style.skus[elem]);
+  }
 
   return(
     <div>
