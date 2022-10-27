@@ -19,7 +19,7 @@ const WeightedAvg = (obj) => {
   }
   //To see current Stars
   // console.log('I AM NUM', (Math.round((holder/count) * 4) / 4))
-  return (Math.round((holder/count) * 4) / 4);
+  return {avg: (Math.round((holder/count) * 4) / 4), overall: count};
 }
 
 const ProductStore2 = create((set, get) => ({

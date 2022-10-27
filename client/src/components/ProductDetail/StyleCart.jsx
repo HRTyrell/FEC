@@ -4,21 +4,88 @@ import styled from "styled-components";
 import StyleSelector from "./StyleSelector.jsx"
 import ProductStore from "../Provider/Zus_Provider.jsx";
 import Starbar from "./starbar.jsx";
+import { FullArrow } from "../Shapes/Shapes.jsx";
+import SizeSelector from "./SizeSelector.jsx";
 
 const StyleDiv = styled.div`
 display: flex;
 flex-direction: column;
 margin: 10px 0;
-height: 800px;
-width: 40%;
-align-items: center;
+height: 1000px;
+width: 30%;
+gap: 20px;
+/* align-items: center; */
+
 /* border: solid; */
-background: #e7b9f3;
+background: white;
 border-radius: 30px;
 text-align: center;
-box-shadow: 15px 15px 30px #cf6ae9,
-            -15px -15px 30px #ffffff;
+box-shadow: 15px 15px 30px #ecc3ea,
+            -10px -5px 30px #ecc3ea;
 `
+
+const Fdiv = styled.div`
+margin: 0px 20px;
+height: 50px;
+display:flex;
+flex-direction: row;
+justify-content: start;
+align-items: center;
+gap: 10px;
+`
+
+const F2div = styled.div`
+margin: 0px 20px;
+height: 50px;
+display:flex;
+flex-direction: row;
+justify-content: start;
+align-items: center;
+gap: 10px;
+`
+
+const F3div = styled.div`
+/* margin: 0px 20px;
+height: 50px; */
+display:flex;
+flex-direction: row;
+/* justify-content: start;
+align-items: center;
+gap: 10px; */
+`
+
+const H1 = styled.h1`
+margin: 0px 20px;
+font-family: 'Cinzel';
+font-weight: 400;
+font-size: 52px;
+color: ${props => props.color || 'Black'};
+text-align: left;
+`
+
+const H4 = styled.h4`
+margin: ${props => props.margin || "0"};
+font-family: 'OldStandard';
+letter-spacing: 1px;
+color: ${props => props.color || 'Black'};
+font-size: ${props => props.size || "14px"};
+`
+
+const H2 = styled.h2`
+margin: ${props => props.margin};
+font-family: 'Cinzel';
+font-weight: 200;
+color: ${props => props.color || 'Black'};
+text-align: left;
+font-size: 32px;
+
+`
+
+const A1 = styled.a`
+color: Black;
+text-decoration: none;
+`
+
 
 const StyleCart = () => {
 
@@ -30,17 +97,34 @@ const StyleCart = () => {
     return null;
   }
 
+  let price = (cStyle.sale_price) ? <F3div><H2 margin="0 20px">Price:&nbsp;<strike>${cStyle.original_price}</strike></H2><H2 color="red" margin="0">&nbsp;${cStyle.sale_price}</H2></F3div> : <F3div><H2 margin="0 20px">Price:&nbsp;${cStyle.original_price}</H2><H2 margin="0 20px" height="32px">&nbsp;</H2></F3div>
+
+  console.log(cStyle)
+
   return (
     <StyleDiv>
-      <Starbar rating = {cStar}/>
-      <h5>{cStar}</h5>
-      <h5>{cProduct.category}</h5>
-      <h5>{cProduct.name}</h5>
-      <h5>{cStyle.original_price}, {cStyle.sale_price}</h5>
-      <h5>Style: {cStyle.name}</h5>
+      <Fdiv>
+        <Starbar rating = {cStar.avg}/>
+        <H4><A1 href="#Ratings">Read All <u>{cStar.overall}</u> Reviews</A1></H4>
+      </Fdiv>
+      <H1>{cProduct.name}</H1>
+      <H2 margin="10px 20px 0">Category: {cProduct.category}</H2>
+      {price}
+      <div>
+        <H2 margin="0px 20px 0">Style:</H2>
+        <F2div>
+          <FullArrow/>
+          <H4 margin ="0 40px" size="20px">{cStyle.name}</H4>
+        </F2div>
+      </div>
       <StyleSelector/>
-      <h5>SizeSelector&Quantity</h5>
-      <h5>AddToCart</h5>
+      <SizeSelector style ={cStyle}/>
+      <button>AddToCart</button>
+      <div>
+        <li>Facebook</li>
+        <li>Pintrest</li>
+        <li>Twitter</li>
+      </div>
     </StyleDiv>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
+import {TOKEN, URL} from "/MyConfig.js";
 
 
 const Modaldiv = styled.div`
@@ -13,20 +14,22 @@ const Modaldiv = styled.div`
 `
 
 const AddQuestion = () => {
-  const product_ID = 66642;
+  const product_ID = 66642; //TODO current product id
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   return (
+    isSubmitted ? <h4>Question Submitted!</h4> :
     <Modaldiv>
       <h3>Ask Your Question</h3>
-      <h5>About The []</h5>
+      <h5>About The [product]</h5>
       <form onSubmit={(e) => {
         e.preventDefault();
         axios({
           method: 'post',
-          url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/qa/questions/`,
+          url: `${URL}qa/questions/`,
           headers: {Authorization: TOKEN},
           data: {
             product_id: product_ID,
@@ -35,7 +38,7 @@ const AddQuestion = () => {
             email: email
           }
         })
-        .then(() => alert('submitted question'))
+        .then(() => {setIsSubmitted(true)})
         .catch((err)=> console.log(err))
       }} >
         <label> Your Question: *</label>

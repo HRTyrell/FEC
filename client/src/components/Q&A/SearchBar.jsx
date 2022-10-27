@@ -8,6 +8,7 @@ const SoftButton = styled.button`
 const Input = styled.input`
   border: none;
   width:95%;
+  outline: none;
 `
 const Form = styled.form`
   display: flex;
