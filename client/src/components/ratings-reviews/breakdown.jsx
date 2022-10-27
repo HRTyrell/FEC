@@ -78,7 +78,7 @@ export const getAvg = function(ratings) {
 
 export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}) {
   let avg = getAvg(metaData.ratings);
-  let totalRatings = Number(metaData.recommended.false) + Number(metaData.recommended.true);
+  let totalRatings = Number(metaData.recommended.false || 0) + Number(metaData.recommended.true|| 0);
 
   const onClickBar = (star)=> {
     let newStarBarFilters={};
