@@ -80,6 +80,12 @@ color: Black;
 text-decoration: none;
 `
 
+const Button2 = styled.button`
+margin: auto;
+height: 100px;
+width: 100px;
+`
+
 
 const StyleCart = () => {
 
@@ -101,8 +107,8 @@ const StyleCart = () => {
         <Starbar rating = {cStar.avg}/>
         <H4><A1 href="#Ratings">Read All <u>{cStar.overall}</u> Reviews</A1></H4>
       </Fdiv>
-      <H1>{cProduct.name}</H1>
-      <H2 margin="10px 20px 0">Category: {cProduct.category}</H2>
+      <H1><em>{cProduct.name}</em></H1>
+      <H2 margin="10px 20px 0">Category: <em>{cProduct.category}</em></H2>
       {price}
       <div>
         <H2 margin="0px 20px 0">Style:</H2>
@@ -113,7 +119,7 @@ const StyleCart = () => {
       </div>
       <StyleSelector/>
       <SizeSelector style ={cStyle}/>
-      <button>AddToCart</button>
+      <Button2>AddToCart</Button2>
       <div>
         <li>Facebook</li>
         <li>Pintrest</li>

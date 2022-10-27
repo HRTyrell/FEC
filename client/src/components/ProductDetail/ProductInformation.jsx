@@ -4,7 +4,7 @@ import styled from "styled-components";
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const DivS = styled.div`
-margin: 0 20px;
+margin: 0 0px;
 display: flex;
 flex-direction: column;
 text-align: left;
@@ -13,9 +13,8 @@ width: 75%;
 const DivS2 = styled.div`
 margin: 10px 0;
 display: flex;
-width: 25%;
+width: 30%;
 flex-direction: column;
-border-left: solid;
 justify-content: center;
 align-items: center;
 text-align: center;
@@ -30,7 +29,7 @@ display: flex;
 flex-direction: row;
 width: 70%;
 border-top: double;
-
+border-bottom: double;
 background: white;
 text-align: center;
 /* box-shadow: 15px 15px 30px #5f5f5f,
@@ -38,6 +37,24 @@ text-align: center;
 @media (max-width: 1300px) {
   width: 100%;
 }
+`
+
+const H2 = styled.h2`
+margin: ${props => props.margin};
+font-family: 'Cinzel';
+font-weight: 200;
+color: ${props => props.color || 'Black'};
+text-align: left;
+font-size: 32px;
+
+`
+
+const H4 = styled.h4`
+margin: ${props => props.margin || "0"};
+font-family: 'OldStandard';
+letter-spacing: 1px;
+color: ${props => props.color || 'Black'};
+font-size: ${props => props.size || "14px"};
 `
 
 //Completion of props and state
@@ -54,16 +71,16 @@ const ProductInformation = () => {
   return (
     <InfoDiv>
       <DivS>
-        <h5>{curProduct.slogan}</h5>
-        <h5>{curProduct.description}</h5>
+        <H2><em>{curProduct.slogan}</em></H2>
+        <H4 size = "30px">{curProduct.description}</H4>
       </DivS>
       <DivS2>
-        <h5>Features</h5>
+        <H2>Features</H2>
         {curProduct.features.map((item, index) => {
           return (
-              <h5 key={index}>
+              <H2 key={index}>
                 {item.feature}: {item.value}
-              </h5>
+              </H2>
           )
         })}
       </DivS2>
