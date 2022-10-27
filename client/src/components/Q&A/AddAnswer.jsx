@@ -27,24 +27,7 @@ const AddAnswer = ({question}) => {
     <Modaldiv>
       <h3>Submit Your Answer</h3>
     <h5> [ProductName]: {question.question_body}</h5> //TODO get current prod name
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        axios({
-          method: 'post',
-          url: `${URL}qa/questions/${question.question_id}/answers`,
-          headers: {Authorization: TOKEN},
-          data: {
-            product_id: product_ID,
-            body: body,
-            name: name,
-            email: email,
-            photos: photos
-          }
-        })
-        .then(() => {setIsSubmitted(true);
-        alert('submitted')})
-        .catch((err)=> console.log(err))
-      }} >
+      <form>
         <label> Your Answer: *
         <textarea
           onChange={(e) => setBody(e.target.value)}
@@ -83,7 +66,24 @@ const AddAnswer = ({question}) => {
       <small>For authentication reasons, you will not be emailed</small>
       <UploadImage setPhotos={setPhotos}/> //fix bug that submits when upload image is clicked
       <p> <br/> </p>
-      <input type="submit" value="Submit" />
+      <button onClick={(e) => {
+        e.preventDefault();
+        axios({
+          method: 'post',
+          url: `${URL}/qa/questions/${question.question_id}/answers`,
+          headers: {Authorization: TOKEN},
+          data: {
+            product_id: product_ID,
+            body: body,
+            name: name,
+            email: email,
+            photos: photos
+          }
+        })
+        .then(() => {setIsSubmitted(true);
+        alert('submitted')})
+        .catch((err)=> console.log(err))
+      }}  > Submit </button>
       </form>
     </Modaldiv>
   )

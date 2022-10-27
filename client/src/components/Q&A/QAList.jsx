@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import styled from 'styled-components'
 import Answers from ".//Answers.jsx";
-import { TOKEN } from "/MyConfig.js";
+import { TOKEN, URL } from "/MyConfig.js";
 import AddQuestion from ".//AddQuestion.jsx";
 import AddAnswer from ".//AddAnswer.jsx";
 import Modal from 'react-modal';
@@ -66,7 +66,7 @@ const QAList = ({ search }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/qa/questions/?product_id=${id}&count=${10000}`,
+      url: `${URL}/qa/questions/?product_id=${id}&count=${10000}`,
       headers: { Authorization: TOKEN }
     })
       .then((res) => {
@@ -148,7 +148,7 @@ const QuestionInfo = ({ question }) => {
     if (!isReported) {
       axios({
         method: 'put',
-        url: `${URL}qa/questions/${question_id}/report`,
+        url: `${URL}/qa/questions/${question_id}/report`,
         headers: { Authorization: TOKEN }
       })
         .catch((err) => (console.log('report question', err)))
@@ -160,7 +160,7 @@ const QuestionInfo = ({ question }) => {
     if (!isHelpful) {
       axios({
         method: 'put',
-        url: `${URL}qa/questions/${question_id}/helpful`,
+        url: `${URL}/qa/questions/${question_id}/helpful`,
         headers: { Authorization: TOKEN }
       })
         .catch((err) => (console.log('report question', err)))

@@ -49,7 +49,7 @@ const Answers = ({ question }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `${URL}qa/questions/${question.question_id}/answers`,
+      url: `${URL}/qa/questions/${question.question_id}/answers`,
       headers: { Authorization: TOKEN }
     })
       .then((res) => {
