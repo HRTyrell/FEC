@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
+import {InlineShareButtons} from 'sharethis-reactjs';
 
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 
+const Fdiv = styled.div`
+width: 100%;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+`
 
+const Sdiv = styled.div`
+width: 200px;
+`
 const Text = styled.span`
 font-size: 1.125em;
 line-height: 1.33333em;
@@ -116,16 +127,32 @@ font-size: 13px;
 
 const AddToCart = () => {
   return(
-    <div>
+    <Fdiv>
+      <Sdiv>
+        <InlineShareButtons config={{
+            alignment: 'center',  // alignment of buttons (left, center, right)
+            color: 'social',      // set the color of buttons (social, white)
+            enabled: true,        // show/hide buttons (true, false)
+            font_size: 16,        // font size for the buttons
+            labels: 'null',        // button labels (cta, counts, null)
+            language: 'en',       // which language to use (see LANGUAGES)
+            networks: [           // which networks to include (see SHARING NETWORKS)
+              'facebook',
+              'twitter',
+              'pinterest'
+            ],
+            padding: 12,          // padding within buttons (INTEGER)
+            radius: 4,            // the corner radius on each button (INTEGER)
+            size: 40             // the size of each button (INTEGER)
+        }}/>
+      </Sdiv>
       <Fancy href="#">
         <TopKey/>
         <Text>Add to Cart</Text>
         <BottomKey1/>
         <BottomKey2/>
       </Fancy>
-      <div>
-      </div>
-    </div>
+    </Fdiv>
   )
 }
 

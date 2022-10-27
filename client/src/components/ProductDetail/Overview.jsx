@@ -5,7 +5,8 @@ import axios from 'axios';
 import {URL, TOKEN} from '/MyConfig.js';
 import ProductInformation from "./ProductInformation.jsx";
 import StyleCart from "./StyleCart.jsx";
-import Gallery from "./Gallery.jsx";
+// import Gallery from "./Gallery.jsx";
+import Gallery2 from "./Gallery2.jsx";
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const S2div = styled.div`
@@ -18,6 +19,9 @@ justify-content: center;
 align-items: center;
 @media (max-width: 1300px) {
   width: 100%;
+}
+@media (max-width: 800px) {
+  flex-direction: column;
 }
 `
 
@@ -43,7 +47,7 @@ const Overview = () => {
   return (
     <>
       <S2div>
-        <Gallery/>
+        <Gallery2/>
         <StyleCart/>
       </S2div>
       <ProductInformation/>

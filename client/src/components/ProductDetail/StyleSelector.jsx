@@ -8,12 +8,20 @@ height: 3.5vw;
 width: 3.5vw;
 border-radius: 50%;
 border: solid;
+@media (max-width: 1300px) {
+  height: 7vw;
+  width: 7vw;
+}
 `
 const ImgY = styled.img`
 position: relative;
 height: 3.5vw;
 width: 3.5vw;
 border-radius: 50%;
+@media (max-width: 1300px) {
+  height: 7vw;
+  width: 7vw;
+}
 `
 
 const SDiv = styled.div`
@@ -25,6 +33,10 @@ place-content: center;
 place-items: center;
 overflow: hidden;
 border-radius: 50%;
+@media (max-width: 1300px) {
+  height: 7vw;
+  width: 7vw;
+}
 ::before {
   content: '';
   position: absolute;

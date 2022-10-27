@@ -22,6 +22,9 @@ text-align: center;
 @media (max-width: 1300px) {
   width: 40%
 }
+@media (max-width: 800px) {
+  width: 100%
+}
 `
 
 const Fdiv = styled.div`
@@ -96,10 +99,7 @@ const StyleCart = () => {
   const cStar = ProductStore((state) => state.curStars);
 
   if (!cProduct || !cStyle) {
-    return (
-    <div class="sharethis-inline-share-buttons">
-    </div>
-    );
+    return null;
   }
 
   let price = (cStyle.sale_price) ? <F3div><H2 margin="0 20px">Price:&nbsp;<strike>${cStyle.original_price}</strike></H2><H2 color="red" margin="0">&nbsp;${cStyle.sale_price}</H2></F3div> : <F3div><H2 margin="0 20px">Price:&nbsp;${cStyle.original_price}</H2><H2 margin="0 20px" height="32px">&nbsp;</H2></F3div>
@@ -108,7 +108,6 @@ const StyleCart = () => {
 
   return (
     <StyleDiv>
-      <div class="sharethis-inline-share-buttons"></div>
       <Fdiv>
         <Starbar rating = {cStar.avg}/>
         <H4><A1 href="#Ratings">Read All <u>{cStar.overall}</u> Reviews</A1></H4>

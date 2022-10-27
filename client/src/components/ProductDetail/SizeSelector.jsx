@@ -46,19 +46,29 @@ height:70px;
 const SizeSelector = ({style}) => {
 
   const [size, setSize] = useState({Choice: false, XS:false, S: false, M: false, L:false, XL: false, XXL: false})
+  let sizes = [];
+  let options;
 
   const setsSize = (value) => {
     for (let elem in size) {
       size[elem] = false;
       if (elem === value) {
+        size.Choice = true;
         size[elem] = true;
       }
     }
   }
 
-  for (let elem in style.skus) {
-    console.log(style.skus[elem]);
+  let skus = Object.keys(style.skus)
+  let values = Object.values(style.skus)
+  console.log("🚀 ~ file: SizeSelector.jsx ~ line 64 ~ SizeSelector ~ skus", skus)
+  console.log("🚀 ~ file: SizeSelector.jsx ~ line 64 ~ SizeSelector ~ values", values)
+
+
+  if (!size.Choice) {
+    options = <option>-</option>
   }
+
 
   return(
     <div>
@@ -73,7 +83,7 @@ const SizeSelector = ({style}) => {
       </Adiv>
       <H2 margin="0px 20px 0">Quantity:</H2>
       <Quant>
-        {<option>-</option>}
+        {options}
       </Quant>
     </div>
   )
