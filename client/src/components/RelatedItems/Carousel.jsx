@@ -73,7 +73,15 @@ const Carousel = (props) => {
 
 
   const { relatedItemsList, outfitList} = useRelatedItemsStore();
-  const outfitListKeys = Object.keys(outfitList);
+  // console.log(outfitList)
+
+  var outfitListKeys;
+  if (outfitList != null) {
+    outfitListKeys = Object.keys(outfitList);
+  } else {
+    outfitListKeys=[]
+  }
+
   let componentBeingRendered = props.title;
   let nOfCards = props.title === 'Related Products' ? relatedItemsList.length : outfitListKeys.length;
   const [currentCard, setCurrentCard] = useState(0);

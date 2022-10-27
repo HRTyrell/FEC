@@ -51,7 +51,14 @@ const YourOutfit = ({data}) => {
     })
 
   }
-  const outfitArray = Object.values(outfitList);
+  var outfitArray;
+  console.log(outfitList)
+  if (outfitList != null) {
+    outfitArray = Object.values(outfitList);
+  } else {
+    outfitArray=[]
+  }
+  // const outfitArray = Object.values(outfitList);
 
 
   return (
