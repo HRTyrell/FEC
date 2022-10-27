@@ -1,8 +1,8 @@
 import {useEffect, useState, useRef} from 'react';
 import styled from 'styled-components';
 import ProductStore from "../Provider/Zus_Provider.jsx";
-import Star from '../../assets/Star.png';
-import fullstar from '../../assets/fullstar.png';
+import Star from '../../assets/YellowStar/emptyStar.png';
+import fullstar from '../../assets/YellowStar/yellowStar.png';
 import CryptoJS from 'crypto-js'
 import axios from 'axios';
 import {CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUD_NAME} from '/MyConfig.js';
@@ -209,7 +209,7 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
             <StyledFlexItemHeader>Overall rating*:</StyledFlexItemHeader>
             <StyledPaddedDiv>
               {starsArray.map((item, index)=> {
-                return <img src={item} key={index} onClick={()=>setRating(index+1)}></img>
+                return <img width="25px" height="25px" src={item} key={index} onClick={()=>setRating(index+1)}></img>
               })}
             </StyledPaddedDiv>
             <label>{{1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great'}[rating]}</label>

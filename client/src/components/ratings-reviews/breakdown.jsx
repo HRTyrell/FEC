@@ -22,8 +22,7 @@ const BreakdownDiv = styled.div`
   border-radius: 10px;
   width: 30%;
   height: fit-content;
-  box-shadow: 8px 8px 16px black,
-  -8px -8px 16px #ffffff;
+  box-shadow:6px 6px 10px #bebebe
 `
 const NoShrinkLabel = styled.label`
   flex-shrink: 0;
