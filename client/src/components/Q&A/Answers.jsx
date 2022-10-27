@@ -49,7 +49,7 @@ const Answers = ({ question }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `${URL}qa/questions/${question.question_id}/answers`,
+      url: `${URL}/qa/questions/${question.question_id}/answers`,
       headers: { Authorization: TOKEN }
     })
       .then((res) => {
@@ -112,7 +112,7 @@ const AnswerInfo = ({ answer }) => {
     if (!isReported) {
       axios({
         method: 'put',
-        url: `${URL}qa/answers/${answer_id}/report`,
+        url: `${URL}/qa/answers/${answer_id}/report`,
         headers: { Authorization: TOKEN }
       })
         .catch((err) => (console.log('report answer', err)))
@@ -124,7 +124,7 @@ const AnswerInfo = ({ answer }) => {
     if (!isHelpful) {
       axios({
         method: 'put',
-        url: `${URL}qa/answers/${answer_id}/helpful`,
+        url: `${URL}/qa/answers/${answer_id}/helpful`,
         headers: { Authorization: TOKEN }
       })
         .catch((err) => (console.log('report answer', err)))

@@ -29,7 +29,7 @@ const AddQuestion = () => {
         e.preventDefault();
         axios({
           method: 'post',
-          url: `${URL}qa/questions/`,
+          url: `${URL}/qa/questions/`,
           headers: {Authorization: TOKEN},
           data: {
             product_id: product_ID,

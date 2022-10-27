@@ -7,3 +7,4 @@ MyConfig.js
 client/dist/*.png
 client/dist/*.ttf
 .DS_Store
+coverage

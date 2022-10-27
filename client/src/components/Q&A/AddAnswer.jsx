@@ -31,7 +31,7 @@ const AddAnswer = ({question}) => {
         e.preventDefault();
         axios({
           method: 'post',
-          url: `${URL}qa/questions/${question.question_id}/answers`,
+          url: `${URL}/qa/questions/${question.question_id}/answers`,
           headers: {Authorization: TOKEN},
           data: {
             product_id: product_ID,
