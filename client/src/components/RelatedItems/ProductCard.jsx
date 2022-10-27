@@ -17,8 +17,8 @@ border-style: solid;
 border-spacing: 20px;
 margin: 2px;
 padding: 0;
-width: 12em;
-height: 24em;
+width: 15em;
+height: 30em;
 border-radius: 30px;
 box-shadow:6px 6px 10px #bebebe,
             -6px -6px 10px #ffffff;
@@ -116,6 +116,7 @@ const ProductCard = ({product, isStar}) => {
     if (isStar) {
       setCurrProdFromObject(product);
     }
+    window.scrollTo(0,0);
   }
   //*************Handle removing product from YourOutfit********** */
   const setOutfit = useRelatedItemsStore((state) => state.setOutfit)

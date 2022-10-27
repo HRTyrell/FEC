@@ -1,8 +1,8 @@
-import Star from '../../assets/Star.png';
-import quarterStar from '../../assets/quarterStar.png';
-import halfStar from '../../assets/halfStar.png';
-import threefourthsStar from '../../assets/3fourthsStar.png';
-import fullstar from '../../assets/fullstar.png';
+import Star from '../../assets/YellowStar/emptyStar.png';
+import quarterStar from '../../assets/YellowStar/1Star.png';
+import halfStar from '../../assets/YellowStar/halfStar.png';
+import threefourthsStar from '../../assets/YellowStar/3Star.png';
+import fullstar from '../../assets/YellowStar/yellowStar.png';
 import styled from 'styled-components';
 
 /////////////Styles////////////////////////////////
