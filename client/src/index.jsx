@@ -42,7 +42,7 @@ const postInteractionsAPI = (data) => {
     headers: {authorization: TOKEN},
     data: data
   })
-  .then(res=>{console.log('interactions API posted:', data)})
+  // .then(res=>{console.log('interactions API posted:', data)})
   .catch(err=>alert('failed to post userclick to Interactions API'));
 }
 
