@@ -9,22 +9,23 @@ import {getProduct} from './parseHelpers.js';
 const Div = styled.div`
 display: flex;
 flex-direction: row;
+justify-content: flex-start;
 align-items: left;
-// border-spacing: 20px;
-padding: 0;
 `;
 
 const CurrentProduct = styled.div`
   display: flex;
   justify-content: center;
-  height: 18em;
   border-style: solid;
-  //border-spacing: 20px;
-  margin: 2px;
-  padding: 0;
-  width: 8em;
   align-items: center;
   align-self: center;
+  width: 12em;
+  height: 24em;
+  border-radius: 30px;
+  box-shadow:6px 6px 10px #bebebe,
+              -6px -6px 10px #ffffff;
+  background-color: rgba(255, 255, 255, 1);
+  margin: 0 0 0 -2em;
 `;
 const Image = styled.img`
   display: flex;
@@ -32,6 +33,7 @@ const Image = styled.img`
   width: 2em;
   height: 2em;
   margin: auto;
+
 `;
 
 const YourOutfit = ({data}) => {
@@ -44,12 +46,12 @@ const YourOutfit = ({data}) => {
   const addToOutfitHandler = (e) => {
     e.preventDefault();
     getProduct(curProduct.id).then(product => {
-      outfitList.push(product);
+      outfitList[product.data.id] = product;
       setOutfit(outfitList);
     })
 
   }
-
+  const outfitArray = Object.values(outfitList);
 
 
   return (
@@ -57,8 +59,8 @@ const YourOutfit = ({data}) => {
       <CurrentProduct onClick={addToOutfitHandler} >
         <Image src={plus} alt="add this Product to Outfit"/>
       </CurrentProduct>
-      {data.map((product, index) => {
-        return <ProductCard product={product} key={product.data.id}/>
+      {outfitArray.map((product, index) => {
+        return <ProductCard product={product} key={product.data.id} isStar={false}/>
       })}
     </Div>
   )

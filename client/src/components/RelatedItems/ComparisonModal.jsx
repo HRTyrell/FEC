@@ -11,7 +11,7 @@ const customStyles = {
   overlay: {
     pointerEvents: 'none',
     background: 'none',
-    zIndex: 1000
+    zIndex: 1000,
 
   },
   content: {
@@ -21,7 +21,9 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    background: 'white'
+
+    background: 'white',
+    width: '35em'
   },
 };
 
@@ -49,7 +51,7 @@ const features = comparisonProduct.features.concat(currentProduct.features);
         <div style={{
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
       }}>
           <h3>{currentProduct.name}</h3>
           <h3>{comparisonProduct.name}</h3>
