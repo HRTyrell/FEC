@@ -82,6 +82,7 @@ const StyledCinzelButton = styled.button`
   font-weight: 400;
   font-size: 25px;
   margin-bottom: 5%;
+  justify-content: center;
 `
 const StyledOldStandardLabel= styled.label`
   font-family: 'OldStandard';
@@ -96,6 +97,10 @@ const StyledCinzelInput = styled.input`
   font-weight: 400;
   font-size: 15px;
 `
+const StyledCenterTextDiv = styled.div`
+  text-align: center;
+`
+
 const characteristicTable = {
   Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
   Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -224,7 +229,9 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
   }
 
   if (!modalView) {
-    return <StyledCinzelButton onClick={()=>setModalView(true)}>Submit New Review</StyledCinzelButton>
+    return (<StyledCenterTextDiv>
+        <StyledCinzelButton onClick={()=>setModalView(true)}>Submit New Review</StyledCinzelButton>
+      </StyledCenterTextDiv>)
   } else {
     return (
       <StyledModal>

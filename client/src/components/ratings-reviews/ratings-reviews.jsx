@@ -14,12 +14,16 @@ const StyledContainer = styled.div`
   gap: 15px;
   justify-content: center;
   align-items: top;
+
+`
+const StylizedOuterContainer = styled.div`
   padding: 10px;
   width: 70%;
 `
 const StyledCinzel = styled.h2`
   font-family: 'Cinzel';
   font-weight: 200;
+  text-align: center;
 `
 const RatingsReviews = () => {
 
@@ -51,7 +55,7 @@ const RatingsReviews = () => {
     return null;
   }
   return (
-    <Fragment>
+    <StylizedOuterContainer>
       <StyledCinzel id="Ratings"> RATINGS & REVIEWS </StyledCinzel>
       <StyledContainer>
         <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
@@ -59,7 +63,7 @@ const RatingsReviews = () => {
         <ReviewsList product_id={curProduct.id} starBarFilters={starBarFilters}/>
       </StyledContainer>
       <NewReviewForm setmetaData={setmetaData} characteristics={metaData.characteristics} product_id={curProduct.id} product_name={curProduct.name}/>
-    </Fragment>
+    </StylizedOuterContainer>
   )
 }
 
