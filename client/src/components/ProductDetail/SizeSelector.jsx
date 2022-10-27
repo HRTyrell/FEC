@@ -7,7 +7,7 @@ const H2 = styled.h2`
 margin: ${props => props.margin};
 font-family: 'Cinzel';
 font-weight: 200;
-color: ${props => props.color || 'Gold'};
+color: ${props => props.color || 'Black'};
 text-align: left;
 font-size: 32px;
 `
@@ -37,6 +37,12 @@ align-items: center;
 justify-content: space-between;
 `
 
+const Quant = styled.select`
+width:50px;
+height:70px;
+
+`
+
 const SizeSelector = ({style}) => {
 
   const [size, setSize] = useState({Choice: false, XS:false, S: false, M: false, L:false, XL: false, XXL: false})
@@ -50,6 +56,8 @@ const SizeSelector = ({style}) => {
     }
   }
 
+  // if (size.Choice) ?
+
   return(
     <div>
       <H2 margin="0px 20px 0">Size:</H2>
@@ -62,9 +70,9 @@ const SizeSelector = ({style}) => {
         <SzButton value = "XXL" onClick={(e) => setsSize(e.target.value)} disabled = {size.XXL}>XXL</SzButton>
       </Adiv>
       <H2 margin="0px 20px 0">Quantity:</H2>
-      <select>
+      <Quant>
         {<option>-</option>}
-      </select>
+      </Quant>
     </div>
   )
 }

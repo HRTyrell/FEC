@@ -6,6 +6,7 @@ import ProductStore from "../Provider/Zus_Provider.jsx";
 import Starbar from "./starbar.jsx";
 import { FullArrow, Circles } from "../Shapes/Shapes.jsx";
 import SizeSelector from "./SizeSelector.jsx";
+import AddToCart from "./AddtoCart.jsx";
 
 const StyleDiv = styled.div`
 display: flex;
@@ -80,6 +81,7 @@ color: Black;
 text-decoration: none;
 `
 
+//TODO Make this DROPDOWN
 const Button2 = styled.button`
 margin: auto;
 height: 100px;
@@ -119,12 +121,7 @@ const StyleCart = () => {
       </div>
       <StyleSelector/>
       <SizeSelector style ={cStyle}/>
-      <Button2>AddToCart</Button2>
-      <div>
-        <li>Facebook</li>
-        <li>Pintrest</li>
-        <li>Twitter</li>
-      </div>
+      <AddToCart/>
       {/* <Circles/> */}
     </StyleDiv>
   )
