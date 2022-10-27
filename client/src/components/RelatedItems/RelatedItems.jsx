@@ -56,19 +56,23 @@ const RelatedItems = () => {
   }, [curProduct])
   const { relatedItemsList, outfitList} = useRelatedItemsStore();
 
-  return (
-    <Div>
-      <H>Related Products</H>
-      <MasterDiv>
-        <Carousel data={relatedItemsList} title="Related Products"><RelatedProducts/></Carousel>
-      </MasterDiv>
-      <H>Your Outfit</H>
-      <MasterDiv>
-        <Carousel data={outfitList} title="Your Outfit"><YourOutfit/></Carousel>
-      </MasterDiv>
-    </Div>
+  if (isMounted) {
+    return (
+      <Div>
+        <H>Related Products</H>
+        <MasterDiv>
+          <Carousel data={relatedItemsList} title="Related Products"><RelatedProducts/></Carousel>
+        </MasterDiv>
+        <H>Your Outfit</H>
+        <MasterDiv>
+          <Carousel data={outfitList} title="Your Outfit"><YourOutfit/></Carousel>
+        </MasterDiv>
+      </Div>
 
-  )
+    )
+  } else {
+    return <div>loading...</div>
+  }
 }
 
 export default RelatedItems;
