@@ -54,7 +54,7 @@ const RelatedItems = () => {
 
   if (isMounted) {
     return (
-      <Div>
+      <Div id="RelatedItems">
         <H>Related Products</H>
         <MasterDiv>
           <Carousel data={relatedItemsList} title="Related Products"><RelatedProducts/></Carousel>

@@ -17,7 +17,7 @@ const MainDiv = styled.div`
     const [search, setSearch] = useState('');
 
     return (
-      <MainDiv>
+      <MainDiv id="QandA">
         <h2> QUESTIONS & ANSWERS</h2>
         <SearchBar setSearch={setSearch}/>
         <QAList search={search} />
