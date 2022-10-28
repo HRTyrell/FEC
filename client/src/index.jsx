@@ -25,18 +25,6 @@ const FullDiv = styled.div`
 height: 100%;
 width: 100%;
 `
-
-
-const App = () => {
-
-  const Clicks = ClickStore((state) => state.AddDomElement);
-  const Targets = ClickStore((state) => state.DomElements);
-
-
-  useEffect(() => {
-    window.onclick = (e) => {
-      Clicks(e.target.outerHTML);
-
 const widgetsIDs ={
   RatingsReviews: 'RatingsReviews',
   QandA: 'QandA',
@@ -71,6 +59,7 @@ window.onclick = (e) => {
   }
 }
 
+const App = () => {
   return (
     <FullDiv>
 
