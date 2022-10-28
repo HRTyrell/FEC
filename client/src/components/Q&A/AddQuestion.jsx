@@ -41,9 +41,13 @@ const AddQuestion = ({ product }) => {
   border-width: thin;
   background:none;
   font-weight: bold;
-  // padding-left: 20px;
   color: #404040;
 `
+const Center = styled.div`
+padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  `
 
   return (
     isSubmitted ? <h4>Question Submitted!</h4> :
@@ -109,9 +113,9 @@ const AddQuestion = ({ product }) => {
             />
           <small>For authentication reasons, you will not be emailed</small>
           </StyledInput>
-          <div>
+          <Center>
             <Button type="submit">SUBMIT</Button>
-          </div>
+          </Center>
         </form>
 
       </Modaldiv>
