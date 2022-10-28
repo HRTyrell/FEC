@@ -37,7 +37,7 @@ const Overview = () => {
   return (
     <>
       <S2div id="ProductInfo2">
-        <Gallery/>
+        <Gallery2/>
         <StyleCart/>
       </S2div>
       <ProductInformation />
