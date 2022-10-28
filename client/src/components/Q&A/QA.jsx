@@ -5,8 +5,8 @@ import QAList from './/QAList.jsx';
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const H2 = styled.h2`
-  font-family: 'Cinzel';
-  font-weight: 200;
+// font-family: 'Proxima Nova';
+  // font-weight: 200;
   text-align: center;
 `
 

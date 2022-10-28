@@ -8,12 +8,14 @@ import AddAnswer from ".//AddAnswer.jsx";
 import Modal from 'react-modal';
 
 const SoftButton = styled.button`
+// font-family: 'Proxima Nova';
   border: none;
   background:none;
   text-decoration: underline;
   color: #404040;
 `
 const Button = styled.button`
+// font-family: 'Proxima Nova';
   padding 10px 5px 10px 5px;
   border-color: #999999;
   background: none;
@@ -66,7 +68,11 @@ const QAList = ({ search, product}) => {
       .then((res) => {
         console.log('productid', product.id)
         let answeredQuestions = res.data.results.filter((question) => {
-          return Object.keys(question.answers).length > 0 && question.question_body.includes(search)
+          if(search.length > 3) {
+            return question.question_body.includes(search);
+          } else {
+          return Object.keys(question.answers).length > 0
+          }
         })
         setQuestions(answeredQuestions);
       })
