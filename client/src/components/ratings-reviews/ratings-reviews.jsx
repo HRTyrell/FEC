@@ -30,7 +30,8 @@ const RatingsReviews = () => {
   const {curProduct} = ProductStore();
   const isMounted = useRef(false);
 
-  const [starBarFilters, setstarBarFilters]  = useState({1:true, 2:true, 3:true, 4:true, 5:true, filtered:false});
+  let defaultStarBarFilters = {1:true, 2:true, 3:true, 4:true, 5:true, filtered:false}
+  const [starBarFilters, setstarBarFilters]  = useState(defaultStarBarFilters);
   const [metaData, setmetaData]  = useState(null);
 
   useEffect(()=> {
@@ -41,6 +42,9 @@ const RatingsReviews = () => {
         headers: {authorization: TOKEN}
         })
         .then((val)=> {
+          val.data.recommended.false = val.data.recommended.false || 0;
+          val.data.recommended.true = val.data.recommended.true || 0;
+          setstarBarFilters(defaultStarBarFilters)
           setmetaData(val.data)
         })
         .catch((err)=> {
@@ -58,11 +62,11 @@ const RatingsReviews = () => {
     <StylizedOuterContainer id="RatingsReviews">
       <StyledCinzel> RATINGS & REVIEWS </StyledCinzel>
       <StyledContainer>
-        <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
+        <Breakdown key={curProduct.id + '-' + curProduct.id} metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
 
-        <ReviewsList product_id={curProduct.id} starBarFilters={starBarFilters}/>
+        <ReviewsList key={curProduct.id} product_id={curProduct.id} starBarFilters={starBarFilters}/>
       </StyledContainer>
-      <NewReviewForm setmetaData={setmetaData} characteristics={metaData.characteristics} product_id={curProduct.id} product_name={curProduct.name}/>
+      <NewReviewForm key={new Date().toJSON()} setmetaData={setmetaData} characteristics={metaData.characteristics} product_id={curProduct.id} product_name={curProduct.name}/>
     </StylizedOuterContainer>
   )
 }

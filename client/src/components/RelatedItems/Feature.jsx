@@ -7,6 +7,8 @@ const Feature = ({currentProductFeatures, comparisonProductFeatures, feature}) =
 
   const existsInCurrent = currentProductFeatures.includes(feature);
   const existsInComparison = comparisonProductFeatures.includes(feature);
+  feature.value = feature.value === null ? '' : feature.value;
+  feature.feature = feature.feature === null ? '' : feature.feature;
 
   return (
 
