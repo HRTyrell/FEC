@@ -25,7 +25,6 @@ const FullDiv = styled.div`
 height: 100%;
 width: 100%;
 `
-
 const widgetsIDs ={
   RatingsReviews: 'RatingsReviews',
   QandA: 'QandA',
@@ -63,6 +62,7 @@ window.onclick = (e) => {
 const App = () => {
   return (
     <FullDiv>
+
       {/* <BGBubbles/> */}
       <GlobalFonts/>
       <NavigationBar />
