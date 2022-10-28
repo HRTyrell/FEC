@@ -51,6 +51,7 @@ const ProductStore2 = create((set, get) => ({
     GetRequest(`/products/${data.id}/styles`)
     .then(({data}) => {
       set(() => ({curProductStyles: data.results}));
+      console.log("🚀 ~ file: Zus_Provider.jsx ~ line 54 ~ .then ~ data", data)
       data.results.map((obj) => {
         if (obj["default?"] === true) {
           set(() => ({curStyle: obj}))

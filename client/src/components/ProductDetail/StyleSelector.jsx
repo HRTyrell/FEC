@@ -8,32 +8,50 @@ height: 3.5vw;
 width: 3.5vw;
 border-radius: 50%;
 border: solid;
+object-fit: cover;
+@media (max-width: 1300px) {
+  height: 7vw;
+  width: 7vw;
+}
 `
 const ImgY = styled.img`
 position: relative;
 height: 3.5vw;
 width: 3.5vw;
 border-radius: 50%;
+object-fit: cover;
+@media (max-width: 1300px) {
+  height: 7vw;
+  width: 7vw;
+}
 `
 
 const SDiv = styled.div`
-width: 3.5vw;
-height: 3.5vw;
+width: 3.7vw;
+height: 3.7vw;
 background: #07182E;
 display: flex;
 place-content: center;
 place-items: center;
 overflow: hidden;
 border-radius: 50%;
+@media (max-width: 1300px) {
+  height: 7vw;
+  width: 7vw;
+}
 ::before {
   content: '';
   position: absolute;
   border-radius: 50%;
   width: 3.8vw;
-  background-image: linear-gradient(180deg, rgb(241, 255, 44), rgb(0, 0, 0));
+  background-image: linear-gradient(180deg, rgb(0, 0, 0), rgb(255, 0, 242));
   height: 3.8vw;
   animation: rotBGimg 3s linear infinite;
   transition: all 0.2s linear;
+  @media (max-width: 1300px) {
+  height: 7.5vw;
+  width: 7.5vw;
+}
 }
 @keyframes rotBGimg {
   from {
@@ -58,11 +76,6 @@ align-content:center;
 align-items:center;
 justify-content: center;
 `
-
-//Completion of State for Styles
-//TODO Completion of choice on Style
-//TODO CSS of Selector
-//TODO Passing Style state to parent
 
 const StyleSelector = () => {
 
@@ -111,8 +124,6 @@ const StyleSelector2 = () => {
   const handleClick = (e) => {
     setStyle(e.target.title);
   }
-
-  // console.log(curStyle)
 
   return (
     <DivS>
