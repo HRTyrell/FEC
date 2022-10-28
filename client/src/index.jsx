@@ -35,14 +35,18 @@ const widgetsIDs ={
 };
 
 const postInteractionsAPI = (data) => {
-  return axios({
+  const controller = new AbortController();
+
+  axios({
     url: `${URL}/interactions` ,
     method: 'post',
     headers: {authorization: TOKEN},
-    data: data
+    data: data,
+    signal: controller.signal
   })
-  // .then(res=>{console.log('interactions API posted:', data)})
-  .catch(err=>alert('failed to post userclick to Interactions API'));
+  .then(res=>{console.log('interactions API posted:', data)})
+  .catch(err=>console.log('failed to post userclick to Interactions API'));
+  controller.abort()
 }
 
 window.onclick = (e) => {
