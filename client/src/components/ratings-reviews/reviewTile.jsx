@@ -19,6 +19,8 @@ const StyledContainerStart = styled.div`
 
 const StyledBold = styled.header`
   font-weight: bold;
+  font-family: 'OldStandard';
+  font-size: 15px;
 `
 const StyledModal = styled.header`
   position: fixed;
@@ -39,6 +41,22 @@ const StyledOuterContainer = styled.div`
 `
 const StyledImage = styled.img`
   margin: 2px 3px;
+`
+const StyledOldBold= styled.b`
+  font-family: 'OldStandard';
+  font-size: 14px;
+`
+const StyledOldStandardTime= styled.time`
+  font-family: 'OldStandard';
+  font-size: 15px;
+`
+const StyledOldDiv= styled.div`
+  font-family: 'OldStandard';
+  font-size: 14px;
+`
+const StyledOldA = styled.a`
+font-family: 'OldStandard';
+font-size: 14px;
 `
 
 export const convertDate = (inp)=> {
@@ -73,17 +91,17 @@ export const ReviewTile = ({review}) => {
     <StyledOuterContainer>
       <StyledContainerSpread>
         <Starbar rating={review.rating}/>
-        <time>{review.reviewer_name + ', ' + convertDate(review.date)}</time>
+        <StyledOldStandardTime>{review.reviewer_name + ', ' + convertDate(review.date)}</StyledOldStandardTime>
       </StyledContainerSpread>
       <StyledBold>{review.summary}</StyledBold>
 
       {showMore ?
-      <div>
+      <StyledOldDiv>
         <p>{review.body.slice(0, 250) + '...'}</p>
         <a href="#/" onClick={()=>{setShowMore(false)}}>{'Show more'}</a>
-      </div>
+      </StyledOldDiv>
       :
-      <div>{review.body}</div>
+      <StyledOldDiv>{review.body}</StyledOldDiv>
       }
 
       <StyledContainerStart>
@@ -91,10 +109,10 @@ export const ReviewTile = ({review}) => {
           return <SizeAdjustableImage key={index} url={photo.url}/>
         })}
       </StyledContainerStart>
-      {review.recommend && <div>✓ I recommend this product</div>}
-      {review.response && <div>RESPONSE FROM SELLER: {review.response}</div>}
-      <b>Was this review helpful? </b>
-      <a href="#/" onClick={uploadHelpfulVote}>Yes ({helpful.helpfulCount})</a>
+      {review.recommend && <StyledOldDiv>✓ I recommend this product</StyledOldDiv>}
+      {review.response && <StyledOldDiv>RESPONSE FROM SELLER: {review.response}</StyledOldDiv>}
+      <StyledOldBold>Was this review helpful? </StyledOldBold>
+      <StyledOldA href="#/" onClick={uploadHelpfulVote}>Yes ({helpful.helpfulCount})</StyledOldA>
     </StyledOuterContainer>
 
   )

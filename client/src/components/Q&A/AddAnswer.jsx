@@ -24,12 +24,17 @@ const Header = styled.div`
   padding: 10px;
   `
   const Button = styled.button`
-  border: none;
+  border-width: thin;
   background:none;
   font-weight: bold;
   // padding-left: 20px;
   color: #404040;
 `
+const Center = styled.div`
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  `
 
 const AddAnswer = ({ question, product }) => {
   const [body, setBody] = useState('');
@@ -60,6 +65,9 @@ const AddAnswer = ({ question, product }) => {
               value={body}
             ></textarea>
           </StyledInput>
+          <div>
+            <UploadImage setPhotos={setPhotos} />
+          </div>
           <StyledInput>
           <label> Nickname * </label>
           <input
@@ -88,10 +96,8 @@ const AddAnswer = ({ question, product }) => {
             For authentication reasons, you will not be emailed
           </small>
           </StyledInput>
-          <div>
-            <UploadImage setPhotos={setPhotos} />
-          </div>
-          <div>
+
+          <Center>
           <Button onClick={(e) => {
             e.preventDefault();
             axios({
@@ -111,8 +117,8 @@ const AddAnswer = ({ question, product }) => {
                 alert('submitted')
               })
               .catch((err) => console.log(err))
-          }}  > SUBMIT </Button>
-        </div>
+          }}> SUBMIT </Button>
+          </Center>
         </form>
       </Modaldiv>
   )

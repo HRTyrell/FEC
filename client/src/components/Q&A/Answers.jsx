@@ -21,10 +21,11 @@ const Collapse = styled.button`
 const A = styled.div`
   padding: 0 0 20px 10px;
   margin: 0;
-  // border-bottom: dotted;
+  // border-bottom: solid;
   // border-color: green;
 `
 const Answersdiv = styled.div`
+  padding-top: 10px;
   max-height: 50vh;
   overflow: auto;
   // border-bottom: dotted;
@@ -41,6 +42,13 @@ const FlexRow = styled.div`
   padding: 10px;
   border-color: yellow;
   padding-bottom: 20px;
+`
+const Padding = styled.div`
+   margin: 0;
+   padding-top: 10px;
+`
+const Footer = styled.div`
+  background: #f8f8f8;
 `
 
 const Answers = ({ question }) => {
@@ -87,7 +95,9 @@ const Answers = ({ question }) => {
 
   return (
     <FlexRow>
+      <Padding>
       <strong>A: &nbsp;</strong>
+      </Padding>
       <Answersdiv>
         {answers.slice(0, count).map((answer) => (
           <A key={answer.answer_id}>
@@ -97,7 +107,7 @@ const Answers = ({ question }) => {
                 <img key={index} src={photo.url} height='100px'></img>
               ))}
             </div>
-            <footer><AnswerInfo answer={answer} /></footer>
+            <Footer><footer><AnswerInfo answer={answer} /></footer></Footer>
           </A>
         ))}
 

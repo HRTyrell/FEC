@@ -4,7 +4,11 @@ import SearchBar from './/SearchBar.jsx';
 import QAList from './/QAList.jsx';
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
-
+const H2 = styled.h2`
+  font-family: 'Cinzel';
+  font-weight: 200;
+  text-align: center;
+`
 
 const MainDiv = styled.div`
   display: flex;
@@ -25,12 +29,12 @@ const MainDiv = styled.div`
     }
 
     return (
-      <><MainDiv>
-      <h2> QUESTIONS & ANSWERS</h2>
-
-        <SearchBar setSearch={setSearch}/>
-        <QAList search={search} product={curProduct} />
-      </MainDiv>
+      <>
+        <H2> QUESTIONS & ANSWERS</H2>
+        <MainDiv id="QandA">
+          <SearchBar setSearch={setSearch}/>
+          <QAList search={search} product={curProduct} />
+        </MainDiv>
       </>
     );
   }

@@ -47,7 +47,7 @@ const NavigationBar = () => {
   }
 
   return (
-    <Wrap>
+    <Wrap id="ProductInfo1">
       <Title>NavigationBar</Title>
       <H5>Sales | Deals | Promotions</H5>
       <Sdiv>
