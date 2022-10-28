@@ -17,14 +17,29 @@ const ReviewsListOuterDiv = styled.div`
   border: solid;
   border-radius: 10px;
   height: fit-content;
-  box-shadow: 8px 8px 16px black,
-  -8px -8px 16px #ffffff;
+  box-shadow:6px 6px 10px #bebebe
+
 `
 const FlexDiv = styled.div`
   display: flex;
   justify-content: space-around;
 `
-
+const StyledCinzelLabel = styled.label`
+  font-family: 'Cinzel';
+  font-weight: 200;
+`
+const StyledCinzelSelect= styled.select`
+  font-family: 'Cinzel';
+  font-weight: 200;
+`
+const StyledOldInput= styled.input`
+  font-family: 'OldStandard';
+  font-size: 15px;
+`
+const StyledOldButton= styled.button`
+  font-family: 'OldStandard';
+  font-size: 15px;
+`
 export const ReviewsList = function ({product_id, starBarFilters}) {
 
   const [reviews, setReviews] = useState(null)
@@ -34,6 +49,7 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
   const [searchBarTerm, setsearchBarTerm] = useState('');
 
   useEffect(()=> {
+
     axios({
       url: `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?page=${1}&count=${100000}&sort=${selectedSort}&product_id=${product_id}`,
       method: 'get',
@@ -67,14 +83,14 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
   return (
     <ReviewsListOuterDiv>
       <FlexDiv>
-        <label>Sort on:
-          <select value={selectedSort} onChange={(e)=>{setSelectedSort(e.target.value)}}>
+        <StyledCinzelLabel>Sort on:
+          <StyledCinzelSelect value={selectedSort} onChange={(e)=>{setSelectedSort(e.target.value)}}>
             {['relevant', 'helpful', 'newest'].map((item,index)=>{
               return <option value={item} key={index}>{item}</option>
             })}
-          </select>
-        </label>
-        <input type="text" placeholder="Search..." onChange={handleSearchBar} ></input>
+          </StyledCinzelSelect>
+        </StyledCinzelLabel>
+        <StyledOldInput type="text" placeholder="Search..." onChange={handleSearchBar} ></StyledOldInput>
       </FlexDiv>
       <ReviewsListDiv>
         <div>
@@ -83,7 +99,7 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
           })}
         </div>
 
-        {moreAvailable && <button onClick={()=>{setcountToRender(countToRender + 2)}}>More Reviews</button>}
+        {moreAvailable && <StyledOldButton onClick={()=>{setcountToRender(countToRender + 2)}}>More Reviews</StyledOldButton>}
       </ReviewsListDiv>
     </ReviewsListOuterDiv>
   )

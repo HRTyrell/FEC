@@ -13,7 +13,9 @@ const Input = styled.input`
 const Form = styled.form`
   display: flex;
   border: solid;
-  width: 100%;
+  padding-right: 10px;
+  // margin-right: 10px;
+  border-color: #4d4d4d;
   height: 50px;
   justify-content: space-between;
 `
@@ -29,7 +31,7 @@ const SearchBar = ({setSearch}) => {
       setValue('');}}>
 
         <Input onChange={(e)=> setValue(e.target.value)}
-          placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
+          placeholder="   HAVE A QUESTION? SEARCH FOR ANSWERS..."
           value={value}/>
 
         <SoftButton type="submit">Search</SoftButton>

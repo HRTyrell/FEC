@@ -69,7 +69,7 @@ const ProductInformation = () => {
   }
 
   return (
-    <InfoDiv>
+    <InfoDiv id="ProductInfo3">
       <DivS>
         <H2><em>{curProduct.slogan}</em></H2>
         <H4 size = "30px">{curProduct.description}</H4>

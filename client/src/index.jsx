@@ -8,8 +8,9 @@ import NavigationBar from "./components/NavBar/NavigationBar.jsx";
 import QA from "./components/Q&A/QA.jsx";
 import RelatedItems from './components/RelatedItems/RelatedItems.jsx';
 import RatingsReviews from './components/ratings-reviews/ratings-reviews.jsx';
-import ClickStore from './components/Provider/Zus_ClickStore.jsx';
 import {BGBubbles} from './components/Shapes/Shapes.jsx';
+import {URL, TOKEN} from '/MyConfig.js';
+import axios from 'axios';
 
 const Sdiv = styled.div`
 display: flex;
@@ -25,6 +26,7 @@ height: 100%;
 width: 100%;
 `
 
+
 const App = () => {
 
   const Clicks = ClickStore((state) => state.AddDomElement);
@@ -34,11 +36,40 @@ const App = () => {
   useEffect(() => {
     window.onclick = (e) => {
       Clicks(e.target.outerHTML);
-    }
-  }, [])
 
-  //Uncomment to see Clicks
-  // console.log(Targets);
+const widgetsIDs ={
+  RatingsReviews: 'RatingsReviews',
+  QandA: 'QandA',
+  RelatedItems: 'RelatedItems',
+  ProductInfo1: 'ProductInfo',
+  ProductInfo2: 'ProductInfo',
+  ProductInfo3: 'ProductInfo'
+};
+
+const postInteractionsAPI = (data) => {
+  return axios({
+    url: `${URL}/interactions` ,
+    method: 'post',
+    headers: {authorization: TOKEN},
+    data: data
+  })
+  // .then(res=>{console.log('interactions API posted:', data)})
+  .catch(err=>alert('failed to post userclick to Interactions API'));
+}
+
+window.onclick = (e) => {
+  for (let i = 0; i < e.path.length; i ++) {
+    let widget = widgetsIDs[e.path[i].id]
+    if (widget!= undefined) {
+      postInteractionsAPI({
+        element: e.target.outerHTML.replace(e.target.innerHTML, ''),
+        widget: widget,
+        time: new Date().toJSON()
+      });
+      break;
+    }
+  }
+}
 
   return (
     <FullDiv>

@@ -7,6 +7,7 @@ import Carousel from './Carousel.jsx';
 import {getRelatedProducts} from './parseHelpers.js';
 import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
 import ProductStore from '../Provider/Zus_Provider.jsx';
+import {H2} from '../ProductDetail/StyleCart.jsx';
 
 const Title = styled.h1`
 
@@ -20,18 +21,14 @@ const MasterDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-content: space-between;
-  width: 51em;
+  width: 65em;
   border-spacing: 0.5%;
   margin: 0;
+  padding: 0;
   line-height: 0.8;
 `;
-const H = styled.h5`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 2em;
-  margin-block-start: 2em;
-  margin-block-end: 0;
+const H = styled(H2)`
+  text-align: center;
 `;
 
 const RelatedItems = () => {
@@ -57,7 +54,7 @@ const RelatedItems = () => {
 
   if (isMounted) {
     return (
-      <Div>
+      <Div id="RelatedItems">
         <H>Related Products</H>
         <MasterDiv>
           <Carousel data={relatedItemsList} title="Related Products"><RelatedProducts/></Carousel>
