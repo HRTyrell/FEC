@@ -31,7 +31,7 @@ const UploadImage = ({setPhotos}) => {
   return (
    <CloudinaryContext cloudName={CLOUDINARY_CLOUD_NAME}>
       <div className="App">
-       {images.length < 4 ? <button onClick={() => beginUpload("image")}>Upload Image</button> : null}
+       {images.length < 4 ? <button onClick={(e) => {e.preventDefault(); beginUpload("image")}}>Upload Image</button> : null}
       <section>
         {images.map(i =>
         <img key={i} publicId={i} fetch-format="auto" quality="auto" src={i} height="50px"/>)}

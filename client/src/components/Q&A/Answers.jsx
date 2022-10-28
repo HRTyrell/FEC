@@ -19,31 +19,35 @@ const Collapse = styled.button`
 `
 
 const A = styled.div`
-  display: flex-column;
-  padding-left: 10px;
-   margin: 0;
-  // border: dotted;
+  padding: 0 0 20px 10px;
+  margin: 0;
+  // border-bottom: dotted;
   // border-color: green;
-  padding-bottom: 20px;
-  height: auto;
-  width: 95%;
+`
+const Answersdiv = styled.div`
+  max-height: 50vh;
+  overflow: auto;
+  // border-bottom: dotted;
+  // border-color: green;
 `
 const P = styled.p`
-  // padding-left: px;
-  margin: 0;
-  padding-bottom: 10px;
+   margin: 0;
+   padding-bottom: 20px;
 `
 
 const FlexRow = styled.div`
   display: flex;
   flex-direction: row;
   padding: 10px;
+  border-color: yellow;
+  padding-bottom: 20px;
 `
 
 const Answers = ({ question }) => {
   const [answers, setAnswers] = useState([]);
   const [id, setId] = useState(question.question_id);
   const [viewAll, setViewAll] = useState(true);
+  const [answersLength, setAnswersLength] = useState(null);
   const [count, setCount] = useState(2);
 
   useEffect(() => {
@@ -56,6 +60,7 @@ const Answers = ({ question }) => {
         let response = setSellersFirst(res.data.results);
         setViewAll(response.length > 2 ? false : true)
         setAnswers(response);
+        setAnswersLength(response.length)
       })
       .catch((err) => (console.log('GET ANSWER', err)))
   }, [id])
@@ -71,36 +76,48 @@ const Answers = ({ question }) => {
   }
 
   const handleView = () => {
-
+    if (viewAll) {
+      setCount(2);
+      setViewAll(false);
+    } else {
+      setCount(answersLength);
+      setViewAll(true);
+    }
   }
-
 
   return (
     <FlexRow>
       <strong>A: &nbsp;</strong>
-      <div>
+      <Answersdiv>
         {answers.slice(0, count).map((answer) => (
           <A key={answer.answer_id}>
-            <label>
-              <P>{answer.body}</P></label>
-            {answer.photos.map((photo, index) => (
-
-              <img key={index} src={photo.url} height='100px'></img>
-
-            ))}
+            <P>{answer.body}</P>
+            <div>
+              {answer.photos.map((photo, index) => (
+                <img key={index} src={photo.url} height='100px'></img>
+              ))}
+            </div>
             <footer><AnswerInfo answer={answer} /></footer>
-
           </A>
         ))}
-        {viewAll ? <Collapse>COLLAPSE ANSWERS</Collapse> : <Collapse>LOAD MORE ANSWERS</Collapse>}
-      </div>
+
+        {viewAll && answersLength > 2 ?
+          <Collapse onClick={() => handleView()}>
+            COLLAPSE ANSWERS
+          </Collapse> : null}
+        {(!viewAll) && answersLength > count ?
+          <Collapse onClick={() => handleView()}>
+            LOAD MORE ANSWERS
+          </Collapse> : null}
+      </Answersdiv>
     </FlexRow>
   )
 }
 
-const AnswerInfo = ({ answer }) => {
+  const AnswerInfo = ({ answer }) => {
   const [isReported, setIsReported] = useState(answer.reported)
   const [isHelpful, setIsHelpful] = useState(false)
+
   const convertDate = (inp) => {
     let formattedDate = new Date(inp)
     formattedDate = formattedDate.toDateString().split(' ');
@@ -115,9 +132,9 @@ const AnswerInfo = ({ answer }) => {
         url: `${URL}/qa/answers/${answer_id}/report`,
         headers: { Authorization: TOKEN }
       })
+        .then(() => setIsReported(true))
         .catch((err) => (console.log('report answer', err)))
     }
-    setIsReported(true);
   }
 
   const handleHelpfulness = (answer_id) => {
@@ -127,16 +144,29 @@ const AnswerInfo = ({ answer }) => {
         url: `${URL}/qa/answers/${answer_id}/helpful`,
         headers: { Authorization: TOKEN }
       })
+        .then(() => setIsHelpful(true))
         .catch((err) => (console.log('report answer', err)))
     }
-    setIsHelpful(true);
+
   }
 
   return (
     <>
-      <small> by {answer.answerer_name},  {convertDate(answer.date)} | Helpful?  <SoftButton onClick={() => handleHelpfulness(answer.answer_id)}>Yes</SoftButton>
+      <small> by {answer.answerer_name === "Seller" ?
+          <strong>Seller</strong>
+          :
+          answer.answerer_name}, {convertDate(answer.date)} |
+        Helpful?
+        <SoftButton onClick={() => handleHelpfulness(answer.answer_id)}>
+          Yes
+        </SoftButton>
         ({isHelpful ? answer.helpfulness + 1 : answer.helpfulness}) |
-        {isReported ? <> Reported </> : <SoftButton onClick={() => handleReported(answer.answer_id)}>Report</SoftButton>}
+        {isReported ?
+          <> Reported </>
+          :
+          <SoftButton onClick={() => handleReported(answer.answer_id)}>
+            Report
+          </SoftButton>}
       </small>
     </>
   )
