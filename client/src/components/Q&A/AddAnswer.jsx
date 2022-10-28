@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
-import {TOKEN, URL} from "/MyConfig.js";
+import { TOKEN, URL } from "/MyConfig.js";
 import Modal from 'react-modal';
 import UploadImage from './UploadImage.jsx';
 
@@ -10,12 +10,28 @@ const Modaldiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-content: space-around;
-  border: solid;
-  width: 300px;
+  // border: dotted;
+  width: 30vw;
+`
+const Header = styled.div`
+  display: flex;
+  justify-content: center;
+  `
+  const StyledInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  `
+  const Button = styled.button`
+  border: none;
+  background:none;
+  font-weight: bold;
+  // padding-left: 20px;
+  color: #404040;
 `
 
-const AddAnswer = ({question}) => {
-  var product_ID = '66644'; // TODO get current productID
+const AddAnswer = ({ question, product }) => {
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,68 +40,81 @@ const AddAnswer = ({question}) => {
 
   return (
     isSubmitted ? <h4>Answer Submitted!</h4> :
-    <Modaldiv>
-      <h3>Submit Your Answer</h3>
-    <h5> [ProductName]: {question.question_body}</h5> //TODO get current prod name
-      <form>
-        <label> Your Answer: *
-        <textarea
-          onChange={(e) => setBody(e.target.value)}
-          type="text"
-          name="name"
-          placeholder="..."
-          required=""
-          maxLength="1000"
-          value={body}
-        ></textarea>
-      </label>
-      <p> <br/> </p>
-      <label> Nickname *
-        <input
-          onChange={(e) => setName(e.target.value)}
-          type="text"
-          placeholder="Example: jack543!"
-          required=""
-          maxLength="60"
-          value={name}
-        />
-      </label>
-      <small>For privacy reasons, do not use your full name or email address</small>
-      <p> <br/> </p>
-      <label> Email:
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          type="text"
-          placeholder="Example: jack@email.com"
-          required=""
-          maxLength="60"
-          value={email}
-        />
-      </label>
-      <p> <br/> </p>
-      <small>For authentication reasons, you will not be emailed</small>
-      <UploadImage setPhotos={setPhotos}/> //fix bug that submits when upload image is clicked
-      <p> <br/> </p>
-      <button onClick={(e) => {
-        e.preventDefault();
-        axios({
-          method: 'post',
-          url: `${URL}/qa/questions/${question.question_id}/answers`,
-          headers: {Authorization: TOKEN},
-          data: {
-            product_id: product_ID,
-            body: body,
-            name: name,
-            email: email,
-            photos: photos
-          }
-        })
-        .then(() => {setIsSubmitted(true);
-        alert('submitted')})
-        .catch((err)=> console.log(err))
-      }}  > Submit </button>
-      </form>
-    </Modaldiv>
+      <Modaldiv>
+        <Header>
+        <div>
+          <h3>SUBMIT YOUR ANSWER</h3>
+          <h4>{product.name}: {question.question_body}</h4>
+        </div>
+        </Header>
+        <form>
+          <StyledInput>
+            <label> Your Answer* </label>
+            <textarea
+              onChange={(e) => setBody(e.target.value)}
+              type="text"
+              name="name"
+              placeholder="..."
+              required=""
+              maxLength="1000"
+              value={body}
+            ></textarea>
+          </StyledInput>
+          <StyledInput>
+          <label> Nickname * </label>
+          <input
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+            placeholder="Example: jack543!"
+            required=""
+            maxLength="60"
+            value={name}
+          />
+          <small>
+            For privacy reasons, do not use your full name or email address
+          </small>
+          </StyledInput>
+          <StyledInput>
+          <label> Email* </label>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Example: jack@email.com"
+              required=""
+              maxLength="60"
+              value={email}
+            />
+          <small>
+            For authentication reasons, you will not be emailed
+          </small>
+          </StyledInput>
+          <div>
+            <UploadImage setPhotos={setPhotos} />
+          </div>
+          <div>
+          <Button onClick={(e) => {
+            e.preventDefault();
+            axios({
+              method: 'post',
+              url: `${URL}/qa/questions/${question.question_id}/answers`,
+              headers: { Authorization: TOKEN },
+              data: {
+                product_id: product_ID,
+                body: body,
+                name: name,
+                email: email,
+                photos: photos
+              }
+            })
+              .then(() => {
+                setIsSubmitted(true);
+                alert('submitted')
+              })
+              .catch((err) => console.log(err))
+          }}  > SUBMIT </Button>
+        </div>
+        </form>
+      </Modaldiv>
   )
 }
 

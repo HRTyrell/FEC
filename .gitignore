@@ -8,3 +8,4 @@ client/dist/*.png
 client/dist/*.ttf
 .DS_Store
 coverage
+jest.config.js

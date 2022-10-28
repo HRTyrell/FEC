@@ -13,35 +13,29 @@ const SoftButton = styled.button`
   text-decoration: underline;
   color: #404040;
 `
+const Button = styled.button`
+  padding 10px 5px 10px 5px;
+  border-color: #999999;
+  background: none;
+  color: #404040;
+  font-weight: bold;
+`
 const Inline = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px;
   margin-top: 5px;
-  border: dotted;
-  border-color: red;
+  border-top: solid;
+  border-top-width: thin;
+  border-color: #ededed;
   height: 20px;
-  width: 95%;
 `
 const QA = styled.div`
-border: dotted;
-border-color: purple;
-  height: 60vh;
+  // border: dotted;
+  // border-color: purple;
+  max-height: 100vh;
   overflow-y: scroll;
-  width: realtive;
 `
-
-const SModal = styled.div`
-  content : {
-    top: 50%
-    left: 50%
-    right                 : auto,
-    bottom                : auto,
-    marginRight           : -50%,
-    transform             : translate(-50%, -50%),
-    backgroundColor       : grey
-  }
-    `
 const customStyles = {
   content: {
     top: '50%',
@@ -55,10 +49,10 @@ const customStyles = {
 };
 
 
-const QAList = ({ search }) => {
-  var product_id = '66644';
+const QAList = ({ search, product}) => {
+  const productId = product.id;
   const [questions, setQuestions] = useState([]);
-  const [id, setId] = useState(product_id);
+  // const [id, setId] = useState(product.id);
   const [count, setCount] = useState(4);
   const [isHelpful, setIsHelpful] = useState(false);
   const [questionModalIsOpen, setQuestionModalIsOpen] = useState(false);
@@ -66,19 +60,18 @@ const QAList = ({ search }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `${URL}/qa/questions/?product_id=${id}&count=${10000}`,
+      url: `${URL}/qa/questions/?product_id=${product.id}&count=${10000}`,
       headers: { Authorization: TOKEN }
     })
       .then((res) => {
+        console.log('productid', product.id)
         let answeredQuestions = res.data.results.filter((question) => {
-
           return Object.keys(question.answers).length > 0 && question.question_body.includes(search)
-
         })
         setQuestions(answeredQuestions);
       })
       .catch((err) => (console.log('GET QUESTION', err)))
-  }, [search])
+  }, [search, productId])
 
   const questionModal = () => {
     const setTrue = () => {
@@ -89,9 +82,9 @@ const QAList = ({ search }) => {
     }
     return (
       <>
-        <button onClick={setTrue}>ADD A QUESTION +</button>
+        <Button onClick={setTrue}>ADD A QUESTION +</Button>
         <Modal isOpen={questionModalIsOpen} style={customStyles} onRequestClose={() => setQuestionModalIsOpen(false)}>
-          <AddQuestion />
+          <AddQuestion product={product}/>
         </Modal>
       </>
     )
@@ -105,22 +98,22 @@ const QAList = ({ search }) => {
             <Inline>
               <strong><label>Q:
                 &nbsp; {question.question_body}</label></strong>
-            <QuestionInfo question={question} />
+              <QuestionInfo question={question} product={product} />
             </Inline>
             <Answers key={question.question_id} question={question} />
           </div>
         ))}
 
         {(questions.length > 2 && count < questions.length) ?
-          <button onClick={(e) => setCount(count + 2)}>
+          <Button onClick={(e) => setCount(count + 2)}>
             MORE ANSWERED QUESTIONS
-          </button> : null}</QA>
+          </Button> : null}</QA>
       {questionModal()}
     </div>
   )
 }
 
-const QuestionInfo = ({ question }) => {
+const QuestionInfo = ({ question, product}) => {
   const [isReported, setIsReported] = useState(false)
   const [isHelpful, setIsHelpful] = useState(false)
   const [answerModalIsOpen, setAnswerModalIsOpen] = useState(false);
@@ -137,7 +130,7 @@ const QuestionInfo = ({ question }) => {
         <SoftButton onClick={setTrue}>Add Answer</SoftButton>
 
         <Modal isOpen={answerModalIsOpen} style={customStyles} onRequestClose={() => setAnswerModalIsOpen(false)}>
-          <AddAnswer question={question}/>
+          <AddAnswer question={question} product={product} />
         </Modal>
       </>
     )
@@ -169,12 +162,14 @@ const QuestionInfo = ({ question }) => {
   }
 
   return (
-    <small>
-      Helpful?
-      <SoftButton onClick={() => { handleHelpfulness(question.question_id) }}>Yes</SoftButton>
-      ({isHelpful ? question.question_helpfulness + 1 : question.question_helpfulness})| {isReported ? <> Reported </> : <SoftButton onClick={() => handleReported(question.question_id)}>Report</SoftButton>} |
+    <div>
+      <small>Helpful?</small>
+      <SoftButton onClick={() => {handleHelpfulness(question.question_id) }}>
+        Yes
+      </SoftButton>
+      ({isHelpful ? question.question_helpfulness + 1 : question.question_helpfulness}) | {isReported ? <small> Reported </small> : <SoftButton onClick={() => handleReported(question.question_id)}><>Report</></SoftButton>} |
       {answerModal(question)}
-      </small>
+    </div>
   )
 }
 
