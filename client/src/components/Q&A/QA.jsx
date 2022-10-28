@@ -30,7 +30,6 @@ const MainDiv = styled.div`
         <SearchBar setSearch={setSearch}/>
         <QAList search={search} product={curProduct} />
       </MainDiv>
-      </>
     );
   }
 
