@@ -58,9 +58,9 @@ const RatingsReviews = () => {
     <StylizedOuterContainer id="RatingsReviews">
       <StyledCinzel> RATINGS & REVIEWS </StyledCinzel>
       <StyledContainer>
-        <Breakdown metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
+        <Breakdown key={curProduct.id + '-' + curProduct.id} metaData={metaData} starBarFilters={starBarFilters} setstarBarFilters={setstarBarFilters}/>
 
-        <ReviewsList product_id={curProduct.id} starBarFilters={starBarFilters}/>
+        <ReviewsList key={curProduct.id} product_id={curProduct.id} starBarFilters={starBarFilters}/>
       </StyledContainer>
       <NewReviewForm setmetaData={setmetaData} characteristics={metaData.characteristics} product_id={curProduct.id} product_name={curProduct.name}/>
     </StylizedOuterContainer>
