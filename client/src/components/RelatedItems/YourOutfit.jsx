@@ -22,7 +22,7 @@ const CurrentProduct = styled.div`
   align-self: center;
   width: 15em;
   height: 30em;
-  border-radius: 30px;
+  //border-radius: 30px;
   box-shadow:6px 6px 10px #bebebe,
               -6px -6px 10px #ffffff;
   background-color: rgba(255, 255, 255, 1);
