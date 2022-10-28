@@ -4,7 +4,7 @@ import styled from "styled-components";
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const DivS = styled.div`
-margin: 0 0px;
+margin: 0 20px;
 display: flex;
 flex-direction: column;
 text-align: left;

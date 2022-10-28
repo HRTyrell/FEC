@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
+import ModalImage from 'react-modal-image';
 
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
@@ -68,8 +69,7 @@ const Gallery2 = () => {
     return null;
   }
 
-
-  console.log("🚀 ~ file: Gallery2.jsx ~ line 65 ~ Gallery2 ~ cStyle", cStyle)
+  console.log(cStyle);
 
   return (
     <GalleryDiv>
@@ -87,11 +87,14 @@ const Gallery2 = () => {
         {cStyle.photos.map((img, index) => {
           return(
             <IDiv key={index}>
-              <C2img src={img.url}/>
+              {/* <button onClick = {}> */}
+                <C2img key={index} src={img.url}/>
+              {/* </button> */}
             </IDiv>
           )
         })}
       </Slides>
+      {/* <ModalImage medium={cStyle.photos[0].url}/> */}
     </GalleryDiv>
   )
 }

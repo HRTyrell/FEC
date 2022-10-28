@@ -25,8 +25,6 @@ height: 100%;
 width: 100%;
 `
 
-
-
 const App = () => {
 
   const Clicks = ClickStore((state) => state.AddDomElement);
