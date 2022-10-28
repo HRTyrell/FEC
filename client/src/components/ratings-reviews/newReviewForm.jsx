@@ -142,7 +142,7 @@ export const cloudinaryPostRequest = (arrayOfFiles, successPhotosCallback) => {
     }))
     .then((results)=>{return results.map((result)=>{return result.data.url})})
     .then((results)=>{successPhotosCallback(results)})
-    .catch((err)=>{console.log('error cloud: ', err)})
+    .catch((err)=>{alert('error with cloudinary API: ', err)})
   } else {
     successPhotosCallback([]);
   }
