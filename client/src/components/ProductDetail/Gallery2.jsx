@@ -8,6 +8,7 @@ display: flex;
 justify-content: center;
 `
 const Thumbnails = styled.div`
+margin: 80px 5px;
 display: flex;
 flex-direction: column;
 gap: 8px;
@@ -28,7 +29,8 @@ width: auto;
 `
 
 const ButtonN = styled.button`
-opacity: .3;
+display:block;
+opacity: ${props => props.disp};
 margin: 5px auto;
 background: transparent;
 border: none;
@@ -36,7 +38,7 @@ height: 50px;
 width: 100px;
 border: solid;
 :hover {
-  opacity: 1;
+  opacity: ${props => props.disp2};
   border: 1px solid white;
   box-shadow: 4px 4px 12px #c5c5c5,
               -4px -4px 12px #ffffff;
@@ -46,7 +48,8 @@ border: solid;
 
 
 const ButtonP = styled.button`
-opacity: .3;
+display:block;
+opacity:${props => props.disp};
 margin: 5px auto;
 background: transparent;
 border: none;
@@ -54,7 +57,7 @@ height: 50px;
 width: 100px;
 border: solid;
 :hover {
-  opacity: 1;
+  opacity: ${props => props.disp2};
   border: 1px solid white;
   box-shadow: 4px 4px 12px #c5c5c5,
               -4px -4px 12px #ffffff;
@@ -63,17 +66,18 @@ border: solid;
 `
 
 const Scrollbar = styled.div`
-width: 1px;
-height: 720px;
+width: 2px;
+height: 800px;
 background: #ccc;
 display: block;
-margin: 0 0 0 8px;
+margin: 80px 0 0 8px;
 `
 const Thumb = styled.div`
-width: 1px;
+width: 2px;
 position: absolute;
-height: 0;
+height: ${props => props.height};
 background: #000;
+transition: height 2s;
 `
 
 const Slides = styled.div`
@@ -129,6 +133,7 @@ const Gallery2 = () => {
   const [ShowModal, setShowModal] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const activeSlideRef = useRef(null);
+  let dispNext, dispPrev, dispNext2, dispPrev2;
 
   const show = () => {
     setShowModal(prev => !prev)
@@ -144,14 +149,25 @@ const Gallery2 = () => {
     }
   }, [activeSlide]);
 
-
   if (!cStyle) {
     return null;
   }
 
+
+
+  if (activeSlide === 0) {
+    dispPrev = "0"
+  } else if (activeSlide === (cStyle.photos.length - 1)) {
+    dispNext = "0"
+  } else {
+    dispPrev = ".3";
+    dispNext = ".3";
+    dispPrev2 = "1";
+    dispNext2 = "1"
+  }
+
   const moveLeft = Math.max(0, activeSlide - 1);
   const moveRight = Math.min(cStyle.photos.length - 1, activeSlide + 1);
-  console.log(cStyle);
 
   return (
     <GalleryDiv>
@@ -163,14 +179,14 @@ const Gallery2 = () => {
       })}
       </Thumbnails>
       <Scrollbar>
-        <Thumb/>
+        <Thumb height={`${((activeSlide + 1) / cStyle.photos.length) * 800}px`}/>
       </Scrollbar>
       <F2Div>
-        <ButtonP onClick={() => setActiveSlide(moveLeft)}>PREV</ButtonP>
+          <ButtonP onClick={() => setActiveSlide(moveLeft)} disp={dispPrev} disp2={dispPrev2}>PREV</ButtonP>
         <Slides>
           {cStyle.photos.map((img, index) => {
             return(
-              <IDiv key={index} ref={index === activeSlide ? activeSlideRef : null} >
+              <IDiv key={index} ref={index === activeSlide ? activeSlideRef : null}>
                 <Button onClick={() => show()}>
                   <C2img key={index} src={img.url}/>
                 </Button>
@@ -178,7 +194,7 @@ const Gallery2 = () => {
             )
           })}
         </Slides>
-        <ButtonN onClick={() => setActiveSlide(moveRight)}>NEXT</ButtonN>
+        <ButtonN onClick={() => setActiveSlide(moveRight)} disp={dispNext} disp2={dispNext2}>NEXT</ButtonN>
       </F2Div>
     </GalleryDiv>
   )
@@ -194,8 +210,8 @@ export default Gallery2;
 // const marginTop = 16;
 
 // const scrollThumb = () => {
-//   const index = Math.floor(slideGallery.scrollTop / slideHeight);
-//   scrollbarThumb.style.height = `${((index + 1) / slideCount) * slideHeight}px`;
+  // const index = Math.floor(slideGallery.scrollTop / slideHeight);
+  // scrollbarThumb.style.height = `${((index + 1) / slideCount) * slideHeight}px`;
 // };
 
 // const scrollToElement = el => {
