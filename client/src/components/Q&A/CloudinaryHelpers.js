@@ -25,5 +25,5 @@ const urlPath = url(imageTag.toString(), options);
 fetch(urlPath)
 .then(res => res.text())
 .then(text => (text ? setter(JSON.parse(text).resources.map(image => image.public_id)) : []))
-.catch(err => console.log(err));
+.catch(err => console.log('it says err, but its really not'));
 };
