@@ -7,6 +7,7 @@ import CryptoJS from 'crypto-js'
 import axios from 'axios';
 import {CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUD_NAME} from '/MyConfig.js';
 import {TOKEN} from '/MyConfig.js';
+import cross from '../../assets/cross.png';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -100,6 +101,10 @@ const StyledCinzelInput = styled.input`
 const StyledCenterTextDiv = styled.div`
   text-align: center;
 `
+const StyledExitButton = styled.img`
+  float: right;
+  padding: 1%;
+`
 
 const characteristicTable = {
   Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
@@ -137,7 +142,7 @@ export const cloudinaryPostRequest = (arrayOfFiles, successPhotosCallback) => {
     }))
     .then((results)=>{return results.map((result)=>{return result.data.url})})
     .then((results)=>{successPhotosCallback(results)})
-    .catch((err)=>alert(err))
+    .catch((err)=>{console.log('error cloud: ', err)})
   } else {
     successPhotosCallback([]);
   }
@@ -230,12 +235,13 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
 
   if (!modalView) {
     return (<StyledCenterTextDiv>
-        <StyledCinzelButton onClick={()=>setModalView(true)}>Submit New Review</StyledCinzelButton>
+        <StyledCinzelButton onClick={()=>{setModalView(true);setRating(0);setUserPhotos([])}}>Submit New Review</StyledCinzelButton>
       </StyledCenterTextDiv>)
   } else {
     return (
       <StyledModal>
         <StyledForm onSubmit={verifyForm}>
+          <StyledExitButton src={cross} width="25px" height="25px" onClick={e=>setModalView(false)}></StyledExitButton>
           <StyledTitle fontSize="x-large">Write Your Review</StyledTitle>
           <StyledTitle fontSize="large" >About the {product_name}</StyledTitle>
 

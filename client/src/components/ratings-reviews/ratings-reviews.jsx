@@ -66,7 +66,7 @@ const RatingsReviews = () => {
 
         <ReviewsList key={curProduct.id} product_id={curProduct.id} starBarFilters={starBarFilters}/>
       </StyledContainer>
-      <NewReviewForm setmetaData={setmetaData} characteristics={metaData.characteristics} product_id={curProduct.id} product_name={curProduct.name}/>
+      <NewReviewForm key={new Date().toJSON()} setmetaData={setmetaData} characteristics={metaData.characteristics} product_id={curProduct.id} product_name={curProduct.name}/>
     </StylizedOuterContainer>
   )
 }

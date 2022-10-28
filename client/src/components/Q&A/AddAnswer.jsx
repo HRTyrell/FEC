@@ -99,7 +99,7 @@ const AddAnswer = ({ question, product }) => {
               url: `${URL}/qa/questions/${question.question_id}/answers`,
               headers: { Authorization: TOKEN },
               data: {
-                product_id: product_ID,
+                product_id: product.id,
                 body: body,
                 name: name,
                 email: email,
