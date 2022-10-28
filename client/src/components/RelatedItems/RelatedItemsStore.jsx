@@ -10,7 +10,7 @@ export const useRelatedItemsStore = create(set => ({
     localStorage.setItem('outfitList', productsString);
   },
   getOutfitFromLocalStorage: () => {
-    var products = JSON.parse(localStorage.getItem('outfitList'));
+    var products = JSON.parse(localStorage.getItem('outfitList')) || {};
     set({outfitList: products});
   },
   setRelatedItems: (relatedItems) => set({relatedItemsList: relatedItems})

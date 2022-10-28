@@ -19,7 +19,7 @@ margin: 2px;
 padding: 0;
 width: 15em;
 height: 30em;
-border-radius: 30px;
+// border-radius: 30px;
 box-shadow:6px 6px 10px #bebebe,
             -6px -6px 10px #ffffff;
 `;
@@ -35,7 +35,7 @@ margin: auto;
 position: relative;
 width: auto;
 background-color: rgba(255, 255, 255, 1);
-border-radius: 30px 30px 0 0 ;
+// border-radius: 30px 30px 0 0 ;
 
 `;
 
@@ -47,7 +47,7 @@ position: relative;
 width: 90%;
 height: auto;
 padding: 2%;
-border-radius: 10px;
+// border-radius: 10px;
 `;
 
 const ButtonStyled = styled.img`
@@ -68,7 +68,7 @@ height: 5em;
 bottom: 1;
 padding: 0.5em 0 0.5em 0;
 background-color: rgba(211, 211, 211, 0.5);
-border-radius: 30px;
+// border-radius: 30px;
 `;
 const Category = styled.p`
   margin-top: 0;
@@ -122,6 +122,7 @@ const ProductCard = ({product, isStar}) => {
   const setOutfit = useRelatedItemsStore((state) => state.setOutfit)
   const outfitList = useRelatedItemsStore.getState().outfitList;
   const onCrossClickHandler = (e) => {
+    e.preventDefault();
     delete outfitList[product.data.id];
     setOutfit(outfitList);
   }
@@ -154,14 +155,14 @@ const ProductCard = ({product, isStar}) => {
   )
 
   return (
-    <CardStyled onClick={handleCardClick}>
+    <CardStyled data-testid="productCard">
       <ComparisonModal modalIsOpen={modalIsOpen} currentProduct={curProduct} comparisonProduct={product.data}/>
       <ProductImageStyled >
-        <ImageStyled src={defaultImage} alt="Image of RelatedProduct" aria-label="Product Image"/>
+        <ImageStyled src={defaultImage} alt="Image of RelatedProduct" aria-label="Product Image" onClick={handleCardClick}/>
         {isStar ? setStarIcon : setCrossIcon}
         <SmallStarBar rating={rating}/>
       </ProductImageStyled>
-      <OuterDescriptionDiv>
+      <OuterDescriptionDiv onClick={handleCardClick}>
         <Category>{product.data.category}</Category>
         <ProductTitle>{product.data.name}</ProductTitle>
         <Price>${product.data.default_price}</Price>

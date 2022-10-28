@@ -18,7 +18,7 @@ const CarouselControl = styled.button`
   z-index: 9;
   position: sticky;
   background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 20%;
+  //border-radius: 20%;
   font-size: 1.5rem;
   height: 2em;
   top: 45%;

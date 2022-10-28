@@ -1,107 +1,133 @@
-<div class="gallery-container">
-  <div class="thumbnails"></div>
-  <div class="scrollbar">
-    <div class="thumb"></div>
-  </div>
-  <div class="slides">
-    <div><img src="https://picsum.photos/id/1067/540/720"></div>
-    <div><img src="https://picsum.photos/id/122/540/720"></div>
-    <div><img src="https://picsum.photos/id/188/540/720"></div>
-    <div><img src="https://picsum.photos/id/249/540/720"></div>
-    <div><img src="https://picsum.photos/id/257/540/720"></div>
-    <div><img src="https://picsum.photos/id/259/540/720"></div>
-    <div><img src="https://picsum.photos/id/283/540/720"></div>
-    <div><img src="https://picsum.photos/id/288/540/720"></div>
-    <div><img src="https://picsum.photos/id/299/540/720"></div>
-  </div>
-</div>
+import React, { useState, useEffect } from 'react';
+import styled from "styled-components";
+import ModalImage from 'react-modal-image';
 
-.gallery-container {
-  display: flex;
-  justify-content: center;
+import ProductStore from "../Provider/Zus_Provider.jsx";
+
+const GalleryDiv = styled.div`
+display: flex;
+justify-content: center;
+`
+const Thumbnails = styled.div`
+display: flex;
+flex-direction: column;
+gap: 8px;
+`
+const Timg = styled.img`
+width: 45px;
+height: 60px;
+object-fit: contain;
+cursor: pointer;
+`
+
+const Scrollbar = styled.div`
+width: 1px;
+height: 720px;
+background: #ccc;
+display: block;
+margin: 0 0 0 8px;
+`
+const Thumb = styled.div`
+width: 1px;
+position: absolute;
+height: 0;
+background: #000;
+`
+
+const Slides = styled.div`
+margin: 0 16px;
+display: grid;
+grid-auto-flow: row;
+gap: 1rem;
+width: calc(540px + 1rem);
+padding: 0 0.25rem;
+height: 720px;
+overflow-y: auto;
+overscroll-behavior-y: contain;
+scroll-snap-type: y mandatory;
+scrollbar-width: none;
+::-webkit-scrollbar {
+display: none;
 }
+`
+const IDiv = styled.div`
+scroll-snap-align: start;
+`
 
-.thumbnails {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+const C2img = styled.img`
+width: 540px;
+object-fit: contain;
+`
 
-.thumbnails img {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-}
 
-.scrollbar {
-  width: 1px;
-  height: 720px;
-  background: #ccc;
-  display: block;
-  margin: 0 0 0 8px;
-}
 
-.thumb {
-  width: 1px;
-  position: absolute;
-  height: 0;
-  background: #000;
-}
+const Gallery2 = () => {
 
-.slides {
-  margin: 0 16px;
-  display: grid;
-  grid-auto-flow: row;
-  gap: 1rem;
-  width: calc(540px + 1rem);
-  padding: 0 0.25rem;
-  height: 720px;
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
-  scroll-snap-type: y mandatory;
-  scrollbar-width: none;
-}
+  const cStyle = ProductStore((state) => state.curStyle);
 
-.slides > div {
-  scroll-snap-align: start;
-}
+  if (!cStyle) {
+    return null;
+  }
 
-.slides img {
-  width: 540px;
-  object-fit: contain;
-}
+  console.log(cStyle);
 
-.slides::-webkit-scrollbar {
-  display: none;
-}
-
-const slideGallery = document.querySelector('.slides');
-const slides = slideGallery.querySelectorAll('div');
-const scrollbarThumb = document.querySelector('.thumb');
-const slideCount = slides.length;
-const slideHeight = 720;
-const marginTop = 16;
-
-const scrollThumb = () => {
-  const index = Math.floor(slideGallery.scrollTop / slideHeight);
-  scrollbarThumb.style.height = `${((index + 1) / slideCount) * slideHeight}px`;
-};
-
-const scrollToElement = el => {
-  const index = parseInt(el.dataset.id, 10);
-  slideGallery.scrollTo(0, index * slideHeight + marginTop);
-};
-
-document.querySelector('.thumbnails').innerHTML += [...slides]
-  .map(
-    (slide, i) => `<img src="${slide.querySelector('img').src}" data-id="${i}">`
+  return (
+    <GalleryDiv>
+      <Thumbnails>
+      {cStyle.photos.map((img, index) => {
+          return(
+            <Timg key={index} src={img.url}/>
+          )
+      })}
+      </Thumbnails>
+      <Scrollbar>
+        <Thumb/>
+      </Scrollbar>
+      <Slides>
+        {cStyle.photos.map((img, index) => {
+          return(
+            <IDiv key={index}>
+              {/* <button onClick = {}> */}
+                <C2img key={index} src={img.url}/>
+              {/* </button> */}
+            </IDiv>
+          )
+        })}
+      </Slides>
+      {/* <ModalImage medium={cStyle.photos[0].url}/> */}
+    </GalleryDiv>
   )
-  .join('');
+}
 
-document.querySelectorAll('.thumbnails img').forEach(el => {
-  el.addEventListener('click', () => scrollToElement(el));
-});
+export default Gallery2;
 
-slideGallery.addEventListener('scroll', e => scrollThumb());
+// const slideGallery = document.querySelector('.slides');
+// const slides = slideGallery.querySelectorAll('div');
+// const scrollbarThumb = document.querySelector('.thumb');
+// const slideCount = slides.length;
+// const slideHeight = 720;
+// const marginTop = 16;
 
-scrollThumb();
+// const scrollThumb = () => {
+//   const index = Math.floor(slideGallery.scrollTop / slideHeight);
+//   scrollbarThumb.style.height = `${((index + 1) / slideCount) * slideHeight}px`;
+// };
+
+// const scrollToElement = el => {
+//   const index = parseInt(el.dataset.id, 10);
+//   slideGallery.scrollTo(0, index * slideHeight + marginTop);
+// };
+
+// document.querySelector('.thumbnails').innerHTML += [...slides]
+//   .map(
+//     (slide, i) => `<img src="${slide.querySelector('img').src}" data-id="${i}">`
+//   )
+//   .join('');
+
+// document.querySelectorAll('.thumbnails img').forEach(el => {
+//   el.addEventListener('click', () => scrollToElement(el));
+// });
+
+// slideGallery.addEventListener('scroll', e => scrollThumb());
+
+// scrollThumb();

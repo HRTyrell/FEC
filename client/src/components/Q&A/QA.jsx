@@ -29,20 +29,12 @@ const MainDiv = styled.div`
     }
 
     return (
-<<<<<<< HEAD
       <>
         <H2> QUESTIONS & ANSWERS</H2>
         <MainDiv id="QandA">
           <SearchBar setSearch={setSearch}/>
           <QAList search={search} product={curProduct} />
         </MainDiv>
-=======
-      <MainDiv id="QandA">
-        <h2> QUESTIONS & ANSWERS</h2>
-        <SearchBar setSearch={setSearch}/>
-        <QAList search={search} product={curProduct} />
-      </MainDiv>
->>>>>>> 8c65e7e25d49fa200bd01829fd5b305f673630b6
       </>
     );
   }
