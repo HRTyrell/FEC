@@ -30,7 +30,8 @@ const RatingsReviews = () => {
   const {curProduct} = ProductStore();
   const isMounted = useRef(false);
 
-  const [starBarFilters, setstarBarFilters]  = useState({1:true, 2:true, 3:true, 4:true, 5:true, filtered:false});
+  let defaultStarBarFilters = {1:true, 2:true, 3:true, 4:true, 5:true, filtered:false}
+  const [starBarFilters, setstarBarFilters]  = useState(defaultStarBarFilters);
   const [metaData, setmetaData]  = useState(null);
 
   useEffect(()=> {
@@ -41,6 +42,9 @@ const RatingsReviews = () => {
         headers: {authorization: TOKEN}
         })
         .then((val)=> {
+          val.data.recommended.false = val.data.recommended.false || 0;
+          val.data.recommended.true = val.data.recommended.true || 0;
+          setstarBarFilters(defaultStarBarFilters)
           setmetaData(val.data)
         })
         .catch((err)=> {

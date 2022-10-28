@@ -78,7 +78,7 @@ export const getAvg = function(ratings) {
 
 export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}) {
   let avg = getAvg(metaData.ratings);
-  let totalRatings = Number(metaData.recommended.false || 0) + Number(metaData.recommended.true|| 0);
+  let totalRatings = Number(metaData.recommended.false) + Number(metaData.recommended.true);
 
   const onClickBar = (star)=> {
     let newStarBarFilters={};
@@ -129,7 +129,7 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
     }
     return filterMessage.length>0? filterMessage : '';
   }
-  console.log(metaData.recommended)
+
   return (
     <BreakdownDiv>
       <StyledStarBarRatingDiv>
@@ -153,7 +153,7 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
             </StyledHoverable>
             )
         })}
-      <StyledCinzel>{`${(Number(metaData.recommended.true || 0) / (Number(metaData.recommended.true || 0) + Number(metaData.recommended.false || 0))).toFixed(2) * 100}% of reviews recommend this product`}</StyledCinzel>
+      <StyledCinzel>{`${(Number(metaData.recommended.true) / (Number(metaData.recommended.true) + Number(metaData.recommended.false))).toFixed(2) * 100}% of reviews recommend this product`}</StyledCinzel>
       <StyledPaddedDiv>
         {Object.keys(metaData.characteristics).map((characteristic, index)=> {
           return <ProductBreakdownFactor key={index} characteristic={characteristic} data={metaData.characteristics[characteristic]}/>
