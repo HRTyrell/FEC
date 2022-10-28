@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {Starbar} from './starbar.jsx';
 import axios from 'axios';
 import {TOKEN} from '/MyConfig.js';
+import brokenIMG from '../../assets/brokenImage.png';
 
 const StyledContainerSpread = styled.div`
   display: flex;
@@ -128,6 +129,8 @@ const SizeAdjustableImage = ({url}) => {
       </StyledModal>
     )
   } else {
-    return <StyledImage src={url} width="50px" height="50px" onClick={()=>{setModalView(true)}}></StyledImage>
+    return <StyledImage src={url} width="50px" height="50px" onClick={(e)=>{if (e.target.src != brokenIMG) {setModalView(true)}}} onError={(e)=>{
+      e.currentTarget.src = brokenIMG;
+    }}></StyledImage>
   }
 }

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
 import { TOKEN, URL } from "/MyConfig.js";
-import Modal from 'react-modal';
 import UploadImage from './UploadImage.jsx';
 
 const Modaldiv = styled.div`
@@ -10,7 +9,6 @@ const Modaldiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-content: space-around;
-  // border: dotted;
   width: 30vw;
 `
 const Header = styled.div`
@@ -24,12 +22,18 @@ const Header = styled.div`
   padding: 10px;
   `
   const Button = styled.button`
-  border: none;
+  border-width: thin;
   background:none;
   font-weight: bold;
   // padding-left: 20px;
   color: #404040;
 `
+
+const Center = styled.div`
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  `
 
 const AddAnswer = ({ question, product }) => {
   const [body, setBody] = useState('');
@@ -37,15 +41,23 @@ const AddAnswer = ({ question, product }) => {
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  // const [isValid]
+
+  // const isValidEmail = (value) => {
+  //   if (value.includes('@') && value.includes('.com')){
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   return (
     isSubmitted ? <h4>Answer Submitted!</h4> :
       <Modaldiv>
         <Header>
-        <div>
           <h3>SUBMIT YOUR ANSWER</h3>
+        </Header>
+        <Header>
           <h4>{product.name}: {question.question_body}</h4>
-        </div>
         </Header>
         <form>
           <StyledInput>
@@ -60,6 +72,9 @@ const AddAnswer = ({ question, product }) => {
               value={body}
             ></textarea>
           </StyledInput>
+          <div>
+            <UploadImage setPhotos={setPhotos} />
+          </div>
           <StyledInput>
           <label> Nickname * </label>
           <input
@@ -88,10 +103,8 @@ const AddAnswer = ({ question, product }) => {
             For authentication reasons, you will not be emailed
           </small>
           </StyledInput>
-          <div>
-            <UploadImage setPhotos={setPhotos} />
-          </div>
-          <div>
+
+          <Center>
           <Button onClick={(e) => {
             e.preventDefault();
             axios({
@@ -99,7 +112,7 @@ const AddAnswer = ({ question, product }) => {
               url: `${URL}/qa/questions/${question.question_id}/answers`,
               headers: { Authorization: TOKEN },
               data: {
-                product_id: product_ID,
+                product_id: product.id,
                 body: body,
                 name: name,
                 email: email,
@@ -108,11 +121,10 @@ const AddAnswer = ({ question, product }) => {
             })
               .then(() => {
                 setIsSubmitted(true);
-                alert('submitted')
               })
               .catch((err) => console.log(err))
-          }}  > SUBMIT </Button>
-        </div>
+          }}> SUBMIT </Button>
+          </Center>
         </form>
       </Modaldiv>
   )
