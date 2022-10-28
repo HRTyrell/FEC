@@ -11,6 +11,7 @@ display: flex;
 flex-direction: row;
 justify-content: flex-start;
 align-items: left;
+padding: 0;
 `;
 
 const CurrentProduct = styled.div`
@@ -19,13 +20,12 @@ const CurrentProduct = styled.div`
   border-style: solid;
   align-items: center;
   align-self: center;
-  width: 12em;
-  height: 24em;
-  border-radius: 30px;
+  width: 15em;
+  height: 30em;
+  //border-radius: 30px;
   box-shadow:6px 6px 10px #bebebe,
               -6px -6px 10px #ffffff;
   background-color: rgba(255, 255, 255, 1);
-  margin: 0 0 0 -2em;
 `;
 const Image = styled.img`
   display: flex;

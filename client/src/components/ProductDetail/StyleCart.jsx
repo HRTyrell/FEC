@@ -68,7 +68,7 @@ color: ${props => props.color || 'Black'};
 font-size: ${props => props.size || "14px"};
 `
 
-const H2 = styled.h2`
+export const H2 = styled.h2`
 margin: ${props => props.margin};
 font-family: 'Cinzel';
 font-weight: 200;
