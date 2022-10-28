@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import styled from "styled-components";
+import styled, {ThemeProvider} from "styled-components";
 
 import GlobalFonts from './fonts/fonts.js';
 import Overview from './components/ProductDetail/Overview.jsx';
@@ -34,6 +34,11 @@ const widgetsIDs ={
   ProductInfo3: 'ProductInfo'
 };
 
+const theme = {
+  fg: "black",
+  bg: "white"
+}
+
 const postInteractionsAPI = (data) => {
   const controller = new AbortController();
 
@@ -66,16 +71,17 @@ window.onclick = (e) => {
 const App = () => {
   return (
     <FullDiv>
-
-      {/* <BGBubbles/> */}
-      <GlobalFonts/>
-      <NavigationBar />
-      <Sdiv>
-        <Overview />
-        <RelatedItems />
-        <QA />
-        <RatingsReviews />
-      </Sdiv>
+      <ThemeProvider theme={theme}>
+        {/* <BGBubbles/> */}
+        <GlobalFonts/>
+        <NavigationBar />
+        <Sdiv>
+          <Overview />
+          <RelatedItems />
+          <QA />
+          <RatingsReviews />
+        </Sdiv>
+      </ThemeProvider>
     </FullDiv>
   )
 }

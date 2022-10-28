@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 
 import ProductStore from "../Provider/Zus_Provider.jsx";
+import Seven from "../../assets/777.png";
 
 const Title = styled.h1`
 display: block;
@@ -36,6 +37,17 @@ text-align: center;
 font-family: 'OldStandard';
 `;
 
+const Logo = styled.img`
+position: absolute;
+left: 0px;
+top: 0px;
+width: 300px;
+height: 300px;
+@media (max-width: 1000px) {
+  display:none;
+}
+`
+
 
 const NavigationBar = () => {
 
@@ -48,6 +60,7 @@ const NavigationBar = () => {
 
   return (
     <Wrap id="ProductInfo1">
+      <Logo src={Seven} />
       <Title>NavigationBar</Title>
       <H5>Sales | Deals | Promotions</H5>
       <Sdiv>
