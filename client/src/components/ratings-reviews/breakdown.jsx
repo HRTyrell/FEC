@@ -146,10 +146,10 @@ export const Breakdown = function ({metaData, starBarFilters, setstarBarFilters}
         </StyledOldStandardDiv> :
         <label></label>
       }
-        {Object.keys(metaData.ratings).reverse().map((item, index) => {
+        {['5', '4', '3', '2', '1'].map((item, index) => {
           return (
             <StyledHoverable key={index} onClick={()=> {onClickBar(item)}}>
-              <NoShrinkLabel>{item + ' Stars'}</NoShrinkLabel><StyledProgressBar max={totalRatings} value={metaData.ratings[item]}></StyledProgressBar><FixedWidthLabel>{metaData.ratings[item]}</FixedWidthLabel>
+              <NoShrinkLabel>{item + ' Stars'}</NoShrinkLabel><StyledProgressBar max={totalRatings} value={metaData.ratings[item] || 0}></StyledProgressBar><FixedWidthLabel>{metaData.ratings[item] || 0}</FixedWidthLabel>
             </StyledHoverable>
             )
         })}
