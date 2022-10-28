@@ -1,6 +1,38 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
 
+const H1 = styled.h1`
+margin: 0px 20px;
+font-family: 'Cinzel';
+font-weight: 400;
+font-size: 52px;
+color: ${props => props.color || 'Black'};
+text-align: left;
+`
+
+const H4 = styled.h4`
+margin: ${props => props.margin || "0"};
+font-family: 'OldStandard';
+letter-spacing: 1px;
+color: ${props => props.color || 'Black'};
+font-size: ${props => props.size || "14px"};
+`
+
+const H2 = styled.h2`
+margin: ${props => props.margin};
+font-family: 'Cinzel';
+font-weight: 200;
+color: ${props => props.color || 'Black'};
+text-align: left;
+font-size: 32px;
+
+`
+
+const A1 = styled.a`
+color: Black;
+text-decoration: none;
+`
+
 const Arrow = styled.div`
   margin: 5px 5px;
   width: 20px;

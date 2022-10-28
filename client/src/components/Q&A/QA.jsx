@@ -25,9 +25,8 @@ const MainDiv = styled.div`
     }
 
     return (
-      <><MainDiv>
-      <h2> QUESTIONS & ANSWERS</h2>
-
+      <MainDiv id="QandA">
+        <h2> QUESTIONS & ANSWERS</h2>
         <SearchBar setSearch={setSearch}/>
         <QAList search={search} product={curProduct} />
       </MainDiv>

@@ -6,7 +6,7 @@ const CarouselStyled = styled.div`
   display: flex;
   justify-content: start;
   height: 100%;
-  width: 51.5em;
+  width: 65em;
   position: relative;
   padding: 1em;
   left: -4.5em;

@@ -6,6 +6,6 @@ package-lock.json
 MyConfig.js
 client/dist/*.png
 client/dist/*.ttf
-.DS_Store
+*.DS_Store
 coverage
-jest.config.js
+
