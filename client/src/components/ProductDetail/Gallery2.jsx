@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
-import ModalImage from 'react-modal-image';
 
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
@@ -18,6 +17,49 @@ width: 45px;
 height: 60px;
 object-fit: contain;
 cursor: pointer;
+`
+
+const Button = styled.button`
+text-decoration: none;
+background: transparent;
+border: none;
+height: auto;
+width: auto;
+`
+
+const ButtonN = styled.button`
+opacity: .3;
+margin: 5px auto;
+background: transparent;
+border: none;
+height: 50px;
+width: 100px;
+border: solid;
+:hover {
+  opacity: 1;
+  border: 1px solid white;
+  box-shadow: 4px 4px 12px #c5c5c5,
+              -4px -4px 12px #ffffff;
+  border-radius: 20px;
+ }
+`
+
+
+const ButtonP = styled.button`
+opacity: .3;
+margin: 5px auto;
+background: transparent;
+border: none;
+height: 50px;
+width: 100px;
+border: solid;
+:hover {
+  opacity: 1;
+  border: 1px solid white;
+  box-shadow: 4px 4px 12px #c5c5c5,
+              -4px -4px 12px #ffffff;
+  border-radius: 20px;
+ }
 `
 
 const Scrollbar = styled.div`
@@ -41,7 +83,7 @@ grid-auto-flow: row;
 gap: 1rem;
 width: calc(540px + 1rem);
 padding: 0 0.25rem;
-height: 720px;
+height: 800px;
 overflow-y: auto;
 overscroll-behavior-y: contain;
 scroll-snap-type: y mandatory;
@@ -51,24 +93,64 @@ display: none;
 }
 `
 const IDiv = styled.div`
+display: flex;
+justify-content: center;
 scroll-snap-align: start;
+height: 780px;
 `
 
 const C2img = styled.img`
-width: 540px;
+height: 780px;
+max-width: 95%;
 object-fit: contain;
 `
 
+const F2Div = styled.div`
+display: flex;
+flex-direction: column;
+`
 
+const StyledModal = styled.header`
+  position: fixed;
+  z-index: 100;
+  padding: 200px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0,0,0,0.8); /* Fallback color */
+`
 
 const Gallery2 = () => {
 
   const cStyle = ProductStore((state) => state.curStyle);
+  const [ShowModal, setShowModal] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const activeSlideRef = useRef(null);
+
+  const show = () => {
+    setShowModal(prev => !prev)
+  }
+
+  useEffect(() => {
+    if (activeSlideRef.current) {
+      activeSlideRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'nearest'
+      });
+    }
+  }, [activeSlide]);
+
 
   if (!cStyle) {
     return null;
   }
 
+  const moveLeft = Math.max(0, activeSlide - 1);
+  const moveRight = Math.min(cStyle.photos.length - 1, activeSlide + 1);
   console.log(cStyle);
 
   return (
@@ -76,25 +158,28 @@ const Gallery2 = () => {
       <Thumbnails>
       {cStyle.photos.map((img, index) => {
           return(
-            <Timg key={index} src={img.url}/>
+              <Timg key={index} src={img.url} onClick={() => setActiveSlide(index)}/>
           )
       })}
       </Thumbnails>
       <Scrollbar>
         <Thumb/>
       </Scrollbar>
-      <Slides>
-        {cStyle.photos.map((img, index) => {
-          return(
-            <IDiv key={index}>
-              {/* <button onClick = {}> */}
-                <C2img key={index} src={img.url}/>
-              {/* </button> */}
-            </IDiv>
-          )
-        })}
-      </Slides>
-      {/* <ModalImage medium={cStyle.photos[0].url}/> */}
+      <F2Div>
+        <ButtonP onClick={() => setActiveSlide(moveLeft)}>PREV</ButtonP>
+        <Slides>
+          {cStyle.photos.map((img, index) => {
+            return(
+              <IDiv key={index} ref={index === activeSlide ? activeSlideRef : null} >
+                <Button onClick={() => show()}>
+                  <C2img key={index} src={img.url}/>
+                </Button>
+              </IDiv>
+            )
+          })}
+        </Slides>
+        <ButtonN onClick={() => setActiveSlide(moveRight)}>NEXT</ButtonN>
+      </F2Div>
     </GalleryDiv>
   )
 }
