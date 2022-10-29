@@ -16,6 +16,21 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
 
+## Related Products & Your Outfit
+  ![RelatedItemsFeatures](https://user-images.githubusercontent.com/5504860/198851825-45b8c683-dd7c-4dc6-b3fb-947ea1d1bed9.gif)
+  
+  This Component consists of the following:
+###### Related Items
+- A scrollable carousel that shows all the realted items for the selected product
+- Clickable Cards that show the relavant product information, the onclick handler changes the selected product and scrolls the user to the top
+- A star that, when hovering opens a modal that compares the related item to the currently selected item
+###### Your Outfit
+- A scrollable carousel that shows all the products in the users outfit
+- Clickable Cards that show the relavant product information, the onclick handler changes the selected product and scrolls the user to the top
+- An initial card that, when clicked adds the selected product to the users outfit, being retained in local Storage
+- A cross in the top right that, when clicked, removes the product from the users oufit.
+ 
+
 ## Constructing a Git Workflow
 
 1. To begin with each feature should be worked on in a seperate branch
