@@ -20,13 +20,12 @@ const StyledModal = styled.div`
 const StyledForm = styled.form`
   position: fixed;
   top: 3vh;
-  left:  8vh;
-  right:  8vh;
-  bottom:  3vh;
+  left: 30vw;
+  right: 30vw;
+  bottom: 3vh;
   border-radius: 20px;
   background-color: white;
-
-  overflow-y: auto;
+  justify-content: center;
   padding-right: 10px;
 `
 const StyledTitle = styled.header`
@@ -298,15 +297,20 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
           <StyledFlexRow>
             <StyledFlexItemHeader>Review summary:</StyledFlexItemHeader>
             <StyledFlexGrowingDiv>
-              <textarea type="text" placeholder="Example: Best purchase ever!" ref={reviewSummary} maxLength="60" size="60" cols="60" rows="1"></textarea>
+              <StyledFlexRowAdjustable>
+                <textarea type="text" placeholder="Example: Best purchase ever!" ref={reviewSummary} size="70" maxLength="60" ></textarea>
+              </StyledFlexRowAdjustable>
             </StyledFlexGrowingDiv>
           </StyledFlexRow>
 
           <StyledFlexRow>
             <StyledFlexItemHeader>Review body:</StyledFlexItemHeader>
             <StyledFlexGrowingDiv>
-              <textarea type="text" placeholder="Why did you like the product or not" maxLength="1000" size="1000" cols="91" rows="11" onChange={(e)=> {setReviewBody(e.target.value)}}></textarea>
+              <StyledFlexRowAdjustable>
+                <textarea type="text" placeholder="Why did you like the product or not" size="70" maxLength="1000" onChange={(e)=> {setReviewBody(e.target.value)}}></textarea>
 
+
+              </StyledFlexRowAdjustable>
               <StyledSmallOld style={{display:'block'}}>{reviewBody.length > 50? 'Minimum reached' : `Minimum required characters left: ${50-reviewBody.length}`}</StyledSmallOld>
             </StyledFlexGrowingDiv>
           </StyledFlexRow>
@@ -325,7 +329,7 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
           <StyledFlexRow>
             <StyledFlexItemHeader>What is your nickname*:</StyledFlexItemHeader>
             <StyledFlexGrowingDiv>
-              <textarea type="text" ref={nickname} placeholder="Example: jackson11!" size="60" cols="60" rows="1"></textarea>
+              <textarea type="text" ref={nickname} placeholder="Example: jackson11!" size="30" maxLength="60"></textarea>
               <StyledSmallOld style={{display:'block'}}>For privacy reasons, do not use your full name or email address</StyledSmallOld>
             </StyledFlexGrowingDiv>
 
@@ -334,7 +338,7 @@ export const NewReviewForm = ({setmetaData, characteristics, product_id, product
           <StyledFlexRow>
             <StyledFlexItemHeader>Your email*:</StyledFlexItemHeader>
             <StyledFlexGrowingDiv>
-              <input type="text" ref={email} placeholder="Example: jackson11@email.com" size="60"></input>
+              <input type="text" ref={email} placeholder="Example: jackson11@email.com" size="30" maxLength="60"></input>
               <StyledSmallOld style={{display:'block'}}>For authentication reasons, you will not be emailed</StyledSmallOld>
             </StyledFlexGrowingDiv>
 
