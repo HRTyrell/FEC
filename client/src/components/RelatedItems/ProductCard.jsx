@@ -160,9 +160,9 @@ const ProductCard = ({product, isStar}) => {
       <ProductImageStyled >
         <ImageStyled src={defaultImage} alt="Image of RelatedProduct" aria-label="Product Image" onClick={handleCardClick}/>
         {isStar ? setStarIcon : setCrossIcon}
-        <SmallStarBar rating={rating}/>
       </ProductImageStyled>
       <OuterDescriptionDiv onClick={handleCardClick}>
+        <SmallStarBar rating={rating}/>
         <Category>{product.data.category}</Category>
         <ProductTitle>{product.data.name}</ProductTitle>
         <Price>${product.data.default_price}</Price>

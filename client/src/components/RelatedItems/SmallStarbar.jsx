@@ -9,6 +9,7 @@ import styled from 'styled-components';
 const AStar = styled.img`
   width: 1em;
   height: auto;
+  padding: 0 0 1em 0;
 `;
 
 
