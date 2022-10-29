@@ -134,7 +134,13 @@ const Carousel = (props) => {
     }
   }, [currentCard])
 
-
+  if (nOfCards === 0 && props.title === 'Related Products') {
+    return (
+      <div>
+        <p>Sorry, there are no products in this view</p>
+      </div>
+    )
+  }
   return (
     <>
     <MDiv>
