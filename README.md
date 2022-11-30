@@ -1,14 +1,11 @@
-# Project Name
-  Tyrell - FEC
+# L77 Online Clothing Store
+This is a front-end web app for a mock online clothing store, providing a similar customer experience as any modern, big name online store. 
 
-> Project description
-
-## Related Projects
-
-  - https://github.com/HRTyrell/BalajiSathiya
-  - https://github.com/HRTyrell/BTanaka11
-  - https://github.com/HRTyrell/gthellter
-  - https://github.com/HRTyrell/babsjohnson
+## Contributors
+  * Bala Sathiya
+  * Ben Tanaka [![GitHub_Logo_White](https://user-images.githubusercontent.com/37204126/204705271-7e0f47d7-c70a-44b2-a9e0-21bc3e59f52c.png)](https://github.com/BTanaka11) [![LI-Logo](https://user-images.githubusercontent.com/37204126/204705205-b075ad02-7f84-4100-a2bc-6b21009af8a2.png)](https://linkedin.com/in/bentanaka)
+  * Drew Henderson
+  * Gabi Olarte
 
 ## Table of Contents
 
@@ -30,38 +27,16 @@
 - An initial card that, when clicked adds the selected product to the users outfit, being retained in local Storage
 - A cross in the top right that, when clicked, removes the product from the users oufit.
  
+## Ratings & Reviews
+<img src="https://user-images.githubusercontent.com/37204126/204711146-2df11b8f-b82b-4717-9916-57844d55dea8.gif" width="650"/>
 
-## Constructing a Git Workflow
-
-1. To begin with each feature should be worked on in a seperate branch
-1. To do so first grab the latest pushed code
-1. ***git checkout main*** (jumping to main branch)
-1. ***git fetch origin*** (Pull latest commits)
-1. ***git reset --hard origin/main*** (throws away all staged/unstaged changes resets to origin/master)
-1. ***git checkout -b BRANCH_NAME*** (creates a new branch for a feature to be worked on)
-1. ***git status | add | commit*** (within this branch to update and write code for it)
-1. ***git push -u origin BRANCH_NAME*** (pushes completed feature to origin/main)
-1. Now the information must be pulled again when you start to keep up with others who have created features
-
-## Opening Day Work with Git
-1. Start with ***git fetch*** (to see whether there is any new commits to pull)
-1. Then ***git checkout main*** (to get the main branch locally up to date)
-1. ***git pull*** (will pull all the commited information back to the local main branch)
-1. ***git checkout BRANCH_NAME*** (takes us back to the fetature branch)
-1. ***git merge origin*** (merge the information from main to the branch)
-1. fix merge conflicts in VSC by keeping the stuff you want from the previous commit and getting rid of everything else
-1. Once Complete and features ready to commit ***git checkout -b BRANCH_NAME*** (to send it back to main)
-
-## Testing Branch
-
-1. Start with ***git checkout test*** (Takes you to the testing branch)
-1. Create a new subTesting branch for your component ***git checkout -b BRANCH_NAME***
-1. For each Feature either work on it within this subbranch or create another subbranch from there
-1. ***git fetch*** then ***git merge origin*** to get main branch info to Test Branch
-1. Do the same to the subBranch before sending a push request to the Github
-1. ***git push -u origin BRANCH_NAME*** (Sending info to Git Repo)
-1. ***ONLY SEND PULL REQUEST TO TEST BRANCH***
-1. Test branch has all the tests while main branch is clear of tests
+###### Breakdown
+- Display of the product's average rating and further breakdown by count of reviews for each star 1-5 and average characteristic ratings
+- Clickable starbars which filter the list. Each is additive and may be removed one at a time or all at once to unfilter the list
+###### Review List
+- Filterable and sortable list of reviews. Each review has functionality to enlarge any images present in modal view and mark review as helpful
+###### New Review Form
+- Allows customers to submit new reviews and contains form validation requiring certain fields to be entered and review body to be at least 50 characters. Customers may attach up to 5 photos, which go through a Cloudinary API to store on the cloud and generate a URL, which then gets saved in a separate backend service which services all other data needs.
 
 ## Requirements
 
