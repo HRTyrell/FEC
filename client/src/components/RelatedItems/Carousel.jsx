@@ -23,7 +23,6 @@ const CarouselControl = styled.button`
   height: 2em;
   top: 45%;
   color: rgba(255, 255, 255, 0.5);
-
   &:hover {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(0, 0, 0, 0.5);
@@ -33,13 +32,13 @@ const CarouselControl = styled.button`
   width: 2em;
   left: 2.5em;
   `;
+
   const HiddenControlPrev = styled(CarouselControl)`
   left: 2em;
   opacity: 0;
   display: flex;
   width: 1.9em;
   align-self: start;
-
   &:hover {
     opacity: 0;
   }
@@ -48,12 +47,12 @@ const CarouselControl = styled.button`
   const CarouselControlNext = styled(CarouselControl)`
   left: 96.5%;
   `;
+
   const HiddenControlNext = styled(CarouselControl)`
   left: 96.5%;
   opacity: 0;
   display: flex;
   align-self: end;
-
   &:hover {
     opacity: 0;
   }
@@ -66,14 +65,10 @@ const MDiv = styled.div`
 
 const Carousel = (props) => {
 
-
-
-  const [showPrevious, setShowPrevious] = useState(false); //Change these both
-  const [showNext, setShowNext] = useState(false);         //to false
-
+  const [showPrevious, setShowPrevious] = useState(false);
+  const [showNext, setShowNext] = useState(false);
 
   const { relatedItemsList, outfitList} = useRelatedItemsStore();
-  // console.log(outfitList)
 
   var outfitListKeys;
   if (outfitList != null) {
@@ -85,7 +80,6 @@ const Carousel = (props) => {
   let componentBeingRendered = props.title;
   let nOfCards = props.title === 'Related Products' ? relatedItemsList.length : outfitListKeys.length;
   const [currentCard, setCurrentCard] = useState(0);
-
 
   useEffect(() => {
     //set Number of Cards on list Render

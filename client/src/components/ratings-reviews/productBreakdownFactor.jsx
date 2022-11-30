@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 const StyledCharacteristicBar = styled.div`
   border-style: solid;
   background-color: LightGray;

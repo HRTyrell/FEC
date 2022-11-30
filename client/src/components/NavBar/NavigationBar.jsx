@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-
 import ProductStore from "../Provider/Zus_Provider.jsx";
 import Seven from "../../assets/777.png";
 
@@ -46,8 +45,7 @@ height: 300px;
 @media (max-width: 1000px) {
   display:none;
 }
-`
-
+`;
 
 const NavigationBar = () => {
 

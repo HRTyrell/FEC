@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import styled from "styled-components";
-import {Starbar} from './starbar.jsx'
-import {ProductBreakdownFactor} from './productBreakdownFactor.jsx'
+import {Starbar} from './starbar.jsx';
+import {ProductBreakdownFactor} from './productBreakdownFactor.jsx';
 
 const StyledProgressBar = styled.progress`
   accent-color: green;
@@ -29,11 +29,13 @@ const BreakdownDiv = styled.div`
 const NoShrinkLabel = styled.label`
   flex-shrink: 0;
 `
+
 const FixedWidthLabel = styled.div`
   display: block;
   float: left;
   width: 16px;
 `
+
 const StyledPaddedDiv = styled.div`
   padding: 10% 0;
   font-family: 'OldStandard';
@@ -46,21 +48,25 @@ const StyledStarBarRatingDiv = styled.div`
   justify-content: space-between;
   font-size: larger;
 `
+
 const StyledCinzel = styled.div`
   font-family: 'Cinzel';
   font-weight: 200;
   font-size: .9em;
   padding-top: 2%;
 `
+
 const StyledCinzelH2 = styled.h2`
   font-family: 'Cinzel';
   font-weight: 400;
   font-size: 1.125em;
 `
+
 const StyledOldStandardDiv = styled.div`
   font-family: 'OldStandard';
   font-size: 15px;
 `
+
 const StyledCinzelButton = styled.button`
   font-family: 'Cinzel';
   font-weight: 400;

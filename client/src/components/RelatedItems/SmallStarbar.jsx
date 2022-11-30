@@ -12,9 +12,6 @@ const AStar = styled.img`
   padding: 0 0 1em 0;
 `;
 
-
-
-//credit Ben Tanaka
 const SmallStarBar = function ({rating}) {
 
   rating = ((rating / .25).toFixed(0)) * .25;

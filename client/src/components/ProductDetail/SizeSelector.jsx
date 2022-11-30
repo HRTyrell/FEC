@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const H2 = styled.h2`
@@ -26,6 +25,7 @@ height:40px;
   color: white;
 }
 `
+
 const DisButton = styled.button`
 padding: 1px 1px;
 Color: Black;
@@ -50,6 +50,7 @@ gap: 5px;
 align-items: center;
 justify-content: space-between;
 `
+
 const Bdiv = styled.div`
 max-width: 100%;
 padding: 10px 20px;
@@ -85,7 +86,6 @@ const SizeSelector = ({style}) => {
   let options = [];
   let i;
 
-
   const setsSize = (value) => {
     i = -1;
     for (let elem in size) {
@@ -110,7 +110,6 @@ const SizeSelector = ({style}) => {
       options.push('OUT OF STOCK')
     }
   }
-
 
   return(
     <div>

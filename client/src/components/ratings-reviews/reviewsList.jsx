@@ -5,11 +5,11 @@ import {TOKEN} from '/MyConfig.js';
 import {ReviewTile} from './reviewTile.jsx'
 
 const ReviewsListDiv = styled.div`
-
   max-height: 100vh;
   overflow: auto;
   margin: 5px;
 `
+
 const ReviewsListOuterDiv = styled.div`
   margin: 10px 0;
   padding: 10px;
@@ -18,28 +18,33 @@ const ReviewsListOuterDiv = styled.div`
   border-radius: 10px;
   height: fit-content;
   box-shadow:6px 6px 10px #bebebe
-
 `
+
 const FlexDiv = styled.div`
   display: flex;
   justify-content: space-around;
 `
+
 const StyledCinzelLabel = styled.label`
   font-family: 'Cinzel';
   font-weight: 200;
 `
+
 const StyledCinzelSelect= styled.select`
   font-family: 'Cinzel';
   font-weight: 200;
 `
+
 const StyledOldInput= styled.input`
   font-family: 'OldStandard';
   font-size: 15px;
 `
+
 const StyledOldButton= styled.button`
   font-family: 'OldStandard';
   font-size: 15px;
 `
+
 export const ReviewsList = function ({product_id, starBarFilters}) {
 
   const [reviews, setReviews] = useState(null)
@@ -79,7 +84,6 @@ export const ReviewsList = function ({product_id, starBarFilters}) {
   if (!reviews) {
     return null;
   }
-  //console.log(reviews)
   return (
     <ReviewsListOuterDiv>
       <FlexDiv>

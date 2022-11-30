@@ -9,14 +9,12 @@ import {useRelatedItemsStore} from './RelatedItemsStore.jsx';
 import ProductStore from '../Provider/Zus_Provider.jsx';
 import {H2} from '../ProductDetail/StyleCart.jsx';
 
-const Title = styled.h1`
-
-`;
 const Div = styled.div`
   display: flex;
   flex-direction: column;
   align-content: space-between;
 `;
+
 const MasterDiv = styled.div`
   display: flex;
   flex-direction: row;
@@ -27,6 +25,7 @@ const MasterDiv = styled.div`
   padding: 0;
   line-height: 0.8;
 `;
+
 const H = styled(H2)`
   text-align: center;
 `;

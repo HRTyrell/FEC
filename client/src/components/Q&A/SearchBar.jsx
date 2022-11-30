@@ -5,11 +5,13 @@ const SoftButton = styled.button`
   border: none;
   background: none;
 `
+
 const Input = styled.input`
   border: none;
   width:95%;
   outline: none;
 `
+
 const Form = styled.form`
   display: flex;
   border: solid;

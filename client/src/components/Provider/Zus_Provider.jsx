@@ -1,6 +1,5 @@
 import create from 'zustand';
 import axios from 'axios';
-
 import {URL, TOKEN} from '/MyConfig.js';
 
 const GetRequest = (req) => {
@@ -18,7 +17,6 @@ const WeightedAvg = (obj) => {
     count += obj[key] * 1;
   }
   //To see current Stars
-  // console.log('I AM NUM', (Math.round((holder/count) * 4) / 4))
   return {avg: (Math.round((holder/count) * 4) / 4), overall: count};
 }
 
@@ -51,7 +49,7 @@ const ProductStore2 = create((set, get) => ({
     GetRequest(`/products/${data.id}/styles`)
     .then(({data}) => {
       set(() => ({curProductStyles: data.results}));
-      console.log("🚀 ~ file: Zus_Provider.jsx ~ line 54 ~ .then ~ data", data)
+
       data.results.map((obj) => {
         if (obj["default?"] === true) {
           set(() => ({curStyle: obj}))

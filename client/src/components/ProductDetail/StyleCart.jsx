@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-
 import StyleSelector from "./StyleSelector.jsx"
 import ProductStore from "../Provider/Zus_Provider.jsx";
 import Starbar from "./starbar.jsx";
@@ -75,7 +74,6 @@ font-weight: 200;
 color: ${props => props.color || 'Black'};
 text-align: left;
 font-size: 32px;
-
 `
 
 const A1 = styled.a`
@@ -83,13 +81,11 @@ color: Black;
 text-decoration: none;
 `
 
-//TODO Make this DROPDOWN
 const Button2 = styled.button`
 margin: auto;
 height: 100px;
 width: 100px;
 `
-
 
 const StyleCart = () => {
 
@@ -122,7 +118,6 @@ const StyleCart = () => {
       <StyleSelector/>
       <SizeSelector style ={cStyle}/>
       <AddToCart/>
-      {/* <Circles/> */}
     </StyleDiv>
   )
 }

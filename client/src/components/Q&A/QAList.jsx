@@ -8,20 +8,20 @@ import AddAnswer from ".//AddAnswer.jsx";
 import Modal from 'react-modal';
 
 const SoftButton = styled.button`
-// font-family: 'Proxima Nova';
   border: none;
   background:none;
   text-decoration: underline;
   color: #404040;
 `
+
 const Button = styled.button`
-// font-family: 'Proxima Nova';
   padding 10px 5px 10px 5px;
   border-color: #999999;
   background: none;
   color: #404040;
   font-weight: bold;
 `
+
 const Inline = styled.div`
   display: flex;
   justify-content: space-between;
@@ -32,12 +32,12 @@ const Inline = styled.div`
   border-color: #ededed;
   height: 20px;
 `
+
 const QA = styled.div`
-  // border: dotted;
-  // border-color: purple;
   max-height: 100vh;
   overflow-y: scroll;
 `
+
 const customStyles = {
   content: {
     top: '50%',
@@ -50,11 +50,9 @@ const customStyles = {
   }
 };
 
-
 const QAList = ({ search, product}) => {
   const productId = product.id;
   const [questions, setQuestions] = useState([]);
-  // const [id, setId] = useState(product.id);
   const [count, setCount] = useState(4);
   const [isHelpful, setIsHelpful] = useState(false);
   const [questionModalIsOpen, setQuestionModalIsOpen] = useState(false);
@@ -66,7 +64,6 @@ const QAList = ({ search, product}) => {
       headers: { Authorization: TOKEN }
     })
       .then((res) => {
-        console.log('productid', product.id)
         let answeredQuestions = res.data.results.filter((question) => {
           if(search.length > 3) {
             return question.question_body.includes(search);
@@ -142,7 +139,6 @@ const QuestionInfo = ({ question, product}) => {
     )
   }
 
-
   const handleReported = (question_id) => {
     if (!isReported) {
       axios({
@@ -178,7 +174,6 @@ const QuestionInfo = ({ question, product}) => {
     </div>
   )
 }
-
 
 export default QAList;
 

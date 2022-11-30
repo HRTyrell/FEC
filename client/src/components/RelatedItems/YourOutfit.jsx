@@ -27,13 +27,13 @@ const CurrentProduct = styled.div`
               -6px -6px 10px #ffffff;
   background-color: rgba(255, 255, 255, 1);
 `;
+
 const Image = styled.img`
   display: flex;
   align-self: center;
   width: 2em;
   height: 2em;
   margin: auto;
-
 `;
 
 const YourOutfit = ({data}) => {
@@ -57,8 +57,6 @@ const YourOutfit = ({data}) => {
   } else {
     outfitArray=[]
   }
-  // const outfitArray = Object.values(outfitList);
-
 
   return (
     <Div>

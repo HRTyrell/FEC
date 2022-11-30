@@ -10,6 +10,7 @@ background:none;
 font-weight: bold;
 color: #404040;
 `
+
 const Center = styled.div`
   padding-top: 10px;
   display: flex;

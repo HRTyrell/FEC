@@ -18,7 +18,6 @@ const RelatedProducts = ({data}) => {
   })
   const uniqueDataArray = Object.values(uniqueData);
 
-
   return (
     <Div>
       {uniqueDataArray.map((product, index) => {

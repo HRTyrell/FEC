@@ -11,17 +11,18 @@ const Modaldiv = styled.div`
   align-content: space-around;
   width: 30vw;
 `
+
 const Header = styled.div`
   display: flex;
   justify-content: center;
   `
-  const StyledInput = styled.div`
+const StyledInput = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 10px;
   `
-  const Button = styled.button`
+const Button = styled.button`
   border-width: thin;
   background:none;
   font-weight: bold;
@@ -41,14 +42,6 @@ const AddAnswer = ({ question, product }) => {
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  // const [isValid]
-
-  // const isValidEmail = (value) => {
-  //   if (value.includes('@') && value.includes('.com')){
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   return (
     isSubmitted ? <h4>Answer Submitted!</h4> :

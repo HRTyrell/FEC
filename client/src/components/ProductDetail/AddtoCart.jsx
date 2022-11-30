@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import {InlineShareButtons} from 'sharethis-reactjs';
-
 import ProductStore from "../Provider/Zus_Provider.jsx";
-
 
 const Fdiv = styled.div`
 width: 100%;
@@ -16,6 +14,7 @@ align-items: center;
 const Sdiv = styled.div`
 width: 200px;
 `
+
 const Text = styled.span`
 font-size: 1.125em;
 line-height: 1.33333em;
@@ -79,7 +78,6 @@ display: inline-block;
 float: right;
 font-weight: 700;
 letter-spacing: 0.05em;
-/* margin: 0; */
 outline: none;
 overflow: visible;
 padding: 1.25em 2em;
@@ -130,20 +128,20 @@ const AddToCart = () => {
     <Fdiv>
       <Sdiv>
         <InlineShareButtons config={{
-            alignment: 'center',  // alignment of buttons (left, center, right)
-            color: 'social',      // set the color of buttons (social, white)
-            enabled: true,        // show/hide buttons (true, false)
-            font_size: 16,        // font size for the buttons
-            labels: 'null',        // button labels (cta, counts, null)
-            language: 'en',       // which language to use (see LANGUAGES)
-            networks: [           // which networks to include (see SHARING NETWORKS)
+            alignment: 'center',
+            color: 'social',
+            enabled: true,
+            font_size: 16,
+            labels: 'null',
+            language: 'en',
+            networks: [
               'facebook',
               'twitter',
               'pinterest'
             ],
-            padding: 12,          // padding within buttons (INTEGER)
-            radius: 4,            // the corner radius on each button (INTEGER)
-            size: 40             // the size of each button (INTEGER)
+            padding: 12,
+            radius: 4,
+            size: 40
         }}/>
       </Sdiv>
       <Fancy href="#">

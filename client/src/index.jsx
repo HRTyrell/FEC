@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled, {ThemeProvider} from "styled-components";
-
 import GlobalFonts from './fonts/fonts.js';
 import Overview from './components/ProductDetail/Overview.jsx';
 import NavigationBar from "./components/NavBar/NavigationBar.jsx";
@@ -25,6 +24,7 @@ const FullDiv = styled.div`
 height: 100%;
 width: 100%;
 `
+
 const widgetsIDs ={
   RatingsReviews: 'RatingsReviews',
   QandA: 'QandA',
@@ -49,7 +49,6 @@ const postInteractionsAPI = (data) => {
     data: data,
     signal: controller.signal
   })
-  .then(res=>{console.log('interactions API posted:', data)})
   .catch(err=>console.log('failed to post userclick to Interactions API'));
   controller.abort()
 }

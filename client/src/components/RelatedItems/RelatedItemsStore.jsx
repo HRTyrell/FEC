@@ -1,6 +1,5 @@
 import create from 'zustand';
 
-
 export const useRelatedItemsStore = create(set => ({
   outfitList: {},
   relatedItemsList: [],

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const DivS = styled.div`
@@ -10,6 +9,7 @@ flex-direction: column;
 text-align: left;
 width: 75%;
 `
+
 const DivS2 = styled.div`
 margin: 10px 0;
 display: flex;
@@ -32,8 +32,6 @@ border-top: double;
 border-bottom: double;
 background: white;
 text-align: center;
-/* box-shadow: 15px 15px 30px #5f5f5f,
-            -10px -5px 30px #ffffff; */
 @media (max-width: 1300px) {
   width: 100%;
 }
@@ -46,7 +44,6 @@ font-weight: 200;
 color: ${props => props.color || 'Black'};
 text-align: left;
 font-size: 32px;
-
 `
 
 const H4 = styled.h4`
@@ -57,12 +54,8 @@ color: ${props => props.color || 'Black'};
 font-size: ${props => props.size || "14px"};
 `
 
-//Completion of props and state
-//TODO CSS alignment and styling
-
 const ProductInformation = () => {
   const curProduct = ProductStore((state) => state.curProduct)
-
 
   if (!curProduct) {
     return null;

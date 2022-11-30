@@ -17,6 +17,7 @@ const StyledModal = styled.div`
   bottom:  0px;
   background-color: rgba(0, 0, 0, .8);
 `
+
 const StyledForm = styled.form`
   position: fixed;
   top: 3vh;
@@ -28,6 +29,7 @@ const StyledForm = styled.form`
   justify-content: center;
   padding-right: 10px;
 `
+
 const StyledTitle = styled.header`
   display: flex;
   justify-content: center;
@@ -45,6 +47,7 @@ const StyledFlexRow = styled.div`
   padding: 5px 0px;
   border-top: 2px solid grey;
 `
+
 const StyledFlexRowAdjustable = styled.div`
   display: flex;
   flex-direction: row;
@@ -63,20 +66,18 @@ const StyledFlexItemHeader = styled.label`
   font-family: 'Cinzel';
   font-weight: 200;
   font-size: 15px;
-
 `
+
 const StyledFlexGrowingDiv = styled.div`
   flex-grow: 2;
   padding-right: 5%;
   padding-left: 5%;
 `
+
 const StyledPaddedDiv = styled.div`
   padding-left: 5%;
 `
-// const StyledBigInput = styled.input`
-//   height: 100%;
-//   font-size: larger;
-// `
+
 const StyledCinzelButton = styled.button`
   font-family: 'Cinzel';
   font-weight: 400;
@@ -84,22 +85,27 @@ const StyledCinzelButton = styled.button`
   margin-bottom: 5%;
   justify-content: center;
 `
+
 const StyledOldStandardLabel= styled.label`
   font-family: 'OldStandard';
   font-size: 15px;
 `
+
 const StyledSmallOld = styled.small`
   font-family: 'OldStandard';
   font-size: 15px;
 `
+
 const StyledCinzelInput = styled.input`
   font-family: 'Cinzel';
   font-weight: 400;
   font-size: 15px;
 `
+
 const StyledCenterTextDiv = styled.div`
   text-align: center;
 `
+
 const StyledExitButton = styled.img`
   float: right;
   padding: 1%;
@@ -128,7 +134,6 @@ export const cloudinaryPostRequest = (arrayOfFiles, successPhotosCallback) => {
       const formData = new FormData();
       let timeStamp=Date.now();
       let signature = CryptoJS.SHA1(`timestamp=${timeStamp}${CLOUDINARY_API_SECRET}`).toString(CryptoJS.enc.Hex);
-
       formData.append("file", file);
       formData.append("api_key", CLOUDINARY_API_KEY);
       formData.append("timestamp", timeStamp);
