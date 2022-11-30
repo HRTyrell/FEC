@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
-
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const GalleryDiv = styled.div`
 display: flex;
 justify-content: center;
 `
+
 const Thumbnails = styled.div`
 margin: 80px 5px;
 display: flex;
 flex-direction: column;
 gap: 8px;
 `
+
 const Timg = styled.img`
 width: 45px;
 height: 60px;
@@ -46,7 +47,6 @@ border: solid;
  }
 `
 
-
 const ButtonP = styled.button`
 display:block;
 opacity:${props => props.disp};
@@ -72,6 +72,7 @@ background: #ccc;
 display: block;
 margin: 80px 0 0 8px;
 `
+
 const Thumb = styled.div`
 width: 2px;
 position: absolute;
@@ -96,6 +97,7 @@ scrollbar-width: none;
 display: none;
 }
 `
+
 const IDiv = styled.div`
 display: flex;
 justify-content: center;
@@ -151,8 +153,6 @@ const Gallery2 = () => {
   if (!cStyle) {
     return null;
   }
-
-
 
   if (activeSlide === 0) {
     dispPrev = "0"

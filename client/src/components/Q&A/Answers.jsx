@@ -134,7 +134,6 @@ const Answers = ({ question }) => {
     return `${formattedDate[1]} ${formattedDate[2]}, ${formattedDate[3]}`
   }
 
-
   const handleReported = (answer_id) => {
     if (!isReported) {
       axios({

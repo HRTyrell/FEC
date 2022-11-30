@@ -3,16 +3,11 @@ import styled from 'styled-components';
 import Modal from 'react-modal';
 import Feature from './Feature.jsx';
 
-
-
-
-
 const customStyles = {
   overlay: {
     pointerEvents: 'none',
     background: 'none',
     zIndex: 1000,
-
   },
   content: {
     top: '50%',
@@ -27,7 +22,6 @@ const customStyles = {
   },
 };
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
 
 const ComparisonModal = ({modalIsOpen, comparisonProduct, currentProduct }) => {

@@ -6,7 +6,6 @@ import fullstar from '../../assets/YellowStar/yellowStar.png';
 
 export const Starbar = function ({rating}) {
 
-
   rating = ((rating / .25).toFixed(0)) * .25;
   const ratingsArray = new Array(Math.floor(rating)).fill(fullstar);
   rating = rating - Math.floor(rating);

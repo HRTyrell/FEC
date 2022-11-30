@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import checkMark from '../../assets/checkMark.png';
 import cross from '../../assets/cross.png';
 
-
 const Feature = ({currentProductFeatures, comparisonProductFeatures, feature}) => {
 
   const existsInCurrent = currentProductFeatures.includes(feature);

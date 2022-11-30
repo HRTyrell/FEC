@@ -23,6 +23,7 @@ const StyledBold = styled.header`
   font-family: 'OldStandard';
   font-size: 15px;
 `
+
 const StyledModal = styled.header`
   position: fixed;
   z-index: 100;
@@ -35,26 +36,32 @@ const StyledModal = styled.header`
   background-color: black;
   background-color: rgba(0,0,0,0.8); /* Fallback color */
 `
+
 const StyledOuterContainer = styled.div`
   padding: 10px 0px;
   margin-right: 5px;
   border-top: 2px solid grey;
 `
+
 const StyledImage = styled.img`
   margin: 2px 3px;
 `
+
 const StyledOldBold= styled.b`
   font-family: 'OldStandard';
   font-size: 14px;
 `
+
 const StyledOldStandardTime= styled.time`
   font-family: 'OldStandard';
   font-size: 15px;
 `
+
 const StyledOldDiv= styled.div`
   font-family: 'OldStandard';
   font-size: 14px;
 `
+
 const StyledOldA = styled.a`
 font-family: 'OldStandard';
 font-size: 14px;
@@ -66,7 +73,6 @@ export const convertDate = (inp)=> {
   return `${formattedDate[1]} ${formattedDate[2]}, ${formattedDate[3]}`
 }
 
-//padding: 10px 5px 10px 0;
 export const ReviewTile = ({review}) => {
 
   const [showMore, setShowMore] = useState(review.body.length > 250 ? true : false)

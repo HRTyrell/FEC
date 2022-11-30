@@ -1,6 +1,5 @@
 import {useState, useEffect, Fragment, useRef} from 'react';
 import axios from 'axios';
-
 import {TOKEN} from '/MyConfig.js';
 import {Breakdown} from './breakdown.jsx';
 import {ReviewsList} from './reviewsList.jsx'
@@ -14,17 +13,19 @@ const StyledContainer = styled.div`
   gap: 15px;
   justify-content: center;
   align-items: top;
-
 `
+
 const StylizedOuterContainer = styled.div`
   padding: 10px;
   width: 70%;
 `
+
 const StyledCinzel = styled.h2`
   font-family: 'Cinzel';
   font-weight: 200;
   text-align: center;
 `
+
 const RatingsReviews = () => {
 
   const {curProduct} = ProductStore();

@@ -25,7 +25,6 @@ font-weight: 200;
 color: ${props => props.color || 'Black'};
 text-align: left;
 font-size: 32px;
-
 `
 
 const A1 = styled.a`
@@ -63,6 +62,7 @@ const Arrow2 = styled.div`
   border-bottom: 20px solid transparent;
   mix-blend-mode: normal;
 `
+
 const F2div = styled.div`
 margin: 0px 20px;
 height: 50px;
@@ -87,6 +87,7 @@ background: linear-gradient(129deg, rgba(250,76,255,1) 0%, rgba(113,0,255,1) 100
 box-shadow: 15px 15px 30px 5px rgba(113,0,255,1),
             -15px -15px 30px 5px rgba(250,76,255,1);
 `
+
 const Circle2 = styled.div`
 position: absolute;
 z-index: 0;
@@ -102,7 +103,6 @@ background: linear-gradient(129deg, rgba(250,76,255,1) 0%, rgba(113,0,255,1) 100
 box-shadow: 15px 15px 30px 5px rgba(113,0,255,1),
             -15px -15px 30px 5px rgba(250,76,255,1);
 `
-
 
 const Bubbles = styled.div`
   position:absolute;
@@ -124,7 +124,6 @@ const Bubble = styled.div`
   border-radius:50%;
   opacity:0.5;
   animation: rise 20s infinite ease-in;
-
 :nth-child(1){
   width:40px;
   height:40px;
@@ -209,10 +208,6 @@ const Bubble = styled.div`
 }
 `
 
-
-
-
-
 export const FullArrow = () => {
   return(
     <F2div>
@@ -242,7 +237,6 @@ export const BGBubbles = () => {
   useEffect(() => {
     setTimeout(() => {
       let h = document.body.scrollHeight
-      console.log('I AM', h)
       setH(h);
     }, 2000);
   })

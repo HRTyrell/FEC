@@ -3,7 +3,6 @@ import styled from "styled-components";
 import axios from 'axios';
 import { TOKEN, URL } from "/MyConfig.js";
 
-
 const Modaldiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -11,34 +10,37 @@ const Modaldiv = styled.div`
   align-content: space-around;
   width: 30vw;
 `
+
 const Header = styled.div`
 display: flex;
 justify-content: center;
 `
+
 const StyledInput = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: center;
 padding: 10px;
 `
+
 const Button = styled.button`
 border-width: thin;
 background:none;
 font-weight: bold;
 color: #404040;
 `
+
 const Center = styled.div`
 padding-top: 10px;
 display: flex;
 justify-content: center;
 `
+
 const AddQuestion = ({ product }) => {
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-
 
   return (
     isSubmitted ? <h4>Question Submitted!</h4> :

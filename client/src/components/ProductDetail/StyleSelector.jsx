@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const ImgS = styled.img`
@@ -14,6 +13,7 @@ object-fit: cover;
   width: 7vw;
 }
 `
+
 const ImgY = styled.img`
 position: relative;
 height: 3.5vw;
@@ -64,7 +64,6 @@ border-radius: 50%;
 }
 `
 
-
 const DivS = styled.div`
 padding: 1em 1em;
 max-width: 100%;
@@ -109,39 +108,5 @@ const StyleSelector = () => {
     </DivS>
   )
 }
-
-const StyleSelector2 = () => {
-
-  const Styles = ProductStore((state) => state.curProductStyles);
-  const curStyle = ProductStore((state) => state.curStyle);
-
-  const setStyle = ProductStore((state) => state.setStyle);
-
-  if (!Styles) {
-    return null;
-  }
-
-  const handleClick = (e) => {
-    setStyle(e.target.title);
-  }
-
-  return (
-    <DivS>
-      {Styles.map((info) => {
-        if (info.style_id === curStyle.style_id) {
-          return(
-            <SDiv>
-              <ImgY title = {info.name} key={info.style_id} value={info.style_id} src={info.photos[0].thumbnail_url} />
-            </SDiv>
-          )
-        }
-        return(
-          <ImgS title = {info.name} key={info.style_id} value={info.style_id} src={info.photos[0].thumbnail_url} onClick = {(e) => handleClick(e)} />
-        )
-      })}
-    </DivS>
-  )
-}
-
 
 export default StyleSelector;

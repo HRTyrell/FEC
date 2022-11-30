@@ -24,7 +24,6 @@ box-shadow:6px 6px 10px #bebebe,
             -6px -6px 10px #ffffff;
 `;
 
-
 const ProductImageStyled = styled.div`
 display: flex;
 flex-direction: Column;
@@ -35,10 +34,7 @@ margin: auto;
 position: relative;
 width: auto;
 background-color: rgba(255, 255, 255, 1);
-// border-radius: 30px 30px 0 0 ;
-
 `;
-
 
 const ImageStyled = styled.img`
 display: flex;
@@ -47,7 +43,6 @@ position: relative;
 width: 90%;
 height: auto;
 padding: 2%;
-// border-radius: 10px;
 `;
 
 const ButtonStyled = styled.img`
@@ -68,8 +63,8 @@ height: 5em;
 bottom: 1;
 padding: 0.5em 0 0.5em 0;
 background-color: rgba(211, 211, 211, 0.5);
-// border-radius: 30px;
 `;
+
 const Category = styled.p`
   margin-top: 0;
   margin-bottom: 0.7em;
@@ -87,9 +82,6 @@ margin: 0.1em 0, 0.1em 0;
 font-size: 0.9em;
 `;
 
-
-
-///////////////React Component///////////////////////////
 const ProductCard = ({product, isStar}) => {
 
   const [modalIsOpen, setIsOpen] = useState(false);

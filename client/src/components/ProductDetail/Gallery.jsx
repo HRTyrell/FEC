@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-
 import ProductStore from "../Provider/Zus_Provider.jsx";
 
 const GalleryDiv = styled.div`
@@ -14,7 +13,6 @@ background: white;
 }
 `
 
-//TODO CONTAINER QUERIES
 const C2Div = styled.div`
 margin: 10px;
 height: 780px;
@@ -30,7 +28,6 @@ scroll-snap-type: y mandatory;
   }
 `
 
-//TODO CONTAINER QUERIES
 const IDiv = styled.div`
 height: 800px;
 /* border: solid; */
@@ -38,13 +35,11 @@ display: flex;
 justify-content: center;
 `
 
-//TODO CONTAINER QUERIES
 const C2img = styled.img`
 height: 780px;
 max-width: 95%;
 object-fit: contain;
 scroll-snap-align: center;
-/* box-shadow: 5px 0px 10px -5px; */
 `
 
 const Gallery = () => {
