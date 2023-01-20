@@ -3,7 +3,7 @@ This is a front-end web app for a mock online clothing store, providing a simila
 
 ## Contributors
   * Bala Sathiya
-  * Ben Tanaka [![GitHub_Logo](https://user-images.githubusercontent.com/37204126/204853859-fffecb7a-8974-44dc-af7d-d962e67e5cd5.png)](https://github.com/BTanaka11) [![LI-Logo](https://user-images.githubusercontent.com/37204126/204705205-b075ad02-7f84-4100-a2bc-6b21009af8a2.png)](https://linkedin.com/in/bentanaka)
+  * Ben Tanaka
   * Drew Henderson
   * Gabi Olarte
 
